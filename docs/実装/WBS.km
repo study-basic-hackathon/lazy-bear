@@ -1,0 +1,206 @@
+{
+    "root": {
+        "data": {
+            "id": "dcfew2kdj8g0",
+            "created": 1756521459357,
+            "text": "実装WBS"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcfew8ohhag0",
+                    "created": 1756521472667,
+                    "text": "資格名入力機能",
+                    "layout_mind_offset": {
+                        "x": -20,
+                        "y": -88
+                    },
+                    "layout_right_offset": {
+                        "x": 12,
+                        "y": -18
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcfewp83vds0",
+                            "created": 1756521508682,
+                            "text": "フロント"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcfey6i91gg0",
+                            "created": 1756521624664,
+                            "text": "バック",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcfewwt026g0",
+                                    "created": 1756521525182,
+                                    "text": "入力データを保管する"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcfexl9xxdc0",
+                    "created": 1756521578449,
+                    "text": "書籍選択機能",
+                    "layout_right_offset": {
+                        "x": 16,
+                        "y": 9
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcfey118ouo0",
+                            "created": 1756521612752,
+                            "text": "フロント"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcfezi3g9c80",
+                                    "created": 1756521728255,
+                                    "text": "書籍を複数選ぶ"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcfeygno4800",
+                            "created": 1756521646760,
+                            "text": "バック"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcfeyj47ynk0",
+                                    "created": 1756521652114,
+                                    "text": "NDL APIから関連書籍一覧をとってくる"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcfezn3kxgw0",
+                                    "created": 1756521739147,
+                                    "text": "選んだ書籍の情報を保管する"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcff02eiw1s0",
+                    "created": 1756521772460,
+                    "text": "ステップ提案＆修正機能"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcff1sum23c0",
+                            "created": 1756521908393,
+                            "text": "フロント"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcff1vc44v40",
+                                    "created": 1756521913805,
+                                    "text": "AIが提示したステップを表示し、ユーザーが必要に応じて修正を行う"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcff275bu5c0",
+                            "created": 1756521939516,
+                            "text": "バック"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcff298ya5s0",
+                                    "created": 1756521944089,
+                                    "text": "VertexAIにステップを作成させる"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcff36ixq9s0",
+                                    "created": 1756522016527,
+                                    "text": "修正が終わったステップをDBに保存する"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcff2r40qsw0",
+                    "created": 1756521982973,
+                    "text": "ガントチャート作成機能"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcff2uwf5j40",
+                            "created": 1756521991221,
+                            "text": "フロント"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcff3htkgww0",
+                                    "created": 1756522041114,
+                                    "text": "ガントチャートを表示する"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcff2x2cqn40",
+                            "created": 1756521995933,
+                            "text": "バック"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcff3mrd8140",
+                                    "created": 1756522051865,
+                                    "text": "プロジェクトやステップなどの情報を使ってタスクを作成する指示をVertexAIに投げる"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
