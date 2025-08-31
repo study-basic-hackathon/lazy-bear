@@ -6,8 +6,8 @@ Next.js + PostgreSQL を使った Web アプリケーション
 
 ### 技術スタック
 
-- **Frontend/Backend**: Next.js 14 (App Router)
-- **Database**: PostgreSQL 15
+- **Frontend/Backend**: Next.js 15 (App Router)
+- **Database**: PostgreSQL 17
 - **Container**: Docker & Docker Compose
 - **Language**: TypeScript
 
