@@ -26,6 +26,8 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      - ~/.config/gcloud:/root/.config/gcloud:ro
     depends_on:
       - database
 

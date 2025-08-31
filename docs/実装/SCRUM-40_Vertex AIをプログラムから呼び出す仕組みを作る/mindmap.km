@@ -1,0 +1,209 @@
+{
+    "root": {
+        "data": {
+            "id": "dcgenqonz080",
+            "created": 1756622366539,
+            "text": "SCRUM-40_Vertex AIをプログラムから呼び出す仕組みを作る"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcgenyqfs8o0",
+                    "created": 1756622384060,
+                    "text": "概要"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcgeo24vdi80",
+                            "created": 1756622391463,
+                            "text": "Next.jsのアプリからVertex AIにアクセスするための土台を作ることが目的"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcgeorczv480",
+                    "created": 1756622446374,
+                    "text": "実装内容"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcgeousb18g0",
+                            "created": 1756622453830,
+                            "text": "画面"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcgeowuhgi80",
+                                    "created": 1756622458315,
+                                    "text": "URLはdemoとかで良い"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcgepwhbvc00",
+                                            "created": 1756622535884,
+                                            "text": "app/src/app/demoにファイルを作成"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgep1bsiew0",
+                                    "created": 1756622468069,
+                                    "text": "取りたい資格と期限を入れる"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgepjy25ag0",
+                                    "created": 1756622508598,
+                                    "text": "送信ボタンを置く"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcges5vki340",
+                                    "created": 1756622713065,
+                                    "text": "レスポンスをそのままJSONで良いので下に表示する"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcgepo3fnkg0",
+                            "created": 1756622517630,
+                            "text": "バックエンド"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcgepqbappc0",
+                                    "created": 1756622522459,
+                                    "text": "app/src/app/apiに実装"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgeqq32cqw0",
+                                    "created": 1756622600325,
+                                    "text": "app/src/lib/に、vertex aiと通信する共通機能を置くのが良いと思っている"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgerrd36eg0",
+                                    "created": 1756622681472,
+                                    "text": "入力"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcgerve8ti80",
+                                            "created": 1756622690249,
+                                            "text": "ユーザーが入力した資格名と期限"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcges34ac800",
+                                    "created": 1756622707061,
+                                    "text": "出力"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcgesh479880",
+                                            "created": 1756622737531,
+                                            "text": "JSON形式"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgetdq0l7c0",
+                                                    "created": 1756622808507,
+                                                    "text": "固定する"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcgesjgr6y80",
+                                            "created": 1756622742644,
+                                            "text": "ステップ一覧。その子としてタスクを入れる"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgesvm754g0",
+                                    "created": 1756622769094,
+                                    "text": "プロンプト"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcgesyml0oo0",
+                                            "created": 1756622775648,
+                                            "text": "システムインストラクション"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcget28u4co0",
+                                                    "created": 1756622783524,
+                                                    "text": "考えてください"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcget91dh6g0",
+                                            "created": 1756622798310,
+                                            "text": "ユーザープロンプト"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgetcb26c80",
+                                                    "created": 1756622805426,
+                                                    "text": "資格名と期限"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
