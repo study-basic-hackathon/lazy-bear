@@ -8,6 +8,8 @@ Next.js + PostgreSQL を使った Web アプリケーション
 
 - **Frontend/Backend**: Next.js 15 (App Router)
 - **Database**: PostgreSQL 17
+- **ORM**: Drizzle ORM
+- **Styling**: Tailwind CSS
 - **Container**: Docker & Docker Compose
 - **Language**: TypeScript
 
@@ -18,7 +20,6 @@ Next.js + PostgreSQL を使った Web アプリケーション
 ### 前提条件
 
 - **Docker Desktop** がインストールされていること
-- **Node.js 18+** がインストールされていること（開発用）
 
 ### 1\. リポジトリをクローン
 
