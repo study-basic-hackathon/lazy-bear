@@ -1,5 +1,5 @@
 # Node.js 18のベースイメージを使用
-FROM node:18-alpine
+FROM node:22-alpine
 
 # 作業ディレクトリを設定
 WORKDIR /app
