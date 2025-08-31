@@ -40,7 +40,6 @@ erDiagram
     date   due_date
     enum   task_status
     %% "undo|doing|done|blocked（4レコード想定）"
-    uuid   status_id FK
   }
 
   PERSONA {
