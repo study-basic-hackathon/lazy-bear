@@ -41,10 +41,10 @@ Docker コンテナをビルドして起動します。初回実行時には、�
 
 ```bash
 # フォアグラウンドで起動（ログを確認しながら作業する場合）
-docker-compose up --build
+docker compose up --build
 
 # バックグラウンドで起動（ターミナルを専有しない場合）
-docker-compose up -d --build
+docker compose up -d --build
 ```
 
 ### 4\. アクセス確認
@@ -58,14 +58,14 @@ docker-compose up -d --build
 
 ```bash
 # コンテナ起動
-docker-compose up
+docker compose up
 
 # コンテナ停止
-docker-compose down
+docker compose down
 
 # ログ確認
-docker-compose logs app
-docker-compose logs database
+docker compose logs app
+docker compose logs database
 
 # データベースに直接接続
 docker exec -it lazy_bear_database psql -U postgres -d lazy_bear_dev
