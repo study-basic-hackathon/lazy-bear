@@ -11,12 +11,11 @@ erDiagram
 
   PROJECT {
     uuid project_id PK
+    uuid persona_id FK
+    uuid weighting_id FK
     string certification_name
     date exam_date
-    enum learning_pattern
     %% "インプット先行パターン|アウトプット先行パターン（2レコード想定）"
-    uuid CERTIFICATION_WEIGHTING FK
-    uuid persona_id FK
     timestamp created_at
     timestamp updated_at
   }
@@ -34,8 +33,7 @@ erDiagram
     uuid task_id PK
     uuid step_id FK
     string title
-    int    pages_from
-    int    pages_to
+    varchar description
     date   start_date
     date   due_date
     enum   task_status
@@ -46,6 +44,7 @@ erDiagram
     uuid persona_id PK
     decimal weekday_hours
     decimal weekend_hours
+    enum learning_pattern
   }
 
   BOOK {
