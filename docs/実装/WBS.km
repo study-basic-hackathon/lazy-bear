@@ -16,8 +16,8 @@
                         "y": -88
                     },
                     "layout_right_offset": {
-                        "x": 12,
-                        "y": -18
+                        "x": 88,
+                        "y": -184
                     }
                 },
                 "children": [
@@ -55,8 +55,8 @@
                     "created": 1756521578449,
                     "text": "書籍選択機能",
                     "layout_right_offset": {
-                        "x": 16,
-                        "y": 9
+                        "x": 55,
+                        "y": 122
                     }
                 },
                 "children": [
@@ -101,6 +101,14 @@
                                 "children": []
                             }
                         ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcg9a82iosw0",
+                            "created": 1756607201734,
+                            "text": "ここはまだ仕様が決まってないので後に回す"
+                        },
+                        "children": []
                     }
                 ]
             },
@@ -108,7 +116,11 @@
                 "data": {
                     "id": "dcff02eiw1s0",
                     "created": 1756521772460,
-                    "text": "ステップ提案＆修正機能"
+                    "text": "ステップ提案＆修正機能",
+                    "layout_right_offset": {
+                        "x": 38,
+                        "y": 103
+                    }
                 },
                 "children": [
                     {
@@ -159,7 +171,11 @@
                 "data": {
                     "id": "dcff2r40qsw0",
                     "created": 1756521982973,
-                    "text": "ガントチャート作成機能"
+                    "text": "ガントチャート作成機能",
+                    "layout_right_offset": {
+                        "x": 19,
+                        "y": 102
+                    }
                 },
                 "children": [
                     {
@@ -191,6 +207,93 @@
                                     "id": "dcff3mrd8140",
                                     "created": 1756522051865,
                                     "text": "プロジェクトやステップなどの情報を使ってタスクを作成する指示をVertexAIに投げる"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcg956qpk9s0",
+                    "created": 1756606807022,
+                    "text": "資格情報取得・編集機能",
+                    "layout_right_offset": {
+                        "x": 46,
+                        "y": -645
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcg95zrd9eo0",
+                            "created": 1756606870189,
+                            "text": "フロント",
+                            "layout_right_offset": {
+                                "x": 8,
+                                "y": -33
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcg96l24heg0",
+                                    "created": 1756606916551,
+                                    "text": "VertexAIが取ってきた点数の配分情報を表示"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcg97oid2cg0",
+                                    "created": 1756607002428,
+                                    "text": "配分情報を取得した取得先のURLも表示"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcg96yvqly00",
+                                    "created": 1756606946640,
+                                    "text": "間違っていたら項目や配分を修正できる"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcg976s2qc00",
+                                    "created": 1756606963833,
+                                    "text": "そもそもVertex AIが情報源のURLを間違えていたら、修正して再取得させる"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcg96dmxspk0",
+                            "created": 1756606900396,
+                            "text": "バック",
+                            "layout_right_offset": {
+                                "x": 23,
+                                "y": -8
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcg982q4ujc0",
+                                    "created": 1756607033373,
+                                    "text": "VertexAIを使ってその資格の配点情報を取得させる"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcg98i1qwqg0",
+                                    "created": 1756607066727,
+                                    "text": "ユーザーが指定したURLから、資格の配点情報を取得させる"
                                 },
                                 "children": []
                             }
