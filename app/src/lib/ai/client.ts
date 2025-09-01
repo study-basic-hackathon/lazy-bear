@@ -1,4 +1,4 @@
-import { VertexAI } from '@google-cloud/vertexai';
+import { VertexAI, FunctionDeclarationSchema, GenerateContentRequest } from '@google-cloud/vertexai';
 
 /**
  * Vertex AIのクライアントを初期化します。
@@ -26,7 +26,7 @@ const getVertexAIClient = () => {
  */
 export const getGenerativeModel = (systemInstruction?: string) => {
   const vertexAI = getVertexAIClient();
-  const modelName = process.env.VERTEX_AI_MODEL_NAME || 'gemini-2.5-flash-lite'; // デフォルトモデル
+  const modelName = process.env.VERTEX_AI_MODEL_NAME || 'gemini-1.5-flash-001'; // デフォルトモデル
 
   return vertexAI.getGenerativeModel({ model: modelName, systemInstruction });
 };
@@ -35,33 +35,58 @@ export const getGenerativeModel = (systemInstruction?: string) => {
  * プロンプトに基づいてコンテンツを生成し、JSONとして解析します。
  * @param systemInstruction システムプロンプト
  * @param userPrompt ユーザープロンプト
+ * @param responseSchema レスポンスのJSONスキーマ
  * @returns 解析されたJSONオブジェクト
  */
-export const generateContentFromPrompt = async (
+export const generateContentFromPrompt = async <T>(
   systemInstruction: string,
-  userPrompt: string
-) => {
+  userPrompt: string,
+  responseSchema?: FunctionDeclarationSchema
+): Promise<T> => {
   const generativeModel = getGenerativeModel(systemInstruction);
 
+  const request: GenerateContentRequest = {
+    contents: [
+      {
+        role: 'user',
+        parts: [{ text: userPrompt }],
+      },
+    ],
+  };
+
+  if (responseSchema) {
+    request.tools = [
+      {
+        functionDeclarations: [
+          {
+            name: 'json_output',
+            description: 'Formats the output as a JSON object based on the provided schema.',
+            parameters: responseSchema,
+          },
+        ],
+      },
+    ];
+    request.generationConfig = {
+      responseMimeType: 'application/json',
+    };
+  }
+
   try {
-    const resp = await generativeModel.generateContent({
-      contents: [
-        {
-          role: 'user',
-          parts: [{ text: userPrompt }],
-        },
-      ],
-    });
+    const resp = await generativeModel.generateContent(request);
+    const functionCall = resp.response.candidates?.[0]?.content?.parts?.[0]?.functionCall;
 
+    if (functionCall?.args) {
+      return functionCall.args as T;
+    }
+
+    // フォールバック：functionCallがない場合は、テキストを解析しようと試みる
     const responseText = resp.response.candidates?.[0]?.content?.parts?.[0]?.text;
-
     if (!responseText) {
       throw new Error('Vertex AIからの有効な応答がありませんでした。');
     }
-
-    // クリーンなJSONをパースする
     const jsonString = responseText.replace(/```json\n?|```/g, '').trim();
-    return JSON.parse(jsonString);
+    return JSON.parse(jsonString) as T;
+
   } catch (error) {
     console.error('Vertex AIの呼び出し中にエラーが発生しました:', error);
     throw new Error('コンテンツの生成に失敗しました。');

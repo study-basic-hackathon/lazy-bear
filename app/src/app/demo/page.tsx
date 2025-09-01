@@ -1,24 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-
-interface Task {
-  id: number;
-  title: string;
-  description: string;
-  startDate: string;
-  endDate: string;
-}
-
-interface Step {
-  id: number;
-  title: string;
-  tasks: Task[];
-}
-
-interface LearningPlan {
-  steps: Step[];
-}
+import { LearningPlan } from '@/lib/types';
 
 export default function DemoPage() {
   const [qualificationName, setQualificationName] = useState('応用情報技術者試験');
