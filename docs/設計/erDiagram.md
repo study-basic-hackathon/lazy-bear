@@ -1,4 +1,4 @@
-## ER図 (書籍テーブルはスキップ)
+## ER図
 
 ```mermaid
 erDiagram
