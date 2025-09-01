@@ -31,7 +31,9 @@ lazy-bear/
 │   ├───package.json      # 依存関係とスクリプト定義
 │   └───src/
 │       ├───app/          # ページとUIコンポーネント (App Router)
+│       │   └───api/      # APIルート (サーバーサイドエンドポイント)
 │       └───lib/
+│           ├───ai/       # Vertex AI 連携機能
 │           └───db/       # Drizzle ORM (スキーマ, マイグレーション)
 ├───docs/                 # プロジェクト計画・設計ドキュメント
 ├───docker/               # 開発環境用のDockerfile
