@@ -2,63 +2,59 @@
 
 ```mermaid
 erDiagram
-  PROJECT ||--|{ STEP : have
-  STEP ||--|{ TASK : breaks_into
+    PROJECT ||--|{ STEP : have
+    STEP ||--|{ TASK : breaks_into
+    PERSONA ||--o{ PROJECT : uses
+    PROJECT ||--o{ WEIGHT : targets
+    PROJECT ||--|{ SCOPE : targets
 
-  PERSONA ||--o{ PROJECT : uses
-  PROJECT ||--|{ CERTIFICATION_WEIGHTING : targets
-  PROJECT ||--|{ BOOK : contains
+    PROJECT {
+        uuid projectId PK
+        uuid personaId FK
+        uuid weightId FK
+        uuid scopeId FK
+        string certificationName
+        date examDate
+        enum baseMaterial "TEXTBOOK / VIDEO"
+    }
 
-  PROJECT {
-    uuid project_id PK
-    uuid persona_id FK
-    uuid weighting_id FK
-    string certification_name
-    date exam_date
-    %% "インプット先行パターン|アウトプット先行パターン（2レコード想定）"
-    timestamp created_at
-    timestamp updated_at
-  }
+    STEP {
+        uuid stepId PK
+        uuid projectId FK
+        string title
+        string theme
+        date startDate
+        date endDate
+    }
 
-  STEP {
-    uuid step_id PK
-    uuid project_id FK
-    string title
-    string theme
-    date start_date
-    date end_date
-  }
+    TASK {
+        uuid taskId PK
+        uuid stepId FK
+        string title
+        text description
+        date startDate
+        date endDate
+        enum taskStatus "undo|doing|done|blocked"
+    }
 
-  TASK {
-    uuid task_id PK
-    uuid step_id FK
-    string title
-    varchar description
-    date   start_date
-    date   due_date
-    enum   task_status
-    %% "undo|doing|done|blocked（4レコード想定）"
-  }
+    PERSONA {
+        uuid personaId PK
+        decimal weekdayHours
+        decimal weekendHours
+        enum learningPattern "インプット先行パターン|アウトプット先行パターン"
+    }
 
-  PERSONA {
-    uuid persona_id PK
-    decimal weekday_hours
-    decimal weekend_hours
-    enum learning_pattern
-  }
+    WEIGHT {
+        uuid weightId PK
+        uuid projectId FK
+        string area
+        int weightPercent
+    }
 
-  BOOK {
-    uuid book_id PK
-    uuid project_id FK
-    string isbn
-    string title
-    json   toc_json
-  }
-
-  CERTIFICATION_WEIGHTING {
-    uuid weighting_id PK
-    uuid project_id FK
-    string area
-    decimal ratio
-  }
+    SCOPE {
+        uuid scopeId PK
+        uuid projectId FK
+        string scope
+        text description
+    }
 ```
