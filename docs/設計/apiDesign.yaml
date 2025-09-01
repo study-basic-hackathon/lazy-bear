@@ -1,12 +1,886 @@
-openapi: 3.1.0
-
+openapi: 3.0.3
 info:
-  title: Hackathon Tasks API
-  version: "1.0.0"
-servers:
-  - url: /api/v1
-paths:
-  /tasks:
-    get:
-      summary: List tasks
+  title: 資格学習計画の生成アプリ
+  description: 資格取得までのガントチャートを生成してくれるAPIです。
+  version: 1.0.0
 
+servers:
+  - url: http://localhost:3000
+    description: ローカル環境
+
+tags:
+  - name: persona
+    description: ペルソナの情報を取得するAPI
+  - name: project
+    description: プロジェクトの情報を取得するAPI
+  - name: step
+    description: ステップの情報を取得するAPI
+  - name: task
+    description: タスクの情報を取得するAPI
+  - name: scope
+    description: 試験範囲の情報を取得するAPI
+  - name: weight
+    description: 配点割合の情報を取得するAPI
+
+paths:
+  /personas/{personaId}:
+    get:
+      tags: [persona]
+      summary: ペルソナの情報の取得
+      parameters:
+        - $ref: "#/components/parameters/PersonaId"
+      responses:
+        "200":
+          description: ペルソナの取得
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Persona"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    post:
+      tags: [persona]
+      summary: ペルソナの作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonaCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/personas/1234"
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+    put:
+      tags: [persona]
+      summary: ペルソナの更新
+      parameters:
+        - $ref: "#/components/parameters/PersonaId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonaUpdate"
+      responses:
+        "200":
+          description: 更新成功
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+  /projects:
+    get:
+      tags: [project]
+      summary: プロジェクトの一覧
+      description: プロジェクトの一覧を取得する。プロジェクトは試験日の昇順。
+      responses:
+        "200":
+          description: プロジェクトの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Project"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    post:
+      tags: [project]
+      summary: プロジェクトの作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/projects/5678"
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}:
+    get:
+      tags: [project]
+      summary: プロジェクトの取得
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: プロジェクト詳細
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    put:
+      tags: [project]
+      summary: プロジェクトの更新
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdate"
+      responses:
+        "200":
+          description: 更新成功
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/weights:
+    get:
+      tags: [project]
+      summary: プロジェクトに紐づく配点割合一覧
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: プロジェクトに紐づく配点割合の一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Weight"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/scopes:
+    get:
+      tags: [project]
+      summary: プロジェクトに紐づく試験範囲一覧
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: プロジェクトに紐づく試験範囲の一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Scope"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/steps:
+    get:
+      tags: [project]
+      summary: プロジェクトに紐づくステップの一覧
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: プロジェクトに紐づくステップの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Step"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+  /steps:
+    post:
+      tags: [step]
+      summary: ステップの作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StepCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/steps/1111"
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /steps/{stepId}:
+    get:
+      tags: [step]
+      summary: ステップの取得
+      parameters:
+        - $ref: "#/components/parameters/StepId"
+      responses:
+        "200":
+          description: ステップの取得
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Step"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    put:
+      tags: [step]
+      summary: ステップの更新
+      parameters:
+        - $ref: "#/components/parameters/StepId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StepUpdate"
+      responses:
+        "200":
+          description: 更新成功
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+  /steps/{stepId}/tasks:
+    get:
+      tags: [step]
+      summary: ステップに紐づくタスクの一覧
+      parameters:
+        - $ref: "#/components/parameters/StepId"
+      responses:
+        "200":
+          description: ステップに紐づくタスクの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Task"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+  /tasks:
+    post:
+      tags: [task]
+      summary: タスクの作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/tasks/9012"
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /tasks/{taskId}:
+    get:
+      tags: [task]
+      summary: タスクの取得
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      responses:
+        "200":
+          description: タスクの取得
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    put:
+      tags: [task]
+      summary: タスクの更新
+      parameters:
+        - $ref: "#/components/parameters/TaskId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskUpdate"
+      responses:
+        "200":
+          description: 更新成功
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+  /scopes:
+    post:
+      tags: [scope]
+      summary: 試験範囲の作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScopeCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/scopes/3333"
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /scopes/{scopeId}:
+    get:
+      tags: [scope]
+      summary: 試験範囲の取得
+      parameters:
+        - $ref: "#/components/parameters/ScopeId"
+      responses:
+        "200":
+          description: 試験範囲の取得
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Scope"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    put:
+      tags: [scope]
+      summary: 試験範囲の更新
+      parameters:
+       - $ref: "#/components/parameters/ScopeId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScopeUpdate"
+      responses:
+        "200":
+          description: 更新成功
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+  /weights:
+    post:
+      tags: [weight]
+      summary: 配点割合の作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WeightCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              schema:
+                type: string
+                example: "/weights/4444"
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /weights/{weightId}:
+    get:
+      tags: [weight]
+      summary: 配点割合の取得
+      parameters:
+        - $ref: "#/components/parameters/WeightId"
+      responses:
+        "200":
+          description: 配点割合の取得
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Weight"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+    put:
+      tags: [weight]
+      summary: 配点割合の更新
+      parameters:
+        - $ref: "#/components/parameters/WeightId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WeightUpdate"
+      responses:
+        "200":
+          description: 更新成功
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+components:
+  parameters:
+    PersonaId:
+      name: personaId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    StepId:
+      name: stepId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    TaskId:
+      name: taskId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ScopeId:
+      name: scopeId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    WeightId:
+      name: weightId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    Persona:
+      type: object
+      properties:
+        personaId:
+          type: string
+          format: uuid
+        weekday_hours:
+          type: integer
+          example: 2
+        weekend_hours:
+          type: integer
+          example: 5
+        learning_pattern:
+          type: string
+          enum: ["インプット先行パターン", "アウトプット先行パターン"]
+    PersonaCreate:
+      type: object
+      required: [weekday_hours, weekend_hours, learning_pattern]
+      properties:
+        weekday_hours:
+          type: integer
+          example: 2
+        weekend_hours:
+          type: integer
+          example: 5
+        learning_pattern:
+          type: string
+          enum: ["インプット先行パターン", "アウトプット先行パターン"]
+          example: "インプット先行パターン"
+    PersonaUpdate:
+      type: object
+      properties:
+        weekday_hours:
+          type: integer
+          example: 2
+        weekend_hours:
+          type: integer
+          example: 5
+        learning_pattern:
+          type: string
+          enum: ["インプット先行パターン", "アウトプット先行パターン"]
+
+    Project:
+      type: object
+      properties:
+        projectId:
+          type: string
+          format: uuid
+        personaId:
+          type: string
+          format: uuid
+        certification_name:
+          type: string
+        exam_date:
+          type: string
+          format: date
+        base_material:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+    ProjectCreate:
+      type: object
+      required: [certification_name, exam_date, base_material, personaId]
+      properties:
+        personaId:
+          type: string
+          format: uuid
+          example: "550e8400-e29b-41d4-a716-446655440000"
+        certification_name:
+          type: string
+          example: "AWS Solutions Architect Associate"
+        exam_date:
+          type: string
+          format: date
+          example: "2025-12-15"
+        base_material:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+          example: "TEXTBOOK"
+    ProjectUpdate:
+      type: object
+      properties:
+        certification_name:
+          type: string
+        exam_date:
+          type: string
+          format: date
+        base_material:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+
+    Step:
+      type: object
+      properties:
+        stepId:
+          type: string
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        theme:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    StepCreate:
+      type: object
+      required: [title, theme, start_date, end_date]
+      properties:
+        projectId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        theme:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+    StepUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        theme:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+
+    Task:
+      type: object
+      properties:
+        taskId:
+          type: string
+          format: uuid
+        stepId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        start_date:
+          type: string
+          format: date
+        due_date:
+          type: string
+          format: date
+        task_status:
+          type: string
+          enum: [undo, doing, done, blocked]
+    TaskCreate:
+      type: object
+      required: [title, description, start_date, end_date, task_status]
+      properties:
+        stepId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        task_status:
+          type: string
+          enum: [undo, doing, done, blocked]
+    TaskUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        start_date:
+          type: string
+          format: date
+        end_date:
+          type: string
+          format: date
+        task_status:
+          type: string
+          enum: [undo, doing, done, blocked]
+
+    Scope:
+      type: object
+      properties:
+        scopeId:
+          type: string
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        scope:
+          type: string
+        description:
+          type: string
+    ScopeCreate:
+      type: object
+      required: [scope, description]
+      properties:
+        projectId:
+          type: string
+          format: uuid
+        scope:
+          type: string
+        description:
+          type: string
+    ScopeUpdate:
+      type: object
+      properties:
+        scope:
+          type: string
+        description:
+          type: string
+
+    Weight:
+      type: object
+      properties:
+        weightId:
+          type: string
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        area:
+          type: string
+        weight_percent:
+          type: integer
+          minimum: 30
+    WeightCreate:
+      type: object
+      required: [area, weight_percent]
+      properties:
+        projectId:
+          type: string
+          format: uuid
+        area:
+          type: string
+        weight_percent:
+          type: integer
+          example: 30
+    WeightUpdate:
+      type: object
+      properties:
+        area:
+          type: string
+        weight_percent:
+          type: integer
+          example: 30
