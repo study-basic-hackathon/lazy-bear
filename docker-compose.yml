@@ -26,6 +26,9 @@ services:
       - "3000:3000"
     environment:
       - DATABASE_URL=${DATABASE_URL}
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
+      - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION}
+      - VERTEX_AI_MODEL_NAME=${VERTEX_AI_MODEL_NAME}
     volumes:
       - ~/.config/gcloud:/root/.config/gcloud:ro
     depends_on:
