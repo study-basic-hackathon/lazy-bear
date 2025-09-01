@@ -72,6 +72,15 @@ docker compose logs database
 docker exec -it lazy_bear_database psql -U postgres -d lazy_bear_dev
 ```
 
+## データベース マイグレーション
+
+### マイグレーションファイル生成
+
+```bash
+npm run db:generate
+npm run db:migrate
+```
+
 ---
 
 ### データベース GUI 接続
