@@ -77,6 +77,8 @@ docker exec -it lazy_bear_database psql -U postgres -d lazy_bear_dev
 ### マイグレーションファイル生成
 
 ```bash
+cd app
+npm install
 npm run db:generate
 npm run db:migrate
 ```
