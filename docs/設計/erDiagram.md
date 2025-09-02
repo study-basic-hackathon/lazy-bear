@@ -13,7 +13,7 @@ erDiagram
         uuid personaId FK
         uuid weightId FK
         uuid scopeId FK
-        string certificationName
+        varchar certificationName
         date examDate
         enum baseMaterial "TEXTBOOK / VIDEO"
     }
@@ -21,8 +21,8 @@ erDiagram
     STEP {
         uuid stepId PK
         uuid projectId FK
-        string title
-        string theme
+        varchar title
+        text theme
         date startDate
         date endDate
     }
@@ -30,7 +30,7 @@ erDiagram
     TASK {
         uuid taskId PK
         uuid stepId FK
-        string title
+        varchar title
         text description
         date startDate
         date endDate
@@ -47,14 +47,14 @@ erDiagram
     WEIGHT {
         uuid weightId PK
         uuid projectId FK
-        string area
+        varchar area
         int weightPercent
     }
 
     SCOPE {
         uuid scopeId PK
         uuid projectId FK
-        string scope
+        varchar scope
         text description
     }
 ```
