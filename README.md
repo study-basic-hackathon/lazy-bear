@@ -35,6 +35,25 @@ cd lazy-bear
 cp .env.example .env
 ```
 
+### N\. Google Cloud CLI の設定
+
+コンテナ内のアプリケーションがVertex AIなどのGoogle Cloudサービスにアクセスするために、ローカル環境でGoogle Cloud CLIの認証設定を行う必要があります。`docker-compose.yml`の設定により、ローカルの認証情報がコンテナに共有されます。
+
+1. **Google Cloud CLIをインストールします。**
+   [公式ドキュメント](https://cloud.google.com/sdk/docs/install)を参考に、お使いのOSに合わせてインストールしてください。
+
+2. **アプリケーションのデフォルト認証情報でログインします。**
+   以下のコマンドを実行するとブラウザが開き、認証を求められます。
+   ```bash
+   gcloud auth application-default login
+   ```
+
+3. **プロジェクトを設定します。**
+   `.env`ファイルに記載した`GOOGLE_CLOUD_PROJECT`と同じプロジェクトIDを設定してください。
+   ```bash
+   gcloud config set project <your-project-id>
+   ```
+
 ### 3\. Docker 環境の起動
 
 Docker コンテナをビルドして起動します。初回実行時には、必要な Docker イメージがダウンロードされ、npm パッケージがインストールされます。

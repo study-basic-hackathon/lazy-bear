@@ -1,0 +1,1163 @@
+{
+    "root": {
+        "data": {
+            "id": "dc9numoey1c0",
+            "created": 1755937376658,
+            "text": "アプリ名：lazy-bear"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcbilx6kuco0",
+                    "created": 1756125708610,
+                    "text": "タスク",
+                    "expandState": "expand",
+                    "layout_right_offset": {
+                        "x": 13,
+                        "y": 645
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dc9nv1zslsw0",
+                            "created": 1755937409998,
+                            "text": "要件定義",
+                            "expandState": "expand",
+                            "layout_right_offset": {
+                                "x": 560,
+                                "y": 607
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dc9nv523ek80",
+                                    "created": 1755937416667,
+                                    "text": "スコープのすり合わせ",
+                                    "layout_right_offset": {
+                                        "x": 33,
+                                        "y": -59
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcbisaeprs80",
+                                            "created": 1756126207586,
+                                            "text": "1ヶ月のハッカソンの中で、「ステップ」と「タスク」の生成までをスコープとする",
+                                            "expandState": "expand"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbisx1gdv40",
+                                                    "created": 1756126256850,
+                                                    "text": "「ステップ」と「タスク」の修正は後回し"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbiwp33uhc0",
+                                            "created": 1756126552992,
+                                            "text": "スケジュールをより正確に生成するため、できれば教材情報（本/Udemy/YouTube）の情報取得APIは期限内に実装したい"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgc9791hu00",
+                                                    "created": 1756615584917,
+                                                    "text": "追記：著作権などの問題があり、後回しにする"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbkry6tyao0",
+                                            "created": 1756131823207,
+                                            "text": "ユーザーテーブルとログイン機能を実装するかは検討中"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dc9nuqwtfkw0",
+                                    "created": 1755937385873,
+                                    "text": "フロー図の作成",
+                                    "layout_right_offset": {
+                                        "x": 41,
+                                        "y": -55
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcbisdxoz7c0",
+                                            "created": 1756126215264,
+                                            "text": "（ログイン）"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbks60xg9c0",
+                                            "created": 1756131840265,
+                                            "text": "資格名入力"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbks9c7zhs0",
+                                                    "created": 1756131847478,
+                                                    "text": "受ける試験の名前と勉強会日、期限を設定"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbkso2u61s0",
+                                            "created": 1756131879562,
+                                            "text": "（教材の選択）"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbksrxb0nk0",
+                                                    "created": 1756131887935,
+                                                    "text": "複数選択可能"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcbkszhi7vk0",
+                                                    "created": 1756131904394,
+                                                    "text": "種類は書籍、Udemy、YouTubeの三つ"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcgcadq7b2o0",
+                                            "created": 1756615677380,
+                                            "text": "資格情報取得・編集"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcao2c2i80",
+                                                    "created": 1756615699881,
+                                                    "text": "Vertex AIがその資格に含まれる試験分野や点数配分を取得"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcb7ouark0",
+                                                    "created": 1756615742601,
+                                                    "text": "ユーザーが必要に応じて修正"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcgcbbsf0yo0",
+                                            "created": 1756615751524,
+                                            "text": "ステップ提案＆修正"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcbhjmwww0",
+                                                    "created": 1756615764054,
+                                                    "text": "Vertex AIが、試験合格までのステップを提案する"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcc0b741c0",
+                                                    "created": 1756615804902,
+                                                    "text": "ユーザーが必要に応じてステップの追加編集削除、順番変更を行う"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcgccf7qz6g0",
+                                            "created": 1756615837346,
+                                            "text": "ガントチャート作成"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgccipr1k00",
+                                                    "created": 1756615844964,
+                                                    "text": "VertexAIがプロジェクトの各ステップに紐づく具体的なタスクを作成"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgccxis6o00",
+                                                    "created": 1756615877195,
+                                                    "text": "VertexAIからのレスポンスをガントチャートに表示"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dc9nyvpyn340",
+                                    "created": 1755937709799,
+                                    "text": "一ヶ月の全体スケジュール"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dc9nz2ln84o0",
+                                            "created": 1755937724776,
+                                            "text": "Jiraで入れる"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dc9nxyn9w0g0",
+                                    "created": 1755937637803,
+                                    "text": "コミュニケーションの定義"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dc9ny2lm5pk0",
+                                            "created": 1755937646410,
+                                            "text": "媒体"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcdjgpe7c0",
+                                                    "created": 1756615924958,
+                                                    "text": "Discord"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dc9ny4x7fe80",
+                                            "created": 1755937651464,
+                                            "text": "スケジュール管理方法"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcdlt7yyg0",
+                                                    "created": 1756615930069,
+                                                    "text": "Jira"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dc9ny9dfqi80",
+                                            "created": 1755937661153,
+                                            "text": "MTGの頻度"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcdpmikko0",
+                                                    "created": 1756615938370,
+                                                    "text": "随時設定"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbixtitkc80",
+                                    "created": 1756126641014,
+                                    "text": "用語定義"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcbixwd82z40",
+                                            "created": 1756126647206,
+                                            "text": "プロジェクト"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbixyxbxmg0",
+                                                    "created": 1756126652775,
+                                                    "text": "スケジュールを作成する最大の単位。どんな資格をいつまでに取得するかを定義する"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbiyihdy740",
+                                            "created": 1756126695346,
+                                            "text": "ステップ"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbiyl35obs0",
+                                                    "created": 1756126701016,
+                                                    "text": "プロジェクトを成功させるためにふんでいくマイルストーンのようなもの。WBSで一番上位に来る作業の単位。"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbiz61bubk0",
+                                            "created": 1756126746618,
+                                            "text": "タスク"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbiz96p0680",
+                                                    "created": 1756126753473,
+                                                    "text": "ステップの下に紐付く、具体的な作業の単位。タスク内容や開始日、終了日のデータをもつ。"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcbj01b2mko0",
+                                                            "created": 1756126814688,
+                                                            "text": "将来的には進捗ステータス情報なども持つ"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbkhx5bq5k0",
+                                            "created": 1756131037298,
+                                            "text": "教材",
+                                            "expandState": "expand"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcbkhzw85bc0",
+                                                    "created": 1756131043278,
+                                                    "text": "プロジェクトの達成に使用する教材。プロジェクト内で複数選択可能。本、YotuTube, Udemyの3種類。"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcbkipx8c800",
+                                                    "created": 1756131099935,
+                                                    "text": "ステップには0個もしくは1個の教材が結びつく。"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcbkjc1d0bs0",
+                                                            "created": 1756131148074,
+                                                            "text": "教材が結びつくステップのタスク作成には、教材の章立てを参考にする"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dc9nvcboego0",
+                            "created": 1755937432484,
+                            "text": "設計",
+                            "layout_right_offset": {
+                                "x": 627,
+                                "y": 547
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dc9nvg5n3cg0",
+                                    "created": 1755937440826,
+                                    "text": "画面設計",
+                                    "layout_right_offset": {
+                                        "x": 37,
+                                        "y": 393
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dc9nvl7dkd40",
+                                            "created": 1755937451815,
+                                            "text": "画面遷移図",
+                                            "layout_right_offset": {
+                                                "x": 17,
+                                                "y": 142
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgchs87b5s0",
+                                                    "created": 1756616257492,
+                                                    "text": "資格名入力フォーム"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgci8ok4og0",
+                                                    "created": 1756616293310,
+                                                    "text": "資格情報出力・編集フォーム"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcj88scq80",
+                                                    "created": 1756616370720,
+                                                    "text": "（書籍選択画面）"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcgcjfrm3iw0",
+                                                            "created": 1756616387096,
+                                                            "text": "後回し"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcifsfaag0",
+                                                    "created": 1756616308781,
+                                                    "text": "ステップ提案・修正フォーム"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcioe5v4w0",
+                                                    "created": 1756616327509,
+                                                    "text": "ガントチャート出力画面"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dc9nvptp9yo0",
+                                            "created": 1755937461872,
+                                            "text": "画面イメージ",
+                                            "layout_right_offset": {
+                                                "x": 2,
+                                                "y": -191
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dc9oa735nzk0",
+                                                    "created": 1755938596548,
+                                                    "text": "ワイヤーフレーム"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dc9oabg7mwo0",
+                                                    "created": 1755938606044,
+                                                    "text": "figma"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dc9nvvaskio0",
+                                    "created": 1755937473790,
+                                    "text": "データ設計",
+                                    "layout_right_offset": {
+                                        "x": 53,
+                                        "y": -257
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dc9nvxua7hk0",
+                                            "created": 1755937479322,
+                                            "text": "必要なデータの洗い出し"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dc9nw4syfqw0",
+                                            "created": 1755937494479,
+                                            "text": "テーブル設計"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcg277tvs0",
+                                                    "created": 1756616122472,
+                                                    "text": "ペルソナ"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcg61jskg0",
+                                                    "created": 1756616130836,
+                                                    "text": "プロジェクト"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcgbv0cdc0",
+                                                    "created": 1756616143502,
+                                                    "text": "（教材）"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcgfkqt2o0",
+                                                    "created": 1756616151588,
+                                                    "text": "点数配分"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcgcgp013pc0",
+                                                            "created": 1756616172103,
+                                                            "text": "プロジェクトIDを外部キーにもつ"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcgz477pc0",
+                                                    "created": 1756616194123,
+                                                    "text": "ステップ"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgch1eugmo0",
+                                                    "created": 1756616199121,
+                                                    "text": "タスク"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dc9nwamqoeo0",
+                                    "created": 1755937507164,
+                                    "text": "システム構成",
+                                    "layout_right_offset": {
+                                        "x": 41.749999944120646,
+                                        "y": 103.49999966472393
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcao8xkk6pk0",
+                                            "created": 1756040057425,
+                                            "text": "Next.js"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcgcjue2a1k0",
+                                                    "created": 1756616418928,
+                                                    "text": "TypeScript"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgcjxqlx5k0",
+                                                    "created": 1756616426217,
+                                                    "text": "AppRouter"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgck065hrs0",
+                                                    "created": 1756616431511,
+                                                    "text": "Drizzle"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcgckrav7rk0",
+                                                    "created": 1756616490569,
+                                                    "text": "フロントもバックも同じプロジェクトで作成するが、将来のモバイルアプリなどの拡張を考えてREST APIで通信する"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcao9288b8w0",
+                                            "created": 1756040067563,
+                                            "text": "RDB"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcao95fd4400",
+                                                    "created": 1756040074525,
+                                                    "text": "一部NoSQL？（教材やタスクの情報など。RDBだけで問題ないかもしれない）"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcao9dfoct40",
+                                            "created": 1756040091958,
+                                            "text": "AI"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcao9g6nrlc0",
+                                                    "created": 1756040097943,
+                                                    "text": "vertexAI"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcaoa4y8fjk0",
+                                            "created": 1756040151853,
+                                            "text": "システム構成図を作る"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcaoajll0tc0",
+                            "created": 1756040183740,
+                            "text": "調査"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcaob5qe1pc0",
+                                    "created": 1756040231920,
+                                    "text": "Vertex AI"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcgcke6sscw0",
+                                            "created": 1756616462025,
+                                            "text": "使えそう"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcaob9vs9a00",
+                                    "created": 1756040240953,
+                                    "text": "教材API"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcgck7fn0eg0",
+                                            "created": 1756616447322,
+                                            "text": "（後回し）"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcaobdgz2dk0",
+                                            "created": 1756040248765,
+                                            "text": "本"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcaobf9q40o0",
+                                            "created": 1756040252680,
+                                            "text": "Udemy"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcaobj3oqrs0",
+                                            "created": 1756040261022,
+                                            "text": "Youtube"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcaobmknwrc0",
+                                            "created": 1756040268579,
+                                            "text": "今回はなし"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcaobqzgad40",
+                                                    "created": 1756040278180,
+                                                    "text": "WEB"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dc9nze7oz0o0",
+                            "created": 1755937750054,
+                            "text": "実装"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcgckji93ww0",
+                                    "created": 1756616473601,
+                                    "text": "資格名入力機能"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgclkys0bk0",
+                                    "created": 1756616555141,
+                                    "text": "資格情報取得・編集機能"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgclsyc6fs0",
+                                    "created": 1756616572529,
+                                    "text": "ステップ提案・修正機能"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcgcly243hs0",
+                                    "created": 1756616583641,
+                                    "text": "ガントチャート作成機能"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dc9nzi3j5mg0",
+                            "created": 1755937758509,
+                            "text": "動作確認"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dc9nzm91t600",
+                            "created": 1755937767550,
+                            "text": "サーバー反映"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcao9tazeow0",
+                            "created": 1756040126502,
+                            "text": "開発環境の構築"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcaoa0pwz340",
+                                    "created": 1756040142643,
+                                    "text": "Docker準備"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcbimotlnjc0",
+                    "created": 1756125768776,
+                    "text": "コンセプト",
+                    "layout_right_offset": {
+                        "x": 47,
+                        "y": -1090
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcbimwg8x940",
+                            "created": 1756125785383,
+                            "text": "一言で言うと",
+                            "layout_right_offset": {
+                                "x": 28,
+                                "y": -57
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbin1oxc940",
+                                    "created": 1756125796791,
+                                    "text": "資格取得のスケジュール生成・管理WEBアプリ"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcbingqblgg0",
+                            "created": 1756125829527,
+                            "text": "ターゲット",
+                            "layout_right_offset": {
+                                "x": 67,
+                                "y": -42
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbinjs7h600",
+                                    "created": 1756125836172,
+                                    "text": "資格を取得するまでのスケジュールを管理したい人"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcbio720d5c0",
+                            "created": 1756125886830,
+                            "text": "AsIs（困りごと）",
+                            "layout_right_offset": {
+                                "x": 55,
+                                "y": -42
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbiobzm4lc0",
+                                    "created": 1756125897569,
+                                    "text": "資格取得をするまでにどんなステップを経たら良いのかわからない"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbiowj5z740",
+                                    "created": 1756125942287,
+                                    "text": "本やUdemy、YouTubeの教材を使って勉強するのに、どの章をどのくらいかけて勉強すれば良いかわからない"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbipare1c00",
+                                    "created": 1756125973260,
+                                    "text": "どのタスクをいつまでに実施したら良いか一目で確認したい"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcbiq7l9nxc0",
+                            "created": 1756126044723,
+                            "text": "ToBe（アプリで実現したいこと）",
+                            "layout_right_offset": {
+                                "x": 31,
+                                "y": -51
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbiqdcoc4g0",
+                                    "created": 1756126057264,
+                                    "text": "生成AIが資格取得のまでのステップと具体的なタスクの期限をガントチャート形式でスケジュール作成"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbivwyg5280",
+                                    "created": 1756126491760,
+                                    "text": "スケジュールに遅れが生じた時などは、生成AIが状況を理解してスケジュールを修正"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbir2ffjhs0",
+                                    "created": 1756126111851,
+                                    "text": "（追加機能）教材（本/Udemy/YouTube）の項目をAPIで取得し、内容を理解した上でタスク生成"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcbkob3tkkg0",
+                    "created": 1756131537867,
+                    "text": "プロジェクトの概要",
+                    "layout_right_offset": {
+                        "x": 43,
+                        "y": -1130
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcbkoh0g62g0",
+                            "created": 1756131550724,
+                            "text": "2025/8/23-9/21で開催される初学者ハッカソンイベントでの開発プロジェクト"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcbkovffa5c0",
+                            "created": 1756131582104,
+                            "text": "日本語のドキュメント作成"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcbkp558fls0",
+                            "created": 1756131603257,
+                            "text": "メンバー"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbkp75vwpk0",
+                                    "created": 1756131607649,
+                                    "text": "はよちゃん"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbkpa2cl6o0",
+                                    "created": 1756131613965,
+                                    "text": "山口 さん"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbkpcq3szk0",
+                                    "created": 1756131619755,
+                                    "text": "いぐっちゃん"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcbkq1tecww0",
+                            "created": 1756131674374,
+                            "text": "スケジュール"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbkq4nc1v40",
+                                    "created": 1756131680538,
+                                    "text": "8/23(終了)",
+                                    "layout_right_offset": {
+                                        "x": 20,
+                                        "y": -24
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcbkq7zu0aw0",
+                                            "created": 1756131687824,
+                                            "text": "チーム作成"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcbkqi6az7s0",
+                                            "created": 1756131709983,
+                                            "text": "企画"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbkqngdh8w0",
+                                    "created": 1756131721476,
+                                    "text": "9/21"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcbkqpwniao0",
+                                            "created": 1756131726813,
+                                            "text": "発表、デモ"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcbkr1tcz140",
+                            "created": 1756131752736,
+                            "text": "コミュニケーション方法"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbkr5y7ec80",
+                                    "created": 1756131761736,
+                                    "text": "Discord"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcbkrbl52000",
+                                    "created": 1756131774007,
+                                    "text": "必要に応じてLINE"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcbkra4bag00",
+                            "created": 1756131770812,
+                            "text": "ソースコード管理"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcbkrixbxsw0",
+                                    "created": 1756131789981,
+                                    "text": "GitHub"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
