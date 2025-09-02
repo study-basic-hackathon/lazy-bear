@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "hediet.vscode-drawio",
-        "oorzc.mind-map"
+        "oorzc.mind-map",
+        "42crunch.vscode-openapi"
     ]
 }
