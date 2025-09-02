@@ -25,6 +25,7 @@ erDiagram
         text theme
         date startDate
         date endDate
+        int index
     }
 
     TASK {
