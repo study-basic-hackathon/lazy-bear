@@ -8,6 +8,8 @@ Next.js + PostgreSQL を使った Web アプリケーション
 
 - **Frontend/Backend**: Next.js 15 (App Router)
 - **Database**: PostgreSQL 17
+- **ORM**: Drizzle ORM
+- **Styling**: Tailwind CSS
 - **Container**: Docker & Docker Compose
 - **Language**: TypeScript
 
@@ -18,7 +20,6 @@ Next.js + PostgreSQL を使った Web アプリケーション
 ### 前提条件
 
 - **Docker Desktop** がインストールされていること
-- **Node.js 18+** がインストールされていること（開発用）
 
 ### 1\. リポジトリをクローン
 
@@ -88,6 +89,17 @@ docker compose logs database
 
 # データベースに直接接続
 docker exec -it lazy_bear_database psql -U postgres -d lazy_bear_dev
+```
+
+## データベース マイグレーション
+
+### マイグレーションファイル生成
+
+```bash
+cd app
+npm install
+npm run db:generate
+npm run db:migrate
 ```
 
 ---
