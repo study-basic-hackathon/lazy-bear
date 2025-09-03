@@ -55,7 +55,7 @@ graph TD
 | **フロントエンド** | `app/src/app/demo/page.tsx` | ユーザー操作の受付、APIへのリクエスト送信、結果の表示。 |
 | **バックエンドAPI** | `app/src/app/api/demo/route.ts` | HTTPリクエストの受付と応答。機能固有ロジックの呼び出し。 |
 | **機能固有ロジック** | `app/src/lib/ai/demo/demo-generate-plan.ts` | AIへの具体的な指示（プロンプト、JSONスキーマ）の定義。ビジネスロジックの中心。 |
-| **共通クライアント** | `app/src/lib/ai/client.ts` | Vertex AIとの通信という技術的な処理を完全に隠蔽・共通化する。 |
+| **共通クライアント** | `app/src/lib/ai/client.ts` | Vertex AIとの通信という技術的な処理を完全に隠蔽・共通化する(基本的に、機能追加時に修正する必要はありません)。 |
 
 ## 3. 実装の流れ
 
@@ -128,7 +128,7 @@ export async function POST(request: Request) {
 
 ### ステップ3: AI呼び出しロジック
 
-Vertex AIとの通信部分は、**「機能固有ロジック」**と**「共通クライアント」**の2層に分かれています。
+Vertex AIとの通信部分は、**「機能固有ロジック」** と **「共通クライアント」** の2層に分かれています。
 
 #### 3.1 機能固有ロジック (`app/src/lib/ai/demo/demo-generate-plan.ts`)
 
@@ -171,7 +171,7 @@ export async function generateLearningPlan(
 
 #### 3.2 共通クライアント (`app/src/lib/ai/client.ts`)
 
-Vertex AIとの通信という技術的な処理を引き受ける部品です。
+Vertex AIとの通信という技術的な処理を引き受ける部品です。（機能追加時にこのファイルを修正する必要は基本的にありません。）
 
 このファイルの中心となる`generateContentFromPrompt`関数は、「機能固有ロジック」で定義された以下の3つの要素を引数として受け取ります。
 - **`systemInstruction`**: AIへの役割指示
