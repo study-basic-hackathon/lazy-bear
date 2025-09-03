@@ -194,7 +194,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/StepCreate"
+              type: array
+              minItems: 3
+              items:
+                $ref: "#/components/schemas/StepCreate"
       responses:
         "201":
           description: 作成成功
@@ -264,7 +267,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/ScopeCreate"
+              type: array
+              minItems: 3
+              items:
+                $ref: "#/components/schemas/ScopeCreate"
       responses:
         "201":
           description: 作成成功
@@ -290,7 +296,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/WeightCreate"
+              type: array
+              minItems: 3
+              items:
+                $ref: "#/components/schemas/WeightCreate"
       responses:
         "201":
           description: 作成成功
@@ -353,21 +362,6 @@ components:
         format: uuid
 
   schemas:
-    Persona:
-      type: object
-      properties:
-        personaId:
-          type: string
-          format: uuid
-        weekday_hours:
-          type: integer
-          example: 2
-        weekend_hours:
-          type: integer
-          example: 5
-        learning_pattern:
-          type: string
-          enum: ["インプット先行パターン", "アウトプット先行パターン"]
     PersonaCreate:
       type: object
       required: [weekday_hours, weekend_hours, learning_pattern]
@@ -382,18 +376,6 @@ components:
           type: string
           enum: ["インプット先行パターン", "アウトプット先行パターン"]
           example: "インプット先行パターン"
-    PersonaUpdate:
-      type: object
-      properties:
-        weekday_hours:
-          type: integer
-          example: 2
-        weekend_hours:
-          type: integer
-          example: 5
-        learning_pattern:
-          type: string
-          enum: ["インプット先行パターン", "アウトプット先行パターン"]
 
     Project:
       type: object
@@ -437,17 +419,6 @@ components:
           type: string
           enum: [TEXTBOOK, VIDEO]
           example: "TEXTBOOK"
-    ProjectUpdate:
-      type: object
-      properties:
-        certification_name:
-          type: string
-        exam_date:
-          type: string
-          format: date
-        base_material:
-          type: string
-          enum: [TEXTBOOK, VIDEO]
 
     Step:
       type: object
@@ -468,9 +439,12 @@ components:
         end_date:
           type: string
           format: date
+        index:
+          type: integer
+          description: "小さい値から昇順に並ぶシリアル番号"
     StepCreate:
       type: object
-      required: [title, theme, start_date, end_date]
+      required: [title, theme, start_date, end_date, index]
       properties:
         projectId:
           type: string
@@ -485,19 +459,9 @@ components:
         end_date:
           type: string
           format: date
-    StepUpdate:
-      type: object
-      properties:
-        title:
-          type: string
-        theme:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
+        index:
+          type: integer
+          description: "小さい値から昇順に並ぶシリアル番号"
 
     Task:
       type: object
@@ -516,42 +480,6 @@ components:
           type: string
           format: date
         due_date:
-          type: string
-          format: date
-        task_status:
-          type: string
-          enum: [undo, doing, done, blocked]
-    TaskCreate:
-      type: object
-      required: [title, description, start_date, end_date, task_status]
-      properties:
-        stepId:
-          type: string
-          format: uuid
-        title:
-          type: string
-        description:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
-          type: string
-          format: date
-        task_status:
-          type: string
-          enum: [undo, doing, done, blocked]
-    TaskUpdate:
-      type: object
-      properties:
-        title:
-          type: string
-        description:
-          type: string
-        start_date:
-          type: string
-          format: date
-        end_date:
           type: string
           format: date
         task_status:
@@ -582,13 +510,6 @@ components:
           type: string
         description:
           type: string
-    ScopeUpdate:
-      type: object
-      properties:
-        scope:
-          type: string
-        description:
-          type: string
 
     Weight:
       type: object
@@ -611,14 +532,6 @@ components:
         projectId:
           type: string
           format: uuid
-        area:
-          type: string
-        weight_percent:
-          type: integer
-          example: 30
-    WeightUpdate:
-      type: object
-      properties:
         area:
           type: string
         weight_percent:
