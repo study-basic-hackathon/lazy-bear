@@ -5,7 +5,7 @@ erDiagram
     PROJECT ||--|{ STEP : have
     STEP ||--|{ TASK : breaks_into
     PERSONA ||--o{ PROJECT : uses
-    PROJECT ||--o{ WEIGHT : targets
+    PROJECT ||--|{ WEIGHT : targets
     PROJECT ||--|{ SCOPE : targets
 
     PROJECT {
