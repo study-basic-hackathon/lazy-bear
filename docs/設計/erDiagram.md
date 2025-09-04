@@ -11,8 +11,6 @@ erDiagram
     PROJECT {
         uuid projectId PK
         uuid personaId FK
-        uuid weightId FK
-        uuid scopeId FK
         varchar certificationName
         date examDate
         enum baseMaterial "TEXTBOOK / VIDEO"
