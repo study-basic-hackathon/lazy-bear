@@ -36,7 +36,7 @@ cd lazy-bear
 cp .env.example .env
 ```
 
-### N\. Google Cloud CLI の設定
+### 3\. Google Cloud CLI の設定
 
 コンテナ内のアプリケーションがVertex AIなどのGoogle Cloudサービスにアクセスするために、ローカル環境でGoogle Cloud CLIの認証設定を行う必要があります。`docker-compose.yml`の設定により、ローカルの認証情報がコンテナに共有されます。
 
@@ -55,7 +55,7 @@ cp .env.example .env
    gcloud config set project <your-project-id>
    ```
 
-### 3\. Docker 環境の起動
+### 4\. Docker 環境の起動
 
 Docker コンテナをビルドして起動します。初回実行時には、必要な Docker イメージがダウンロードされ、npm パッケージがインストールされます。
 
@@ -67,7 +67,7 @@ docker compose up --build
 docker compose up -d --build
 ```
 
-### 4\. アクセス確認
+### 5\. アクセス確認
 
 - **Next.js アプリ**: http://localhost:3000
 - **PostgreSQL**: localhost:5432
@@ -93,14 +93,35 @@ docker exec -it lazy_bear_database psql -U postgres -d lazy_bear_dev
 
 ## データベース マイグレーション
 
-### マイグレーションファイル生成
+データベースのテーブル構造（スキーマ）は、マイグレーションファイルを通して管理・共有されます。
+
+### 最新のスキーマを取り込む場合 (変更担当者以外向け)
+
+他の開発者が行ったスキーマ変更をローカルのデータベースに反映させるには、Gitで最新のソースコード（新しいマイグレーションファイルを含む）を取得した後、以下のコマンドを実行します。
 
 ```bash
-cd app
-npm install
-npm run db:generate
-npm run db:migrate
+docker compose exec app npm run db:migrate
 ```
+
+**注意:** スキーマ定義を直接変更していない場合は、`db:generate`コマンドを実行しないでください。意図しないマイグレーションファイルが生成され、コンフリクトの原因となります。
+
+### スキーマ定義を変更する場合 (担当者向け)
+
+テーブルやカラムの追加・変更など、スキーマ定義 (`app/src/lib/db/schema/` 内のファイル) を変更した開発者は、以下の手順を実施する責任があります。
+
+1.  **マイグレーションファイルを生成する**
+    スキーマ定義の変更後、データベースへの変更内容を記述したSQLファイルを生成します。
+    ```bash
+    docker compose exec app npm run db:generate
+    ```
+    生成されたSQLファイル (`app/src/lib/db/migrations/*.sql`) は、必ずGitにコミットしてチームで共有してください。
+
+2.  **マイグレーションを適用する**
+    生成したSQLファイルを自身のローカルデータベースに適用し、動作確認を行います。
+    ```bash
+    docker compose exec app npm run db:migrate
+    ```
+
 
 ---
 
