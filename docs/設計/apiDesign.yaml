@@ -448,18 +448,6 @@ components:
         personaId:
           type: string
           format: uuid
-        weightId:
-          type: array
-          items:
-            type: string
-            format: uuid
-          minItems: 3
-        scopeId:
-          type: array
-          items:
-            type: string
-            format: uuid
-          minItems: 3
         certificationName:
           type: string
         examDate:
