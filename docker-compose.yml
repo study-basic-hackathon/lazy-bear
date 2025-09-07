@@ -28,6 +28,8 @@ services:
       - GOOGLE_CLOUD_LOCATION=${GOOGLE_CLOUD_LOCATION}
       - VERTEX_AI_MODEL_NAME=${VERTEX_AI_MODEL_NAME}
     volumes:
+      - ./app:/app
+      - /app/node_modules
       - ${GOOGLE_CLOUD_CREDENTIAL_PATH}:/root/.config/gcloud:ro
     depends_on:
       - database
