@@ -30,7 +30,7 @@ services:
     volumes:
       - ./app:/app
       - /app/node_modules
-      - ~/.config/gcloud:/root/.config/gcloud:ro
+      - ${GOOGLE_CLOUD_CREDENTIAL_PATH}:/root/.config/gcloud:ro
     depends_on:
       - database
 
