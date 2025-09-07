@@ -1,0 +1,133 @@
+{
+    "root": {
+        "data": {
+            "id": "dcmasch30aw0",
+            "created": 1757220802726,
+            "text": "WBS"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcmashypt5s0",
+                    "created": 1757220814677,
+                    "text": "フロント"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "dcmasmlxfq00",
+                    "created": 1757220824787,
+                    "text": "バックエンド"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcmat5hp6600",
+                            "created": 1757220865890,
+                            "text": "persona"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcmatdio7280",
+                                    "created": 1757220883363,
+                                    "text": "バックエンド"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcmaxj0tkl40",
+                                            "created": 1757221208801,
+                                            "text": "DBにデータを入れたりする"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcmaszc6r000",
+                            "created": 1757220852496,
+                            "text": "project",
+                            "layout_right_offset": {
+                                "x": 8,
+                                "y": 26
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcmau3eauww0",
+                                    "created": 1757220939696,
+                                    "text": "バックエンド"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcmaut84bko0",
+                                            "created": 1757220995918,
+                                            "text": "DBにデータを入れたりする/生成AIのlibを呼ぶ"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcmauxfo6mw0",
+                                    "created": 1757221005082,
+                                    "text": "AIのlibを作る"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcmaszc6r000",
+                            "created": 1757220852496,
+                            "text": "step",
+                            "layout_right_offset": {
+                                "x": 22,
+                                "y": 27
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcmau3eauww0",
+                                    "created": 1757220939696,
+                                    "text": "バックエンド"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcmaut84bko0",
+                                            "created": 1757220995918,
+                                            "text": "DBにデータを入れたりする/生成AIのlibを呼ぶ"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcmauxfo6mw0",
+                                    "created": 1757221005082,
+                                    "text": "AIのlibを作る"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

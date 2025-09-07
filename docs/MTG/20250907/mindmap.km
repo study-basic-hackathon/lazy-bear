@@ -1,0 +1,176 @@
+{
+    "root": {
+        "data": {
+            "id": "dcm59p671yw0",
+            "created": 1757205235898,
+            "text": "20250907_MTG"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcm59xvkfmo0",
+                    "created": 1757205254846,
+                    "text": "前回からの進捗"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcm5a955qs80",
+                            "created": 1757205279371,
+                            "text": "はよちゃん"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcm5aph5sgw0",
+                                    "created": 1757205314925,
+                                    "text": "DB設計"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcm5bdrxd0o0",
+                                            "created": 1757205367819,
+                                            "text": "井口質問：scopeとweightの例があれば"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcm5as669w80",
+                                    "created": 1757205320791,
+                                    "text": "API設計"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcm5awndqdc0",
+                                    "created": 1757205330538,
+                                    "text": "ディレクトリ構成"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcm5ajpzxhc0",
+                            "created": 1757205302398,
+                            "text": "山口 さん",
+                            "layout_right_offset": {
+                                "x": 31,
+                                "y": 31
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcm5b3ym0000",
+                                    "created": 1757205346455,
+                                    "text": "モデル作成"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcm5alyh5gg0",
+                            "created": 1757205307265,
+                            "text": "いぐっちゃん",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcm5c6lvisg0",
+                                    "created": 1757205430579,
+                                    "text": "VertexAI",
+                                    "expandState": "expand",
+                                    "layout_right_offset": {
+                                        "x": 0,
+                                        "y": 102
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcm5dh1zf140",
+                                            "created": 1757205531685,
+                                            "text": "gemini cli"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcm5dkfp6kw0",
+                                            "created": 1757205539045,
+                                            "text": "Vertex AI"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcm5doth4lc0",
+                                                    "created": 1757205548585,
+                                                    "text": "ローカルのプログラムから"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcm5dtk2wtk0",
+                                                    "created": 1757205558901,
+                                                    "text": "GUI"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcm5dynbdzc0",
+                                                            "created": 1757205569981,
+                                                            "text": "権限未設定"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcm5d6685480",
+                                    "created": 1757205507997,
+                                    "text": "マイグレーション方法の変更",
+                                    "layout_right_offset": {
+                                        "x": 5,
+                                        "y": -110
+                                    }
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcm5e1f1lzs0",
+                    "created": 1757205576011,
+                    "text": "タスク分担",
+                    "layout_right_offset": {
+                        "x": -1,
+                        "y": 46
+                    }
+                },
+                "children": []
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
