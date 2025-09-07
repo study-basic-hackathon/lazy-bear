@@ -6,13 +6,14 @@ erDiagram
     STEP ||--|{ TASK : breaks_into
     PERSONA ||--o{ PROJECT : uses
     PROJECT ||--|{ WEIGHT : targets
-    PROJECT ||--|{ SCOPE : targets
+    WEIGHT ||--|{ SCOPE : contains
 
     PROJECT {
         uuid projectId PK
         uuid personaId FK
         varchar certificationName
         date examDate
+        date examStartDate
         enum baseMaterial "TEXTBOOK / VIDEO"
     }
 
@@ -52,7 +53,7 @@ erDiagram
 
     SCOPE {
         uuid scopeId PK
-        uuid projectId FK
+        uuid weightId FK
         varchar scope
         text description
     }
