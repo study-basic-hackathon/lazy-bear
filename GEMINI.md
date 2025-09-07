@@ -22,6 +22,7 @@
 - フロントエンドとバックエンドはNext.jsフレームワーク内で密に結合されています。
 - データベース操作はDrizzle ORMを介して行われます。スキーマは `app/src/lib/db/schema/` に配置されています。
 - 学習計画を生成するAIロジックは、Vertex AIクライアントと対話するサービス内にカプセル化されるべきです。
+- 主要な設計書として `docs/設計/erDiagram.md` (ER図) と `docs/設計/apiDesign.yaml` (API設計) があります。
 
 ## 3. プロジェクト構造
 
@@ -31,6 +32,7 @@ lazy-bear/
 │   ├───package.json      # 依存関係とスクリプト定義
 │   └───src/
 │       ├───app/          # ページとUIコンポーネント (App Router)
+│       │   ├───(client)/  # フロントエンドの実装
 │       │   └───api/      # APIルート (サーバーサイドエンドポイント)
 │       └───lib/
 │           ├───ai/       # Vertex AI 連携機能
