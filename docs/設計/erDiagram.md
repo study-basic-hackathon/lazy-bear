@@ -13,7 +13,7 @@ erDiagram
         uuid personaId FK
         varchar certificationName
         date examDate
-        date examStartDate
+        date startDate
         enum baseMaterial "TEXTBOOK / VIDEO"
     }
 
