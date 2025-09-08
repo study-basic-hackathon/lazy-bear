@@ -17,109 +17,6 @@ tags:
     description: ステップの情報を取得するAPI
 
 paths:
-  /projects/{projectId}/step:generate:
-    get:
-      tags: [project]
-      summary: ステップ候補のリストの取得
-      description: ステップ候補のリストを取得する。
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      responses:
-        "200":
-          description: ステップ候補のリスト
-          content:
-            application/json:
-              schema:
-                type: array
-                minItems: 3
-                items:
-                  type: object
-                  properties:
-                    title:
-                      type: string
-                    theme:
-                      type: string
-                    index:
-                      type: integer
-                      description: 並び順（昇順）
-        default:
-          description: An unexpected error occurred
-  /projects/{projectId}/weight:generate:
-    get:
-      tags: [project]
-      summary: 配点割合候補のリストの取得
-      description: 配点割合候補のリストを取得する。
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      responses:
-        "200":
-          description: 配点割合候補のリスト
-          content:
-            application/json:
-              schema:
-                type: array
-                minItems: 3
-                items:
-                  type: object
-                  properties:
-                    area:
-                      type: string
-                    weightPercent:
-                      type: number
-                      format: integer
-                      minimum: 30
-                      description: 配点割合（%）
-        default:
-          description: An unexpected error occurred
-  /projects/{projectId}/scope:generate:
-    get:
-      tags: [project]
-      summary: 試験範囲候補のリストの取得
-      description: 試験範囲候補のリストの取得。
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      responses:
-        "200":
-          description: 試験範囲候補のリスト
-          content:
-            application/json:
-              schema:
-                type: array
-                minItems: 3
-                items:
-                  type: object
-                  properties:
-                    scope:
-                      type: string
-                    description:
-                      type: string
-        default:
-          description: An unexpected error occurred
-  /projects/{projectId}/task:generate:
-    post:
-      tags: [project]
-      summary: タスク候補のリストの登録
-      description: タスク候補のリストの登録。
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      responses:
-        "201":
-          description: 作成成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  taskIds:
-                    type: array
-                    minItems: 3
-                    items:
-                      type: string
-                      format: uuid
-                    description: 作成されたタスクIDのリスト
-        default:
-          description: An unexpected error occurred
-
   /personas:
     post:
       tags: [persona]
@@ -197,12 +94,12 @@ paths:
                 message: データが見つかりません
         default:
           description: An unexpected error occurred
-  /personas/{personaId}/projects/{projectId}:
+
+  /projects/{projectId}:
     get:
-      tags: [persona]
-      summary: ペルソナのプロジェクトの取得
+      tags: [project]
+      summary: プロジェクトの取得
       parameters:
-        - $ref: "#/components/parameters/PersonaId"
         - $ref: "#/components/parameters/ProjectId"
       responses:
         "200":
@@ -217,6 +114,111 @@ paths:
             application/json:
               example:
                 message: データが見つかりません
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/steps/generate:
+    get:
+      tags: [project]
+      summary: ステップ候補のリストの取得
+      description: ステップ候補のリストを取得する。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: ステップ候補のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    theme:
+                      type: string
+                    index:
+                      type: integer
+                      description: 並び順（昇順）
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/weights/generate:
+    get:
+      tags: [project]
+      summary: 配点割合候補のリストの取得
+      description: 配点割合候補のリストを取得する。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: 配点割合候補のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  type: object
+                  properties:
+                    area:
+                      type: string
+                    weightPercent:
+                      type: number
+                      format: integer
+                      minimum: 30
+                      description: 配点割合（%）
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/scopes/generate:
+    get:
+      tags: [project]
+      summary: 試験範囲候補のリストの取得
+      description: 試験範囲候補のリストの取得。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: 試験範囲候補のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  type: object
+                  properties:
+                    weightId:
+                      type: string
+                      format: uuid
+                    scope:
+                      type: string
+                    description:
+                      type: string
+        default:
+          description: An unexpected error occurred
+  /projects/{projectId}/tasks/generate:
+    post:
+      tags: [project]
+      summary: タスク候補のリストの登録
+      description: タスク候補のリストの登録。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "201":
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  taskIds:
+                    type: array
+                    minItems: 3
+                    items:
+                      type: string
+                      format: uuid
+                    description: 作成されたタスクIDのリスト
         default:
           description: An unexpected error occurred
   /projects/{projectId}/steps:
@@ -247,7 +249,7 @@ paths:
       tags: [project]
       summary: ステップの作成
       parameters:
-        - $ref: "#/components/parameters/ProjectId"
+        - $ref: "#/components/parameters/PersonaId"
       requestBody:
         required: true
         content:
@@ -272,43 +274,6 @@ paths:
                       type: string
                       format: uuid
                     description: 作成されたステップIDのリスト
-        "400":
-          description: 不正なリクエスト
-          content:
-            application/json:
-              example: { "message": "入力内容が正しくありません" }
-        default:
-          description: An unexpected error occurred
-  /projects/{projectId}/scopes:
-    post:
-      tags: [project]
-      summary: 試験範囲の作成
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              minItems: 3
-              items:
-                $ref: "#/components/schemas/ScopeCreate"
-      responses:
-        "201":
-          description: 作成成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  scopeIds:
-                    type: array
-                    minItems: 3
-                    items:
-                      type: string
-                      format: uuid
-                    description: 作成されたスコープIDのリスト
         "400":
           description: 不正なリクエスト
           content:
@@ -353,6 +318,44 @@ paths:
               example: { "message": "入力内容が正しくありません" }
         default:
           description: An unexpected error occurred
+
+  /projects/{projectId}/scopes:
+    post:
+      tags: [project]
+      summary: 試験範囲の作成
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 3
+              items:
+                $ref: "#/components/schemas/ScopeCreate"
+      responses:
+        "201":
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  scopeIds:
+                    type: array
+                    minItems: 3
+                    items:
+                      type: string
+                      format: uuid
+                    description: 作成されたスコープIDのリスト
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred 
 
   /steps/{stepId}/tasks:
     get:
@@ -450,6 +453,9 @@ components:
           format: uuid
         certificationName:
           type: string
+        examStartDate:
+          type: string
+          format: date
         examDate:
           type: string
           format: date
@@ -458,11 +464,15 @@ components:
           enum: [TEXTBOOK, VIDEO]
     ProjectCreate:
       type: object
-      required: [certificationName, examDate, baseMaterial]
+      required: [certificationName, examStartDate, examDate, baseMaterial]
       properties:
         certificationName:
           type: string
           example: "AWS Solutions Architect Associate"
+        examStartDate:
+          type: string
+          format: date
+          example: "2025-10-01"
         examDate:
           type: string
           format: date
@@ -512,7 +522,6 @@ components:
           type: integer
           description: "小さい値から昇順に並ぶシリアル番号"
 
-
     Task:
       type: object
       properties:
@@ -542,7 +551,7 @@ components:
         scopeId:
           type: string
           format: uuid
-        projectId:
+        weightId:
           type: string
           format: uuid
         scope:
@@ -551,8 +560,11 @@ components:
           type: string
     ScopeCreate:
       type: object
-      required: [scope, description]
+      required: [weightId, scope, description]
       properties:
+        weightId:
+          type: string
+          format: uuid
         scope:
           type: string
         description:
