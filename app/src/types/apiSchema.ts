@@ -4,216 +4,6 @@
  */
 
 export interface paths {
-    "/projects/{projectId}/step:generate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * ステップ候補のリストの取得
-         * @description ステップ候補のリストを取得する。
-         */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description ステップ候補のリスト */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            title?: string;
-                            theme?: string;
-                            /** @description 並び順（昇順） */
-                            index?: number;
-                        }[];
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/projects/{projectId}/weight:generate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 配点割合候補のリストの取得
-         * @description 配点割合候補のリストを取得する。
-         */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 配点割合候補のリスト */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            area?: string;
-                            /**
-                             * Format: integer
-                             * @description 配点割合（%）
-                             */
-                            weightPercent?: number;
-                        }[];
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/projects/{projectId}/scope:generate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 試験範囲候補のリストの取得
-         * @description 試験範囲候補のリストの取得。
-         */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 試験範囲候補のリスト */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            scope?: string;
-                            description?: string;
-                        }[];
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/projects/{projectId}/task:generate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * タスク候補のリストの登録
-         * @description タスク候補のリストの登録。
-         */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 作成成功 */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @description 作成されたタスクIDのリスト */
-                            taskIds?: string[];
-                        };
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/personas": {
         parameters: {
             query?: never;
@@ -376,20 +166,19 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/personas/{personaId}/projects/{projectId}": {
+    "/projects/{projectId}": {
         parameters: {
             query?: never;
             header?: never;
             path?: never;
             cookie?: never;
         };
-        /** ペルソナのプロジェクトの取得 */
+        /** プロジェクトの取得 */
         get: {
             parameters: {
                 query?: never;
                 header?: never;
                 path: {
-                    personaId: components["parameters"]["PersonaId"];
                     projectId: components["parameters"]["ProjectId"];
                 };
                 cookie?: never;
@@ -428,6 +217,218 @@ export interface paths {
         };
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/{projectId}/steps/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * ステップ候補のリストの取得
+         * @description ステップ候補のリストを取得する。
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    projectId: components["parameters"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description ステップ候補のリスト */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            title?: string;
+                            theme?: string;
+                            /** @description 並び順（昇順） */
+                            index?: number;
+                        }[];
+                    };
+                };
+                /** @description An unexpected error occurred */
+                default: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/{projectId}/weights/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 配点割合候補のリストの取得
+         * @description 配点割合候補のリストを取得する。
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    projectId: components["parameters"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 配点割合候補のリスト */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            area?: string;
+                            /**
+                             * Format: integer
+                             * @description 配点割合（%）
+                             */
+                            weightPercent?: number;
+                        }[];
+                    };
+                };
+                /** @description An unexpected error occurred */
+                default: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/{projectId}/scopes/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * 試験範囲候補のリストの取得
+         * @description 試験範囲候補のリストの取得。
+         */
+        get: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    projectId: components["parameters"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 試験範囲候補のリスト */
+                200: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** Format: uuid */
+                            weightId?: string;
+                            scope?: string;
+                            description?: string;
+                        }[];
+                    };
+                };
+                /** @description An unexpected error occurred */
+                default: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/{projectId}/tasks/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * タスク候補のリストの登録
+         * @description タスク候補のリストの登録。
+         */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    projectId: components["parameters"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody?: never;
+            responses: {
+                /** @description 作成成功 */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @description 作成されたタスクIDのリスト */
+                            taskIds?: string[];
+                        };
+                    };
+                };
+                /** @description An unexpected error occurred */
+                default: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
         delete?: never;
         options?: never;
         head?: never;
@@ -539,70 +540,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/projects/{projectId}/scopes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** 試験範囲の作成 */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["ScopeCreate"][];
-                };
-            };
-            responses: {
-                /** @description 作成成功 */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @description 作成されたスコープIDのリスト */
-                            scopeIds?: string[];
-                        };
-                    };
-                };
-                /** @description 不正なリクエスト */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        /** @example {
-                         *       "message": "入力内容が正しくありません"
-                         *     } */
-                        "application/json": unknown;
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/projects/{projectId}/weights": {
         parameters: {
             query?: never;
@@ -637,6 +574,70 @@ export interface paths {
                         "application/json": {
                             /** @description 作成されたウェイトIDのリスト */
                             weightIds?: string[];
+                        };
+                    };
+                };
+                /** @description 不正なリクエスト */
+                400: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        /** @example {
+                         *       "message": "入力内容が正しくありません"
+                         *     } */
+                        "application/json": unknown;
+                    };
+                };
+                /** @description An unexpected error occurred */
+                default: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content?: never;
+                };
+            };
+        };
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/projects/{projectId}/scopes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** 試験範囲の作成 */
+        post: {
+            parameters: {
+                query?: never;
+                header?: never;
+                path: {
+                    projectId: components["parameters"]["ProjectId"];
+                };
+                cookie?: never;
+            };
+            requestBody: {
+                content: {
+                    "application/json": components["schemas"]["ScopeCreate"][];
+                };
+            };
+            responses: {
+                /** @description 作成成功 */
+                201: {
+                    headers: {
+                        [name: string]: unknown;
+                    };
+                    content: {
+                        "application/json": {
+                            /** @description 作成された試験範囲のリスト */
+                            scopeIds?: string[];
                         };
                     };
                 };
@@ -746,6 +747,8 @@ export interface components {
             personaId?: string;
             certificationName?: string;
             /** Format: date */
+            startDate?: string;
+            /** Format: date */
             examDate?: string;
             /** @enum {string} */
             baseMaterial?: "TEXTBOOK" | "VIDEO";
@@ -753,6 +756,11 @@ export interface components {
         ProjectCreate: {
             /** @example AWS Solutions Architect Associate */
             certificationName: string;
+            /**
+             * Format: date
+             * @example 2025-10-01
+             */
+            startDate: string;
             /**
              * Format: date
              * @example 2025-12-15
@@ -806,11 +814,13 @@ export interface components {
             /** Format: uuid */
             scopeId?: string;
             /** Format: uuid */
-            projectId?: string;
+            weightId?: string;
             scope?: string;
             description?: string;
         };
         ScopeCreate: {
+            /** Format: uuid */
+            weightId: string;
             scope: string;
             description: string;
         };
