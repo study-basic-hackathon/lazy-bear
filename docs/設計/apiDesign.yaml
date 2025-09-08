@@ -249,7 +249,7 @@ paths:
       tags: [project]
       summary: ステップの作成
       parameters:
-        - $ref: "#/components/parameters/PersonaId"
+        - $ref: "#/components/parameters/ProjectId"
       requestBody:
         required: true
         content:
@@ -348,14 +348,14 @@ paths:
                     items:
                       type: string
                       format: uuid
-                    description: 作成されたスコープIDのリスト
+                    description: 作成された試験範囲のリスト
         "400":
           description: 不正なリクエスト
           content:
             application/json:
               example: { "message": "入力内容が正しくありません" }
         default:
-          description: An unexpected error occurred 
+          description: An unexpected error occurred
 
   /steps/{stepId}/tasks:
     get:
