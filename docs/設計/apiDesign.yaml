@@ -453,7 +453,7 @@ components:
           format: uuid
         certificationName:
           type: string
-        examStartDate:
+        startDate:
           type: string
           format: date
         examDate:
@@ -464,12 +464,12 @@ components:
           enum: [TEXTBOOK, VIDEO]
     ProjectCreate:
       type: object
-      required: [certificationName, examStartDate, examDate, baseMaterial]
+      required: [certificationName, startDate, examDate, baseMaterial]
       properties:
         certificationName:
           type: string
           example: "AWS Solutions Architect Associate"
-        examStartDate:
+        startDate:
           type: string
           format: date
           example: "2025-10-01"
