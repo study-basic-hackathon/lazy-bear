@@ -331,59 +331,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/projects/{projectId}/scopes/generate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * 試験範囲候補のリストの取得
-         * @description 試験範囲候補のリストの取得。
-         */
-        get: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody?: never;
-            responses: {
-                /** @description 試験範囲候補のリスト */
-                200: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** Format: uuid */
-                            weightId?: string;
-                            scope?: string;
-                            description?: string;
-                        }[];
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/projects/{projectId}/tasks/generate": {
         parameters: {
             query?: never;
@@ -604,70 +551,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/projects/{projectId}/scopes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** 試験範囲の作成 */
-        post: {
-            parameters: {
-                query?: never;
-                header?: never;
-                path: {
-                    projectId: components["parameters"]["ProjectId"];
-                };
-                cookie?: never;
-            };
-            requestBody: {
-                content: {
-                    "application/json": components["schemas"]["ScopeCreate"][];
-                };
-            };
-            responses: {
-                /** @description 作成成功 */
-                201: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        "application/json": {
-                            /** @description 作成された試験範囲のリスト */
-                            scopeIds?: string[];
-                        };
-                    };
-                };
-                /** @description 不正なリクエスト */
-                400: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content: {
-                        /** @example {
-                         *       "message": "入力内容が正しくありません"
-                         *     } */
-                        "application/json": unknown;
-                    };
-                };
-                /** @description An unexpected error occurred */
-                default: {
-                    headers: {
-                        [name: string]: unknown;
-                    };
-                    content?: never;
-                };
-            };
-        };
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/steps/{stepId}/tasks": {
         parameters: {
             query?: never;
@@ -739,6 +622,11 @@ export interface components {
              * @enum {string}
              */
             learningPattern: "インプット先行パターン" | "アウトプット先行パターン";
+            /**
+             * @example TEXTBOOK
+             * @enum {string}
+             */
+            baseMaterial: "TEXTBOOK" | "VIDEO";
         };
         Project: {
             /** Format: uuid */
@@ -750,8 +638,6 @@ export interface components {
             startDate?: string;
             /** Format: date */
             examDate?: string;
-            /** @enum {string} */
-            baseMaterial?: "TEXTBOOK" | "VIDEO";
         };
         ProjectCreate: {
             /** @example AWS Solutions Architect Associate */
@@ -766,11 +652,6 @@ export interface components {
              * @example 2025-12-15
              */
             examDate: string;
-            /**
-             * @example TEXTBOOK
-             * @enum {string}
-             */
-            baseMaterial: "TEXTBOOK" | "VIDEO";
         };
         Step: {
             /** Format: uuid */
@@ -809,20 +690,6 @@ export interface components {
             dueDate?: string;
             /** @enum {string} */
             taskStatus?: "undo" | "doing" | "done" | "blocked";
-        };
-        Scope: {
-            /** Format: uuid */
-            scopeId?: string;
-            /** Format: uuid */
-            weightId?: string;
-            scope?: string;
-            description?: string;
-        };
-        ScopeCreate: {
-            /** Format: uuid */
-            weightId: string;
-            scope: string;
-            description: string;
         };
         Weight: {
             /** Format: uuid */
