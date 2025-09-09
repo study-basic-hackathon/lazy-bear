@@ -13,6 +13,7 @@ erDiagram
         varchar certificationName
         date examDate
         date startDate
+        enum baseMaterial "TEXTBOOK / VIDEO"
     }
 
     STEP {
@@ -40,7 +41,6 @@ erDiagram
         decimal weekdayHours
         decimal weekendHours
         enum learningPattern "インプット先行パターン|アウトプット先行パターン"
-        enum baseMaterial "TEXTBOOK / VIDEO"
     }
 
     WEIGHT {
