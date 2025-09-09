@@ -6,7 +6,6 @@ erDiagram
     STEP ||--|{ TASK : breaks_into
     PERSONA ||--o{ PROJECT : uses
     PROJECT ||--|{ WEIGHT : targets
-    WEIGHT ||--|{ SCOPE : contains
 
     PROJECT {
         uuid projectId PK
@@ -14,7 +13,6 @@ erDiagram
         varchar certificationName
         date examDate
         date startDate
-        enum baseMaterial "TEXTBOOK / VIDEO"
     }
 
     STEP {
@@ -42,6 +40,7 @@ erDiagram
         decimal weekdayHours
         decimal weekendHours
         enum learningPattern "インプット先行パターン|アウトプット先行パターン"
+        enum baseMaterial "TEXTBOOK / VIDEO"
     }
 
     WEIGHT {
@@ -49,12 +48,5 @@ erDiagram
         uuid projectId FK
         varchar area
         int weightPercent
-    }
-
-    SCOPE {
-        uuid scopeId PK
-        uuid weightId FK
-        varchar scope
-        text description
     }
 ```

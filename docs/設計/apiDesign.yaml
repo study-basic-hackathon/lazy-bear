@@ -170,33 +170,6 @@ paths:
                       description: 配点割合（%）
         default:
           description: An unexpected error occurred
-  /projects/{projectId}/scopes/generate:
-    get:
-      tags: [project]
-      summary: 試験範囲候補のリストの取得
-      description: 試験範囲候補のリストの取得。
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      responses:
-        "200":
-          description: 試験範囲候補のリスト
-          content:
-            application/json:
-              schema:
-                type: array
-                minItems: 3
-                items:
-                  type: object
-                  properties:
-                    weightId:
-                      type: string
-                      format: uuid
-                    scope:
-                      type: string
-                    description:
-                      type: string
-        default:
-          description: An unexpected error occurred
   /projects/{projectId}/tasks/generate:
     post:
       tags: [project]
@@ -319,44 +292,6 @@ paths:
         default:
           description: An unexpected error occurred
 
-  /projects/{projectId}/scopes:
-    post:
-      tags: [project]
-      summary: 試験範囲の作成
-      parameters:
-        - $ref: "#/components/parameters/ProjectId"
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: array
-              minItems: 3
-              items:
-                $ref: "#/components/schemas/ScopeCreate"
-      responses:
-        "201":
-          description: 作成成功
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  scopeIds:
-                    type: array
-                    minItems: 3
-                    items:
-                      type: string
-                      format: uuid
-                    description: 作成された試験範囲のリスト
-        "400":
-          description: 不正なリクエスト
-          content:
-            application/json:
-              example: { "message": "入力内容が正しくありません" }
-        default:
-          description: An unexpected error occurred
-
   /steps/{stepId}/tasks:
     get:
       tags: [step]
@@ -429,7 +364,7 @@ components:
   schemas:
     PersonaCreate:
       type: object
-      required: [weekdayHours, weekendHours, learningPattern]
+      required: [weekdayHours, weekendHours, learningPattern, baseMaterial]
       properties:
         weekdayHours:
           type: integer
@@ -441,6 +376,10 @@ components:
           type: string
           enum: ["インプット先行パターン", "アウトプット先行パターン"]
           example: "インプット先行パターン"
+        baseMaterial:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+          example: "TEXTBOOK"
 
     Project:
       type: object
@@ -459,12 +398,9 @@ components:
         examDate:
           type: string
           format: date
-        baseMaterial:
-          type: string
-          enum: [TEXTBOOK, VIDEO]
     ProjectCreate:
       type: object
-      required: [certificationName, startDate, examDate, baseMaterial]
+      required: [certificationName, startDate, examDate]
       properties:
         certificationName:
           type: string
@@ -477,10 +413,6 @@ components:
           type: string
           format: date
           example: "2025-12-15"
-        baseMaterial:
-          type: string
-          enum: [TEXTBOOK, VIDEO]
-          example: "TEXTBOOK"
 
     Step:
       type: object
@@ -544,31 +476,6 @@ components:
         taskStatus:
           type: string
           enum: [undo, doing, done, blocked]
-
-    Scope:
-      type: object
-      properties:
-        scopeId:
-          type: string
-          format: uuid
-        weightId:
-          type: string
-          format: uuid
-        scope:
-          type: string
-        description:
-          type: string
-    ScopeCreate:
-      type: object
-      required: [weightId, scope, description]
-      properties:
-        weightId:
-          type: string
-          format: uuid
-        scope:
-          type: string
-        description:
-          type: string
 
     Weight:
       type: object
