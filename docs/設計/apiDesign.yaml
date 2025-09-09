@@ -376,10 +376,6 @@ components:
           type: string
           enum: ["インプット先行パターン", "アウトプット先行パターン"]
           example: "インプット先行パターン"
-        baseMaterial:
-          type: string
-          enum: [TEXTBOOK, VIDEO]
-          example: "TEXTBOOK"
 
     Project:
       type: object
@@ -398,6 +394,9 @@ components:
         examDate:
           type: string
           format: date
+        baseMaterial:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
     ProjectCreate:
       type: object
       required: [certificationName, startDate, examDate]
@@ -413,6 +412,10 @@ components:
           type: string
           format: date
           example: "2025-12-15"
+        baseMaterial:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+          example: "TEXTBOOK"
 
     Step:
       type: object
