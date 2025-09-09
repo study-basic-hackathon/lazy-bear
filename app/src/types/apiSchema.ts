@@ -622,11 +622,6 @@ export interface components {
              * @enum {string}
              */
             learningPattern: "インプット先行パターン" | "アウトプット先行パターン";
-            /**
-             * @example TEXTBOOK
-             * @enum {string}
-             */
-            baseMaterial: "TEXTBOOK" | "VIDEO";
         };
         Project: {
             /** Format: uuid */
@@ -638,6 +633,8 @@ export interface components {
             startDate?: string;
             /** Format: date */
             examDate?: string;
+            /** @enum {string} */
+            baseMaterial?: "TEXTBOOK" | "VIDEO";
         };
         ProjectCreate: {
             /** @example AWS Solutions Architect Associate */
@@ -652,6 +649,11 @@ export interface components {
              * @example 2025-12-15
              */
             examDate: string;
+            /**
+             * @example TEXTBOOK
+             * @enum {string}
+             */
+            baseMaterial?: "TEXTBOOK" | "VIDEO";
         };
         Step: {
             /** Format: uuid */
