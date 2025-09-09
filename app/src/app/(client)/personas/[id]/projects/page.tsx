@@ -21,6 +21,7 @@ const mockProjects: Record<string, Project[]> = {
       personaId: "11111111-1111-1111-1111-111111111111",
       certificationName: "AWS SAA",
       examDate: "2025-10-01",
+      startDate: "2025-08-01",
       baseMaterial: "TEXTBOOK",
     },
     {
@@ -28,6 +29,7 @@ const mockProjects: Record<string, Project[]> = {
       personaId: "11111111-1111-1111-1111-111111111111",
       certificationName: "LPIC-1",
       examDate: "2025-11-15",
+      startDate: "2025-10-01",
       baseMaterial: "VIDEO",
     },
   ],
