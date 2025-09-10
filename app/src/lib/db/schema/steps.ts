@@ -10,7 +10,7 @@ import { projects } from "./projects";
 
 export const steps = pgTable("step", {
   stepId: uuid("stepId").primaryKey().defaultRandom(),
-  personaId: uuid("projectId")
+  projectId: uuid("projectId")
     .notNull()
     .references(() => projects.projectId),
   title: varchar("title").notNull(),
