@@ -672,10 +672,6 @@ export interface components {
         StepCreate: {
             title: string;
             theme: string;
-            /** Format: date */
-            startDate: string;
-            /** Format: date */
-            endDate: string;
             /** @description 小さい値から昇順に並ぶシリアル番号 */
             index: number;
         };
