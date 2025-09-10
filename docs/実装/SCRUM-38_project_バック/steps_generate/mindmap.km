@@ -1,0 +1,99 @@
+{
+    "root": {
+        "data": {
+            "id": "dcp44ug10o00",
+            "created": 1757506714315,
+            "text": "steps生成エンドポイント"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcp45oxvwyo0",
+                    "created": 1757506780699,
+                    "text": "メソッド"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcp45unw6io0",
+                            "created": 1757506793155,
+                            "text": "POST"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcp45m5z7ds0",
+                    "created": 1757506774658,
+                    "text": "/projects/{projectId}/steps/generate"
+                },
+                "children": []
+            },
+            {
+                "data": {
+                    "id": "dcp46si9tnc0",
+                    "created": 1757506866826,
+                    "text": "ロジック"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcp46wcojm80",
+                            "created": 1757506875195,
+                            "text": "projectIdkからプロジェクトのレコードを取得し、変数に入れる"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcp4gwaaaw80",
+                            "created": 1757507658692,
+                            "text": "weightsテーブルから、そのprojectを親にもつレコードを全て取得し、リストの変数に入れる"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcp4htuy9k00",
+                            "created": 1757507731775,
+                            "text": "とりあえずモックで、docs/設計/apiDesign.yamlの使用通りのレスポンスを返す"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcp4jdb8s540",
+                                    "created": 1757507852483,
+                                    "text": "本当はvertexAIに作らせる"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcp4j0avmw00",
+                    "created": 1757507824163,
+                    "text": "参照",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcp4iueipsw0",
+                            "created": 1757507811323,
+                            "text": "app/src/app/api/projects/[projectId]/weights/generate/route.tsと同じような感じ"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
