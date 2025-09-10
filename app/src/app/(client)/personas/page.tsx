@@ -60,6 +60,18 @@ export default function PersonaCreatePage() {
     // const data = await res.json();
     // const personaId = data.personaId;
     // router.push(`/personas/${personaId}`);
+
+        // Location ヘッダを取得
+    // const location = res.headers.get("Location");
+
+    // const location = res.headers.get("Location") ?? "";
+    // // ["", "personas", "abcd-1234"]
+    // const parts = location.split("/");
+    // const personaId = parts[2]; // "abcd-1234"
+
+    // 成功時にページ遷移
+    const personaId = "11111111-1111-1111-1111-111111111111"; // ← APIから返る想定
+    router.push(`/personas/${personaId}/projects`);
   };
 
   return (
@@ -85,8 +97,8 @@ export default function PersonaCreatePage() {
             marginTop: "70px",
           }}
         >
-          {/* 各要素の間隔を28pxに統一 */}
-          <div className="flex flex-col" style={{ gap: "28px" }}>
+          {/* 各要素の間隔を24pxに統一 */}
+          <div className="flex flex-col" style={{ gap: "24px" }}>
             <div>
               <label className="block text-sm font-medium text-gray-700" style={{ marginBottom: "12px" }}>
                 平日の勉強時間
@@ -111,7 +123,7 @@ export default function PersonaCreatePage() {
                   placeholder="例: 2"
                   required
                 />
-                <span>時間</span>
+                <span className="text-stone-950">時間</span>
               </div>
             </div>
 
@@ -139,7 +151,7 @@ export default function PersonaCreatePage() {
                   placeholder="例: 5"
                   required
                 />
-                <span>時間</span>
+                <span className="text-stone-950">時間</span>
               </div>
             </div>
             {errors.hours && (
