@@ -10,5 +10,6 @@ export const projects = pgTable("project", {
     .references(() => personas.personaId),
   certificationName: varchar("certificationName").notNull(),
   examDate: date("examDate").notNull(),
-  learningPattern: baseMaterial("baseMaterial").notNull().default("TEXTBOOK"),
+  startDate: date("startDate").notNull(),
+  baseMaterial: baseMaterial("baseMaterial").notNull().default("TEXTBOOK"),
 });
