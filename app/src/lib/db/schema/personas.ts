@@ -1,4 +1,5 @@
 import { pgTable, uuid, decimal, pgEnum } from "drizzle-orm/pg-core";
+import { start } from "repl";
 
 export const learningEnum = pgEnum("learningEnum", [
   "インプット先行パターン",
