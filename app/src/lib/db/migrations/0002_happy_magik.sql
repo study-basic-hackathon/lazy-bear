@@ -1,0 +1,1 @@
+ALTER TABLE "persona" RENAME COLUMN "learningEnum" TO "learningPattern";
