@@ -55,31 +55,50 @@ export default function ProjectCreatePage() {
 
     const payload: ProjectCreate = {
       ...form,
-      baseMaterial: form.baseMaterial, // ここでは enum 型 ("TEXTBOOK" | "VIDEO") に確定
+      baseMaterial: form.baseMaterial,
     };
 
     console.log("プロジェクト作成 payload:", payload);
 
-    // TODO: API に接続
-    // await fetch(`/api/personas/${personaId}/projects`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
-    // const data = await res.json();
-    // const projectId = data.projectId;
+    try {
+      // weight モックデータ（テスト用、終了後削除予定）
+      const mockWeights = [
+        { area: "ネットワーク", weightPercent: 30 },
+        { area: "データベース", weightPercent: 25 },
+        { area: "セキュリティ", weightPercent: 20 },
+        { area: "アルゴリズム", weightPercent: 25 },
+      ];
 
-    // Location ヘッダを取得
-    // const location = res.headers.get("Location");
+      // 1. プロジェクト作成
+      const res = await fetch(`/api/personas/${personaId}/projects`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
 
-    // const location = res.headers.get("Location") ?? "";
-    // // ["", "projects", "abcd-1234"]
-    // const parts = location.split("/");
-    // const projectId = parts[2]; // "abcd-1234"
+      // if (!res.ok) throw new Error("プロジェクト作成に失敗しました");
 
-    // 成功時にページ遷移
-    const projectId = "mock-project-id"; // ← APIから返る想定
-    router.push(`/projects/${projectId}/weights/generate`);
+      // Location ヘッダから projectId を取得
+      const location = res.headers.get("Location") ?? "";
+      const parts = location.split("/");
+      const projectId = parts[parts.length - 1] || "mock-project-id";  //右はモック用データ
+
+      // 2. 遷移前に AI に配点割合生成を依頼
+      // const genRes = await fetch(`/api/projects/${projectId}/weights/generate`, {
+      //   method: "GET",
+      // });
+
+      // if (!genRes.ok) {
+      //   console.warn("配点割合生成API失敗 → モックデータ使用");
+        console.log(mockWeights);
+      // }
+
+      // 3. 配点割合ページへ遷移
+      router.push(`/projects/${projectId}/weights/post`);
+    } catch (err) {
+      console.error(err);
+      alert("登録処理に失敗しました");
+    }
   };
 
   return (
@@ -99,7 +118,7 @@ export default function ProjectCreatePage() {
             marginTop: "70px",
           }}
         >
-          {/* グリッド: 資格名 + 開始日 + 試験日 + 学習方法 */}
+          {/* フォーム入力欄（資格名, 開始日, 試験日, 学習方法） */}
           <div
             className="grid"
             style={{
@@ -142,7 +161,6 @@ export default function ProjectCreatePage() {
                   backgroundColor: "#EFF0F4",
                   color: form.startDate ? "#000000" : "#A8A5AF",
                 }}
-                placeholder="例: 2025-09-01"
               />
             </div>
 
@@ -160,7 +178,6 @@ export default function ProjectCreatePage() {
                   backgroundColor: "#EFF0F4",
                   color: form.examDate ? "#000000" : "#A8A5AF",
                 }}
-                placeholder="例: 2025-12-01"
               />
               {errors.date && (
                 <p className="text-red-500 text-sm mt-1">{errors.date}</p>
@@ -218,5 +235,3 @@ export default function ProjectCreatePage() {
     </div>
   );
 }
-
-
