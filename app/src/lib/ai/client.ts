@@ -44,6 +44,11 @@ export const generateContentFromPrompt = async <T>(
   responseSchema?: FunctionDeclarationSchema,
   tools?: Tool[]
 ): Promise<T> => {
+  console.log('--- System Instruction ---');
+  console.log(systemInstruction);
+  console.log('--- User Prompt ---');
+  console.log(userPrompt);
+
   const request: GenerateContentRequest = {
     contents: [
       {
@@ -82,6 +87,8 @@ export const generateContentFromPrompt = async <T>(
     const functionCall = resp.response.candidates?.[0]?.content?.parts?.[0]?.functionCall;
 
     if (functionCall?.args) {
+      console.log("--- AI Response (Function Call) ---");
+      console.log(JSON.stringify(functionCall.args, null, 2));
       return functionCall.args as T;
     }
 
@@ -98,7 +105,10 @@ export const generateContentFromPrompt = async <T>(
       throw new Error('AIの応答に有効なJSON文字列が含まれていませんでした。');
     }
     const jsonString = jsonMatch[0];
-    return JSON.parse(jsonString) as T;
+    const parsedJson = JSON.parse(jsonString);
+    console.log("--- AI Response (Parsed Text) ---");
+    console.log(JSON.stringify(parsedJson, null, 2));
+    return parsedJson as T;
 
   } catch (error) {
     console.error('Vertex AIの呼び出し中にエラーが発生しました:', error);

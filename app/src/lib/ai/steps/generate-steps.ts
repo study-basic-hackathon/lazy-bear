@@ -1,6 +1,6 @@
 
 import { generateContentFromPrompt } from '../client';
-import { FunctionDeclarationSchema } from '@google-cloud/vertexai';
+import { FunctionDeclarationSchema, SchemaType } from '@google-cloud/vertexai';
 import { type projects, type personas } from '@/lib/db/schema';
 import { type weights } from '@/lib/db/schema/weights';
 import { paths } from '@/types/apiSchema';
@@ -20,9 +20,9 @@ const systemInstruction = `
     - 各試験分野の配点比率
     - ペルソナ（平日・休日の学習可能時間、学習の好み）
 2.  **思考プロセス:**
-    a. まず、与えられた試験分野とその配点を、大きなカテゴリ（例：テクノロジ系、マネジメント系、ストラテジ系など）に分類・整理します。
-    b. 次に、各カテゴリの学習を1〜2個の大きな「ステップ」にまとめます。配点が高い分野は重点的に扱います。
-    c. 最後に、試験に向けた実践的な演習や全体の総復習のためのステップを設けます。
+    a. まず、与えられた各試験分野を分割し、各試験分野以下の大きさのカテゴリ（例：テクノロジ系、マネジメント系、ストラテジ系など）に分類・整理します。
+    b. 配点が高い試験分野のカテゴリは重点的に扱います。次に、各カテゴリの学習を1〜2個の大きな「ステップ」にまとめます。
+    c. さらに、初期に試験の準備のステップと、最後に試験に向けた実践的な演習や全体の総復習のためのステップを設けます。
 3.  上記プロセスに基づき、学習全体を **必ず5〜7個** のステップに分割してください。これより多くても少なくてもいけません。
 4.  ペルソナの学習可能時間や学習パターン（インプット先行かアウトプット先行か）を考慮して、各ステップのテーマや順序を調整してください。
 5.  `baseMaterial` が `TEXTBOOK` の場合は教科書ベースの学習、`VIDEO` の場合はビデオ教材ベースの学習を想定したステップを計画してください。
@@ -33,8 +33,8 @@ const systemInstruction = `
 - ルートオブジェクトは "steps" という名前のキーを一つだけ持つこと。
 - "steps" の値は、オブジェクトの配列であること。
 - 配列の各オブジェクトは、以下のキーを持つこと。
-  - "title": ステップの簡潔なタイトル (string)。
-  - "theme": そのステップで学習する内容の具体的なテーマや要約 (string)。
+  - "title": ステップの簡潔なタイトル (string)。長くても20文字以内にしてください。
+  - "theme": そのステップで達成すべき学習目標 (string)。
   - "index": ステップの順序を示す0から始まる整数 (number)。
 - 配列は "index" の昇順でソートされていること。
 
@@ -42,24 +42,24 @@ const systemInstruction = `
 `;
 
 const responseSchema: FunctionDeclarationSchema = {
-  type: 'object',
+  type: SchemaType.OBJECT,
   properties: {
     steps: {
-      type: 'array',
+      type: SchemaType.ARRAY,
       description: '学習ステップの配列',
       items: {
-        type: 'object',
+        type: SchemaType.OBJECT,
         properties: {
           title: {
-            type: 'string',
+            type: SchemaType.STRING,
             description: 'ステップのタイトル',
           },
           theme: {
-            type: 'string',
-            description: 'ステップの学習テーマ',
+            type: SchemaType.STRING,
+            description: 'そのステップで達成すべき学習目標',
           },
           index: {
-            type: 'integer',
+            type: SchemaType.INTEGER,
             description: 'ステップの順序 (0始まり)',
           },
         },

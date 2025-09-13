@@ -31,9 +31,6 @@ export async function GET(
     // AIを呼び出して比重を生成
     const weightResponse = await generateWeights(project.certificationName);
 
-    // デバッグログを追加
-    console.log("AI Response object:", weightResponse);
-
     // 結果を返す
     return NextResponse.json(weightResponse.weights, { status: 200 });
 
