@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       .insert(personas)
       .values({
         weekdayHours: weekdayHours.toString(),
-        weekendHours: weekdayHours.toString(),
+        weekendHours: weekendHours.toString(),
         learningPattern: learningPattern || "インプット先行パターン",
       })
       .returning();
