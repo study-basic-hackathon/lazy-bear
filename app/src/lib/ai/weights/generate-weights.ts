@@ -1,6 +1,6 @@
 import { generateContentFromPrompt } from '../client';
 import { FunctionDeclarationSchema } from '@google-cloud/vertexai';
-import { Weight } from '@/lib/types';
+import { paths } from '@/types/apiSchema';
 
 const systemInstruction = `
 あなたは、ユーザーから指定された資格の出題分野と配点比率を分析し、結果をJSON形式"のみ"で返す高度なAPIです。
@@ -47,8 +47,10 @@ const responseSchema: FunctionDeclarationSchema = {
   required: ['weights'],
 };
 
+type WeightsGenerateResponse = paths["/projects/{projectId}/weights/generate"]["get"]["responses"]["200"]["content"]["application/json"];
+
 type WeightResponse = {
-  weights: Weight[];
+  weights: WeightsGenerateResponse;
 };
 
 export async function generateWeights(

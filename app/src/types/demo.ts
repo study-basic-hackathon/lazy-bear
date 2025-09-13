@@ -15,8 +15,3 @@ export interface Step {
 export interface LearningPlan {
   steps: Step[];
 }
-
-export type Weight = {
-  area: string;
-  weightPercent: number;
-};

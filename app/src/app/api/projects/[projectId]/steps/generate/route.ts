@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
 import { projects, weights } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
+import { generateSteps } from "@/lib/ai/steps/generate-steps";
 import { paths } from "@/types/apiSchema";
 
 type StepsGenerateResponse =
@@ -16,11 +17,12 @@ export async function GET(
     const { projectId } = await params;
 
     // DBからプロジェクト情報を取得
-    const project = await db
-      .select()
-      .from(projects)
-      .where(eq(projects.projectId, projectId))
-      .then((res) => res[0]);
+    const project = await db.query.projects.findFirst({
+      where: eq(projects.projectId, projectId),
+      with: {
+        persona: true,
+      },
+    });
 
     if (!project) {
       return NextResponse.json(
@@ -35,26 +37,12 @@ export async function GET(
       .from(weights)
       .where(eq(weights.projectId, projectId));
 
-    // TODO: 本来はVertex AIで生成する
-    const mockSteps: StepsGenerateResponse = [
-      {
-        title: "AWSの基本",
-        theme: "主要なAWSサービス（EC2, S3, VPC）の概要を理解する",
-        index: 0,
-      },
-      {
-        title: "設計原則",
-        theme: "高可用性、コスト効率、耐障害性に優れたアーキテクチャの設計原則を学ぶ",
-        index: 1,
-      },
-      {
-        title: "セキュリティ",
-        theme: "IAM、セキュリティグループ、KMSなどのセキュリティ関連サービスを習得する",
-        index: 2,
-      },
-    ];
+    // AIを呼び出してステップを生成
+    const stepResponse = await generateSteps(project, projectWeights);
 
-    return NextResponse.json(mockSteps);
+    const steps: StepsGenerateResponse = stepResponse.steps;
+
+    return NextResponse.json(steps);
   } catch (error) {
     console.error("Error in GET /api/projects/[projectId]/steps/generate:", error);
     return NextResponse.json(
