@@ -10,10 +10,10 @@ type StepsGenerateResponse =
 
 export async function GET(
   request: Request,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
   try {
-    const projectId = params.projectId;
+    const { projectId } = await params;
 
     // DBからプロジェクト情報を取得
     const project = await db

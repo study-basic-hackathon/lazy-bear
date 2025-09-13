@@ -8,9 +8,9 @@ type StepCreateArray = components["schemas"]["StepCreate"][];
 
 export async function POST(
   request: Request,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = params;
+  const { projectId } = await params;
 
   if (!projectId) {
     return NextResponse.json(

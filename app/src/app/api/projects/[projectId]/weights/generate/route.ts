@@ -1,50 +1,45 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { db } from '@/lib/db/db';
+import { projects } from '@/lib/db/schema';
+import { eq } from 'drizzle-orm';
+import { generateWeights } from '@/lib/ai/weights/generate-weights';
 
-// Mock implementation of the AI client
-const mockAiClient = {
-  generateWeightCandidates: async (projectId: string) => {
-    // projectId is not used in this mock, but would be in a real implementation
-    console.log(`Generating weight candidates for project: ${projectId}`);
 
-    // Simulate a network delay
-    await new Promise(resolve => setTimeout(resolve, 500));
-
-    // Return mock data that conforms to the API specification
-    return [
-      {
-        area: 'テクノロジ系',
-        weightPercent: 50,
-      },
-      {
-        area: 'マネジメント系',
-        weightPercent: 30,
-      },
-      {
-        area: 'ストラテジ系',
-        weightPercent: 20,
-      },
-    ];
-  },
-};
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = params;
+  const { projectId } = await params;
+
 
   if (!projectId) {
     return NextResponse.json({ message: 'Project ID is required' }, { status: 400 });
   }
 
   try {
-    // Call the mock AI client to get weight candidates
-    const weightCandidates = await mockAiClient.generateWeightCandidates(projectId);
+    // DBからプロジェクト情報を取得
+    const project = await db.query.projects.findFirst({
+      where: eq(projects.projectId, projectId),
+    });
 
-    return NextResponse.json(weightCandidates, { status: 200 });
+    if (!project) {
+      return NextResponse.json({ message: 'Project not found' }, { status: 404 });
+    }
+
+    // AIを呼び出して比重を生成
+    const weightResponse = await generateWeights(project.certificationName);
+
+    // デバッグログを追加
+    console.log("AI Response object:", weightResponse);
+
+    // 結果を返す
+    return NextResponse.json(weightResponse.weights, { status: 200 });
+
   } catch (error) {
     console.error('Error generating weight candidates:', error);
-    return NextResponse.json({ message: 'An unexpected error occurred' }, { status: 500 });
+    const errorMessage = error instanceof Error ? error.message : 'An unexpected error occurred';
+    return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
 }
