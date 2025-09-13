@@ -1,0 +1,490 @@
+{
+    "root": {
+        "data": {
+            "id": "dcq0a618r6w0",
+            "created": 1757597406881,
+            "text": "井口残タスク"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcq0jfxtmcg0",
+                    "created": 1757598133719,
+                    "text": "井口",
+                    "layout_right_offset": {
+                        "x": 46,
+                        "y": 215
+                    },
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcq0achh8k80",
+                            "created": 1757597420923,
+                            "text": "AIだけ",
+                            "layout_right_offset": {
+                                "x": 5,
+                                "y": 114
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq0ah3gzjc0",
+                                    "created": 1757597430960,
+                                    "text": "weight"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0g4xz1og0",
+                                            "created": 1757597874691,
+                                            "text": "/projects/{projectId}/weights/generate"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcq0g7wyskg0",
+                                                    "created": 1757597881161,
+                                                    "text": "GET"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcq0ndeoxdk0",
+                                            "created": 1757598441665,
+                                            "text": "ここのAIが一番やりやすいかつ最初にやる必要がある"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcq0bhkyu000",
+                                    "created": 1757597510383,
+                                    "text": "step",
+                                    "layout_right_offset": {
+                                        "x": 5,
+                                        "y": 34
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0gabrxu80",
+                                            "created": 1757597886410,
+                                            "text": "/projects/{projectId}/steps/generate "
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcq0goxij140",
+                                                    "created": 1757597918199,
+                                                    "text": "GET"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcq0nvknuuw0",
+                                            "created": 1757598481209,
+                                            "text": "projectとweight両方とも引っ張ってくる"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcq0e9qxyp40",
+                            "created": 1757597728422,
+                            "text": "完了",
+                            "layout_right_offset": {
+                                "x": 4.000000521540585,
+                                "y": -201.25000005587935
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq0efvyne00",
+                                    "created": 1757597741786,
+                                    "text": "/projects/{projectId}/weights",
+                                    "layout_right_offset": {
+                                        "x": 27,
+                                        "y": 55
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0f6dtr2w0",
+                                            "created": 1757597799462,
+                                            "text": "POST"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcq0fb09nc00",
+                                    "created": 1757597809526,
+                                    "text": "/projects/{projectId}/steps",
+                                    "layout_right_offset": {
+                                        "x": 26,
+                                        "y": -59
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0frnnz9k0",
+                                            "created": 1757597845770,
+                                            "text": "POST"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcq0rb6k3600",
+                    "created": 1757598750277,
+                    "text": "未定",
+                    "expandState": "expand",
+                    "layout_right_offset": {
+                        "x": -9.749999720603228,
+                        "y": 265.9999990314245
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcq0cjpao2g0",
+                            "created": 1757597593362,
+                            "text": "エンドポイントとAI両方"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq0csdx2x40",
+                                    "created": 1757597612265,
+                                    "text": "task"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0cui9axs0",
+                                            "created": 1757597616881,
+                                            "text": "generate"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcq0hr4cpu00",
+                                                    "created": 1757598001330,
+                                                    "text": "/projects/{projectId}/tasks/generate"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcq0hyzvpf40",
+                                                            "created": 1757598018474,
+                                                            "text": "POST"
+                                                        },
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "data": {
+                                                            "id": "dcq0n501ojc0",
+                                                            "created": 1757598423366,
+                                                            "text": "ラスボス"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcq0sascymo0",
+                    "created": 1757598827782,
+                    "text": "山口 さん",
+                    "layout_right_offset": {
+                        "x": 4.333334392971437,
+                        "y": -407.8333303199877
+                    },
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcq0r0o1q4o0",
+                            "created": 1757598727390,
+                            "text": "井口の分巻き取り",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq0bk501pc0",
+                                    "created": 1757597515947,
+                                    "text": "エンドポイント"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0bp3cqpc0",
+                                            "created": 1757597526731,
+                                            "text": "GET project"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcq0gx4qs540",
+                                                    "created": 1757597936050,
+                                                    "text": "/projects/{projectId}"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcq0gz8tta80",
+                                                            "created": 1757597940651,
+                                                            "text": "GET"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcq0d0os74w0",
+                                            "created": 1757597630336,
+                                            "text": "GET steps"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcq0h3ttgmo0",
+                                                    "created": 1757597950627,
+                                                    "text": "/projects/{projectId}/steps"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcq0h5s1kp40",
+                                                            "created": 1757597954874,
+                                                            "text": "GET"
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcq0sksjvc00",
+                            "created": 1757598849562,
+                            "text": "元から割り当てられてた分"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq0suxioxs0",
+                                    "created": 1757598871630,
+                                    "text": "/steps/{stepId}/tasks"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq0swxyh2o0",
+                                            "created": 1757598876010,
+                                            "text": "GET"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcq13dcnkdk0",
+                    "created": 1757599695369,
+                    "text": "その他",
+                    "layout_right_offset": {
+                        "x": -73.74999882653356,
+                        "y": 167.99999836087224
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcq13n9b39k0",
+                            "created": 1757599716934,
+                            "text": "資料作り",
+                            "layout_right_offset": {
+                                "x": 176,
+                                "y": 123
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq18i260y00",
+                                    "created": 1757600097439,
+                                    "text": "ZENNハッカソンではデモ動画",
+                                    "layout_right_offset": {
+                                        "x": 2,
+                                        "y": -3
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcq191drbe00",
+                                            "created": 1757600139499,
+                                            "text": "YouTube"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcq13rke4vs0",
+                            "created": 1757599726312,
+                            "text": "ユーザー",
+                            "layout_right_offset": {
+                                "x": 184,
+                                "y": 137
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq15cwef2w0",
+                                    "created": 1757599851114,
+                                    "text": "テーブル"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcq15fwqnpc0",
+                                    "created": 1757599857665,
+                                    "text": "ログイン機能"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcq14gz3zv40",
+                            "created": 1757599781621,
+                            "text": "フロントバックの接続テスト",
+                            "layout_right_offset": {
+                                "x": 90,
+                                "y": -170
+                            }
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcq13k79b740",
+                            "created": 1757599710280,
+                            "text": "サーバーの準備",
+                            "layout_right_offset": {
+                                "x": 114,
+                                "y": -156
+                            }
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcq1ac096io0",
+                            "created": 1757600240991,
+                            "text": "9/24の提出",
+                            "layout_right_offset": {
+                                "x": 146,
+                                "y": 37
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcq1aizh9bk0",
+                                    "created": 1757600256182,
+                                    "text": "gitリポジトリ"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcq1alxocv40",
+                                    "created": 1757600262603,
+                                    "text": "ZENN記事"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcq1arpttk00",
+                                    "created": 1757600275190,
+                                    "text": "YouTubeデモ動画"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcq1haxtr7s0",
+                                    "created": 1757600787217,
+                                    "text": "デプロイURL"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
