@@ -76,7 +76,7 @@ export default function PersonaProjectsPage() {
         <div className="mb-6 flex justify-end">
           <Link href={`/personas/${personaId}`}>
             <Image
-              src="/allProject/avatar.svg"
+              src="/getProjects/avatar.svg"
               alt="userIcon"
               width={52}
               height={52}
@@ -124,7 +124,7 @@ export default function PersonaProjectsPage() {
           <div className="flex justify-center">
             <Link href={`/personas/${personaId}/projects/post`}>
               <Image
-                src="/allProject/postProject.svg"
+                src="/getProjects/plusButton.svg"
                 alt="Add Project"
                 width={45}
                 height={45}
