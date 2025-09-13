@@ -9,8 +9,6 @@ export async function GET(
 ) {
   try {
     const { personaId } = params;
-    console.log("受信したpersonaId:", personaId); // デバッグ用
-    console.log("personaIdの型:", typeof personaId); // デバッグ用
 
     const uuidRegex =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -26,14 +24,15 @@ export async function GET(
       .from(projects)
       .where(eq(projects.personaId, personaId))
       .orderBy(asc(projects.examDate));
-    if (projectList.length === 0) {
-      return NextResponse.json(
-        { message: "データが見つかりません" },
-        { status: 404 }
-      );
-    }
 
-    return NextResponse.json(projectList, { status: 200 });
+    // データが見つからない場合は空配列を返す（404ではなく200で）
+    return NextResponse.json(
+      {
+        projects: projectList,
+        count: projectList.length,
+      },
+      { status: 200 }
+    );
   } catch (error) {
     console.error("プロジェクト取得エラー:", error);
     return NextResponse.json(
@@ -43,13 +42,25 @@ export async function GET(
   }
 }
 
-export async function POST(request: Request) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { personaId: string } }
+) {
   try {
+    const { personaId } = params;
     const body = await request.json();
-    const { personaId, certificationName, examDate, startDate, baseMaterial } =
-      body;
+    const { certificationName, examDate, startDate, baseMaterial } = body;
 
-    if (!personaId || !certificationName || !examDate || !startDate) {
+    const uuidRegex =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(personaId)) {
+      return NextResponse.json(
+        { error: "無効なペルソナIDです" },
+        { status: 400 }
+      );
+    }
+
+    if (!certificationName || !examDate || !startDate) {
       return NextResponse.json(
         { error: "必須項目が不足しています" },
         { status: 400 }
