@@ -9,12 +9,12 @@ const systemInstruction = `
 
 ## 出力前に必ず以下を確認する
   - 全ステップが MECE で網羅されているか？
-  - 全タスクが MECE で網羅されているか？
+  - title, themeは日本語で出力されているか？
 
 ## 語句定義 (Definition)
 
 ### 出題分野
-- 粒度: 科目 >= 出題分野 > 試験範囲の章・節に相当する部分。
+- 粒度: 科目 >= 出題分野 >= 試験範囲の章・節に相当する部分。
 
 ### ステップ
 - 粒度:
@@ -75,12 +75,12 @@ const systemInstruction = `
 ### タスク
 1. 全数は **必ず3個以上7個以下** である。
 2. description は **必ず動詞で終える**。
-3. description は必ず **50〜80文字以内** で記述する。
+3. description は必ず **20〜30文字以内** で記述する。
 
 ### ステップ
 1. 全数は **必ず3個以上10個以下** である。
 2. 各ステップは出題分野に基づき、スキルや能力による分類は禁止する。
-3. theme は必ず **50〜80文字以内** で記述する。
+3. theme は必ず **80〜100文字以内** で記述する。
 4. 必ず最初に「資格勉強の準備期間」に相当するステップを設ける。
 5. 必ず最後に「総合演習期間」に相当するステップを設ける。
 6. theme の記述ルール:
@@ -137,8 +137,10 @@ export async function generateSteps(
   weights: Weight[]
 ): Promise<StepResponse> {
   const userPrompt = `
-    以下の情報に基づいて、学習ステップを生成してください。
+  ## 指示
+  - 以下の情報に基づいて、学習ステップを生成してください。
 
+  ## 各情報
     - 資格名: ${project.certificationName}
     - 学習開始日: ${project.startDate}
     - 試験日: ${project.examDate}
@@ -146,7 +148,6 @@ export async function generateSteps(
     - 平日の学習可能時間: ${project.persona?.weekdayHours}時間
     - 休日の学習可能時間: ${project.persona?.weekendHours}時間
     - 学習スタイル: ${project.persona?.learningPattern}
-
     - 出題分野と配点:
     ${weights.map((w) => `  - ${w.area}: ${w.weightPercent}%`).join('\n')}
   `;
