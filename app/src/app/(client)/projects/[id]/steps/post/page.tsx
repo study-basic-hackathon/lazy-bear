@@ -87,15 +87,15 @@ export default function StepsPostPage() {
     setError("");
 
     try {
-      await fetch(`/api/project/${projectId}/steps`, {
+      await fetch(`/api/projects/${projectId}/steps`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(steps),
       });
 
-      await fetch(`/api/project/${projectId}/tasks/generate`, { method: "POST" });
+      await fetch(`/api/projects/${projectId}/tasks/generate`, { method: "POST" });
 
-      router.push(`/project/${projectId}/created-success`);
+      router.push(`/projects/${projectId}/created-success`);
     } catch (err) {
       console.error("保存または生成エラー:", err);
       setError("保存または生成に失敗しました");
