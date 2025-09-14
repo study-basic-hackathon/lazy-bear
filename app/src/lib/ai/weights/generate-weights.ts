@@ -1,5 +1,5 @@
 import { generateContentFromPrompt } from '../client';
-import { FunctionDeclarationSchema } from '@google-cloud/vertexai';
+import { FunctionDeclarationSchema, SchemaType } from '@google-cloud/vertexai';
 import { paths } from '@/types/apiSchema';
 
 const systemInstruction = `
@@ -7,8 +7,8 @@ const systemInstruction = `
 あなたの応答は、必ずJSONオブジェクトでなければなりません。説明、前置き、後書き、その他のテキストは一切含めないでください。
 
 **あなたのタスク:**
-1.  Web検索ツールを使い、指定された資格の公式サイトや信頼できる情報源から、出題分野と配点比率を調査します。
-2.  調査結果に基づき、以下の仕様に厳密に従ったJSONオブジェクトを生成します。
+1.  指定された資格名に基づき、出題分野と配点比率を分析します。
+2.  分析結果に基づき、以下の仕様に厳密に従ったJSONオブジェクトを生成します。
 
 **JSON仕様:**
 - ルートオブジェクトは "weights" という名前のキーを一つだけ持つこと。
@@ -23,20 +23,20 @@ const systemInstruction = `
 `;
 
 const responseSchema: FunctionDeclarationSchema = {
-  type: 'object',
+  type: SchemaType.OBJECT,
   properties: {
     weights: {
-      type: 'array',
+      type: SchemaType.ARRAY,
       description: '試験分野と配点比率の配列',
       items: {
-        type: 'object',
+        type: SchemaType.OBJECT,
         properties: {
           area: {
-            type: 'string',
+            type: SchemaType.STRING,
             description: '試験分野名',
           },
           weightPercent: {
-            type: 'integer',
+            type: SchemaType.INTEGER,
             description: '配点比率（%）',
           },
         },
@@ -61,11 +61,10 @@ export async function generateWeights(
     上記の資格の出題分野と配点比率を分析してください。
   `;
 
-  // GoogleSearchツールを有効にしてAIにリクエスト
+  // AIにリクエスト
   return await generateContentFromPrompt<WeightResponse>(
     systemInstruction,
     userPrompt,
-    responseSchema,
-    [{ googleSearch: {} }]
+    responseSchema
   );
 }

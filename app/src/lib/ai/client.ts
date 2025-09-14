@@ -59,7 +59,7 @@ export const generateContentFromPrompt = async <T>(
     tools,
   };
 
-  const useSearchTool = tools?.some(tool => 'googleSearch' in tool);
+  const useSearchTool = tools?.some(tool => 'google_search' in tool);
 
   if (responseSchema && !useSearchTool) { // 検索ツールがない場合のみ function calling を使う
     const functionTool: Tool = {

@@ -1,4 +1,3 @@
-
 import { generateContentFromPrompt } from '../client';
 import { FunctionDeclarationSchema, SchemaType } from '@google-cloud/vertexai';
 import { type projects, type personas } from '@/lib/db/schema';
@@ -16,7 +15,7 @@ const systemInstruction = `
 1.  与えられた以下の情報を考慮します。
     - 資格名
     - 学習期間（開始日と終了日）
-    - 主な学習教材（`baseMaterial`）
+    - 主な学習教材（\`baseMaterial\`）
     - 各試験分野の配点比率
     - ペルソナ（平日・休日の学習可能時間、学習の好み）
 2.  **思考プロセス:**
@@ -25,7 +24,7 @@ const systemInstruction = `
     c. さらに、初期に試験の準備のステップと、最後に試験に向けた実践的な演習や全体の総復習のためのステップを設けます。
 3.  上記プロセスに基づき、学習全体を **必ず5〜7個** のステップに分割してください。これより多くても少なくてもいけません。
 4.  ペルソナの学習可能時間や学習パターン（インプット先行かアウトプット先行か）を考慮して、各ステップのテーマや順序を調整してください。
-5.  `baseMaterial` が `TEXTBOOK` の場合は教科書ベースの学習、`VIDEO` の場合はビデオ教材ベースの学習を想定したステップを計画してください。
+5.  \`baseMaterial\` が \`TEXTBOOK\` の場合は教科書ベースの学習、\`VIDEO\` の場合はビデオ教材ベースの学習を想定したステップを計画してください。
 6.  各ステップには、学習内容の要約である「テーマ」を設定します。
 7.  以下のJSON仕様に厳密に従ったJSONオブジェクトを生成します。
 
