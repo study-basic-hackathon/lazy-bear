@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@google-cloud/vertexai": "^1.10.0",
+    "date-fns": "^4.1.0",
     "drizzle-orm": "^0.36.4",
     "next": "15.5.2",
     "postgres": "^3.4.5",

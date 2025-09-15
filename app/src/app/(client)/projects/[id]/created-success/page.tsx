@@ -24,7 +24,7 @@ export default function ProjectCreatedSuccessPage() {
   // useEffect(() => {
   //   const fetchProject = async () => {
   //     try {
-  //       const res = await fetch(`/api/project/${projectId}`);
+  //       const res = await fetch(`/api/projects/${projectId}`);
   //       if (!res.ok) throw new Error("プロジェクト情報の取得に失敗しました");
   //       const project = await res.json();
   //       setPersonaId(project.personaId); // APIのレスポンスに personaId が含まれている想定
