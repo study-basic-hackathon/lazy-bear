@@ -1,0 +1,140 @@
+{
+    "root": {
+        "data": {
+            "id": "dcrigokros80",
+            "created": 1757750257363,
+            "text": "GET /projects/{projectId}/steps/generate"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcrigzd62oo0",
+                    "created": 1757750280848,
+                    "text": "概要"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrih1p0d0g0",
+                            "created": 1757750285918,
+                            "text": "プロジェクトおよびそれに紐づくWeightのレコードをDBから取得した上で、VertexAIにstepsを生成させる"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcrihzzzcy00",
+                            "created": 1757750360592,
+                            "text": "用語定義"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcriiqid3rk0",
+                                    "created": 1757750418300,
+                                    "text": "プロジェクト: どの資格をいつまでに取得するか等、スケジュールを作成する最大単位。\nステップ: プロジェクト成功のためのマイルストーン相当。WBS上位の作業単位。\n（今回は不使用）タスク: ステップ配下の具体作業。内容/開始日/終了日（将来: 進捗ステータス）。"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcrijar7ehk0",
+                    "created": 1757750462370,
+                    "text": "現状"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrijd7rf340",
+                            "created": 1757750467726,
+                            "text": "エンドポイントは作っているがAI部分未実装"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcrijpku9eg0",
+                    "created": 1757750494637,
+                    "text": "やること"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrijs7ch2o0",
+                            "created": 1757750500351,
+                            "text": "VertexAIにリクエストをする部分を実装し、エンドポイントと連結する"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcrik40kl5k0",
+                            "created": 1757750526063,
+                            "text": "URLからプロジェクトレコードと、それに紐づくWeightレコードを抽出し、AI呼び出し部分に受け渡す。"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcril7vz2ps0",
+                            "created": 1757750612856,
+                            "text": "すでに、weightの作成でVertexAIを使っているので大いに参考にすること"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcrilz89d600",
+                                    "created": 1757750672372,
+                                    "text": "app/src/app/api/projects/[projectId]/weights/generate/route.ts"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcrim1mc0bs0",
+                                    "created": 1757750677577,
+                                    "text": "app/src/lib/ai/weights/generate-weights.ts"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcrimo6vqow0",
+                                    "created": 1757750726709,
+                                    "text": "app/src/lib/ai/client.ts"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcrine16wd40",
+                            "created": 1757750782961,
+                            "text": "APIの仕様は以下"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcrini0t87c0",
+                                    "created": 1757750791645,
+                                    "text": "docs/設計/apiDesign.yaml"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

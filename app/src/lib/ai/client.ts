@@ -1,4 +1,4 @@
-import { VertexAI, FunctionDeclarationSchema, GenerateContentRequest } from '@google-cloud/vertexai';
+import { VertexAI, FunctionDeclarationSchema, GenerateContentRequest, Tool } from '@google-cloud/vertexai';
 
 /**
  * Vertex AIのクライアントを初期化します。
@@ -41,9 +41,13 @@ export const getGenerativeModel = (systemInstruction?: string) => {
 export const generateContentFromPrompt = async <T>(
   systemInstruction: string,
   userPrompt: string,
-  responseSchema?: FunctionDeclarationSchema
+  responseSchema?: FunctionDeclarationSchema,
+  tools?: Tool[]
 ): Promise<T> => {
-  const generativeModel = getGenerativeModel(systemInstruction);
+  console.log('--- System Instruction ---');
+  console.log(systemInstruction);
+  console.log('--- User Prompt ---');
+  console.log(userPrompt);
 
   const request: GenerateContentRequest = {
     contents: [
@@ -52,40 +56,59 @@ export const generateContentFromPrompt = async <T>(
         parts: [{ text: userPrompt }],
       },
     ],
+    tools,
   };
 
-  if (responseSchema) {
-    request.tools = [
-      {
-        functionDeclarations: [
-          {
-            name: 'json_output',
-            description: 'Formats the output as a JSON object based on the provided schema.',
-            parameters: responseSchema,
-          },
-        ],
-      },
-    ];
+  const useSearchTool = tools?.some(tool => 'google_search' in tool);
+
+  if (responseSchema && !useSearchTool) { // 検索ツールがない場合のみ function calling を使う
+    const functionTool: Tool = {
+      functionDeclarations: [
+        {
+          name: 'json_output',
+          description: 'Formats the output as a JSON object based on the provided schema.',
+          parameters: responseSchema,
+        },
+      ],
+    };
+    request.tools = request.tools ? [...request.tools, functionTool] : [functionTool];
     request.generationConfig = {
       responseMimeType: 'application/json',
     };
+  } else if (responseSchema && useSearchTool) {
+    // 検索ツールとスキーマが両方ある場合、システムプロンプトにJSON形式を強制する指示を追加
+    systemInstruction += '\n\nIMPORTANT: Your output MUST be a single, valid JSON object that conforms to the provided schema. Do not include any other text, markdown, or explanations. The entire response should be only the JSON object.';
   }
+
+  const generativeModel = getGenerativeModel(systemInstruction);
 
   try {
     const resp = await generativeModel.generateContent(request);
     const functionCall = resp.response.candidates?.[0]?.content?.parts?.[0]?.functionCall;
 
     if (functionCall?.args) {
+      console.log("--- AI Response (Function Call) ---");
+      console.log(JSON.stringify(functionCall.args, null, 2));
       return functionCall.args as T;
     }
 
     // フォールバック：functionCallがない場合は、テキストを解析しようと試みる
     const responseText = resp.response.candidates?.[0]?.content?.parts?.[0]?.text;
     if (!responseText) {
+      console.error("Vertex AI did not return a text response. Full response:", JSON.stringify(resp.response, null, 2));
       throw new Error('Vertex AIからの有効な応答がありませんでした。');
     }
-    const jsonString = responseText.replace(/```json\n?|```/g, '').trim();
-    return JSON.parse(jsonString) as T;
+    // AIの応答からJSONオブジェクト部分を抽出する
+    const jsonMatch = responseText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) {
+      console.error("AI response did not contain a valid JSON object string. Response text:", responseText);
+      throw new Error('AIの応答に有効なJSON文字列が含まれていませんでした。');
+    }
+    const jsonString = jsonMatch[0];
+    const parsedJson = JSON.parse(jsonString);
+    console.log("--- AI Response (Parsed Text) ---");
+    console.log(JSON.stringify(parsedJson, null, 2));
+    return parsedJson as T;
 
   } catch (error) {
     console.error('Vertex AIの呼び出し中にエラーが発生しました:', error);

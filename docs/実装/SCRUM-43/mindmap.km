@@ -1,0 +1,174 @@
+{
+    "root": {
+        "data": {
+            "id": "dcrfcng0ids0",
+            "created": 1757741478113,
+            "text": "SCRUM-43 GET /projects/{projectId}/weights/generate"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcrfd5hk0200",
+                    "created": 1757741517388,
+                    "text": "タスク概要"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrfdaqub7k0",
+                            "created": 1757741528833,
+                            "text": "資格勉強のプロジェクトについて、勉強分野と比重のリスト「weight」をVertexAIに作らせるエンドポイント"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcrfermv9280",
+                    "created": 1757741643963,
+                    "text": "現状"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrfeu8w98g0",
+                            "created": 1757741649649,
+                            "text": "すでにエンドポイントは作っているものの、AIに処理を渡すところは未実装（モックになっている）"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcrffnqyfl40",
+                            "created": 1757741713867,
+                            "text": "app/src/app/api/projects/[projectId]/weights/generate/route.ts"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcrffs0jhao0",
+                    "created": 1757741723153,
+                    "text": "これからやるべきこと"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrfgxx2suw0",
+                            "created": 1757741814369,
+                            "text": "route.tsでは、URLからプロジェクトIDを抜き出してVertexAIの処理に渡す"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcrffw7bpa80",
+                            "created": 1757741732272,
+                            "text": "VertexAIに渡す情報を定義して、VertexAIに処理を渡す機能を実装し、エンドポイントと連結する"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcrfgeeqfcg0",
+                                    "created": 1757741771901,
+                                    "text": "システムインストラクション"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcrfglyl6l40",
+                                    "created": 1757741788339,
+                                    "text": "レスポンスのJSON型"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcrfgs9vzrc0",
+                                    "created": 1757741802083,
+                                    "text": "ユーザープロンプト"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcrfhr276ew0",
+                    "created": 1757741877805,
+                    "text": "お願い事"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcrfhti7so00",
+                            "created": 1757741883127,
+                            "text": "VertexAI部分の実装方法は以下を参照"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcrfig1iut40",
+                                    "created": 1757741932184,
+                                    "text": "docs/実装/SCRUM-40_Vertex AIをプログラムから呼び出す仕組みを作る/Vertex AI 機能実装ガイド.md"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcrgioj9emg0",
+                            "created": 1757744771781,
+                            "text": "プロジェクトのテーブルのカラムの意図を理解してプロンプトを組んでほしい。"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcrgje3vz3c0",
+                                    "created": 1757744827447,
+                                    "text": "app/src/lib/db/schema/projects.ts"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcrgjg3bb2g0",
+                            "created": 1757744831766,
+                            "text": "最低でも3つ以上はweightを作って欲しい"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcrgk2bfj8o0",
+                            "created": 1757744880146,
+                            "text": "VertexAIには、できれば試験名について検索し、比重を出すようにして"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcrgkjojchc0",
+                                    "created": 1757744917944,
+                                    "text": "検索して分からなければ、推測でも良いとする"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

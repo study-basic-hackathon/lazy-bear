@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { LearningPlan } from '@/lib/types';
+import { LearningPlan } from '@/types/demo';
 
 export default function DemoPage() {
   const [qualificationName, setQualificationName] = useState('応用情報技術者試験');

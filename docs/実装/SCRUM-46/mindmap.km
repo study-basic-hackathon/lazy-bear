@@ -1,0 +1,225 @@
+{
+    "root": {
+        "data": {
+            "id": "dcs7ntqffog0",
+            "created": 1757821344886,
+            "text": "SCRUM46_POST /projects/{projectId}/tasks/generate(ラスボス)"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcs85604odc0",
+                    "created": 1757822703785,
+                    "text": "ラスボスの意味"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcs85aw30fc0",
+                            "created": 1757822714424,
+                            "text": "一番重たいタスクの意味。"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcs85huer3s0",
+                    "created": 1757822729561,
+                    "text": "参考にしてほしいファイル"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcs85vx92bk0",
+                            "created": 1757822760207,
+                            "text": "docs/実装/SCRUM-40_Vertex AIをプログラムから呼び出す仕組みを作る/Vertex AI 機能実装ガイド.md"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs85zeu7hc0",
+                            "created": 1757822767801,
+                            "text": "docs/設計/apiDesign.yaml"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs86h6fp2g0",
+                            "created": 1757822806475,
+                            "text": "docs/設計/erDiagram.md"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs86pof7co0",
+                            "created": 1757822824977,
+                            "text": "stepまでの実装"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcs886blqlc0",
+                                    "created": 1757822939571,
+                                    "text": "weight"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcs88lpzdhk0",
+                                            "created": 1757822973093,
+                                            "text": "app/src/app/api/projects/[projectId]/weights/generate/route.ts"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcs88uj19ao0",
+                                            "created": 1757822992263,
+                                            "text": "app/src/lib/ai/weights/generate-weights.ts"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcs880wbvfc0",
+                                    "created": 1757822927764,
+                                    "text": "step",
+                                    "expandState": "expand"
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcs87dxargo0",
+                                            "created": 1757822877756,
+                                            "text": "app/src/app/api/projects/[projectId]/steps/generate/route.ts"
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcs87g1w6eo0",
+                                            "created": 1757822882388,
+                                            "text": "app/src/lib/ai/steps/generate-steps.ts"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcs892r18280",
+                    "created": 1757823010161,
+                    "text": "やること"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcs8ax8q1e00",
+                            "created": 1757823154899,
+                            "text": "app/src/app/api/projects/[projectId]",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcs895j1zy00",
+                                    "created": 1757823016209,
+                                    "text": "URLからプロジェクトIDを読み取り、プロジェクト、それに紐づくpersona, Weight, StepをDBから取得し、AIにリクエストを投げ、レスポンスを加工してtaskレコードを作る。終わったら、作成したtaskレコードのidを返す"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcs8b1juzns0",
+                            "created": 1757823164279,
+                            "text": "app/src/lib/ai"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcs8bokwe3c0",
+                                    "created": 1757823214408,
+                                    "text": "受け取った引数のデータを使ってVertex AIにリクエストを投げる"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcs8c2nhotk0",
+                    "created": 1757823245040,
+                    "text": "注意点"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcs8c4wmcgw0",
+                            "created": 1757823249945,
+                            "text": "このエンドポイントでは、リクエストを受け取ってVertexAIにタスクを作らせたあと、そのままユーザーのチェックなしにDBへタスクレコードを登録します。"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs8dbgay280",
+                            "created": 1757823342560,
+                            "text": "vertexAIからのレスポンスは、stepIDを明記するように指示してください。なので、リクエストを送るときにstepのidも入れておく必要があると思います。"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs8ee6pa4w0",
+                            "created": 1757823426874,
+                            "text": "stepの開始日時、終了日時に収まるようにタスクの開始日時、終了日時を入れるように指定してください。"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs8hdqi1nc0",
+                            "created": 1757823660987,
+                            "text": "VertexAIからのレスポンスの型は、基本的にはTaskテーブルのカラムのtaskID以外全てです。それがタスクの数だけリストにして返して。"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs8gmdxhhc0",
+                            "created": 1757823601454,
+                            "text": "最終的なレスポンスの型は、app/src/types/apiSchema.tsに定義されている型を使ってください。"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcs8iladyh40",
+                            "created": 1757823755791,
+                            "text": "VertexAIにgoogle検索機能を使わせる必要はありません。"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
