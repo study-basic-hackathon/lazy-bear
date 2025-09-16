@@ -1,4 +1,4 @@
-"use client";
+"use client"; 
 
 import Image from "next/image";
 import { useState } from "react";
@@ -26,20 +26,17 @@ export default function StepsPostPage() {
   ]);
 
   const [error, setError] = useState<string>("");
-  const [expanded, setExpanded] = useState<boolean[]>(steps.map(() => false));
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
 
   // 削除
   const handleDelete = (index: number) => {
     const updated = steps.filter((_, i) => i !== index);
     setSteps(updated.map((s, i) => ({ ...s, index: i })));
-    setExpanded(expanded.filter((_, i) => i !== index));
   };
 
   // 追加
   const handleAdd = () => {
-    setSteps([...steps, { index: steps.length, title: "", theme: "" }]);
-    setExpanded([...expanded, false]);
+    setSteps([...steps, { index: steps.length, title: "", theme: "" }]); // 空文字を代入
   };
 
   // ドラッグ
@@ -50,12 +47,6 @@ export default function StepsPostPage() {
     const [removed] = reordered.splice(draggingIndex, 1);
     reordered.splice(index, 0, removed);
     setSteps(reordered.map((s, i) => ({ ...s, index: i })));
-
-    const expReordered = [...expanded];
-    const [expRemoved] = expReordered.splice(draggingIndex, 1);
-    expReordered.splice(index, 0, expRemoved);
-    setExpanded(expReordered);
-
     setDraggingIndex(null);
   };
 
@@ -70,18 +61,11 @@ export default function StepsPostPage() {
     setSteps(updated);
   };
 
-  // 折り畳み
-  const toggleExpand = (index: number) => {
-    const updated = [...expanded];
-    updated[index] = !updated[index];
-    setExpanded(updated);
-  };
-
   // 保存
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (steps.some((s) => s.title.trim() === "" || s.theme.trim() === "")) {
-      setError("タイトルと説明を入力してください");
+    if (steps.some((s) => s.title.trim() === "")) {
+      setError("タイトルを入力してください");
       return;
     }
     setError("");
@@ -123,10 +107,15 @@ export default function StepsPostPage() {
             className="grid"
             style={{ gridTemplateRows: "auto auto", rowGap: "8px", borderRadius: "0px", height: "344px" }}
           >
-            <div className="grid grid-cols-1 font-semibold text-center border-b">
-              <div>ステップタイトルと説明</div>
+            {/* ヘッダー */}
+            <div className="grid font-semibold text-center border-b" style={{ gridTemplateColumns: "24px 24px 176px auto" }}>
+              <div></div> {/* ドラッグ列 */}
+              <div></div>
+              <div>ステップ名</div>
+              <div></div> {/* ゴミ箱列 */}
             </div>
 
+            {/* ステップ一覧 */}
             <div style={{ overflowY: "auto", height: "calc(344px - 24px)" }}>
               {steps.map((s, index) => (
                 <div
@@ -137,18 +126,12 @@ export default function StepsPostPage() {
                   onDragOver={(e) => e.preventDefault()}
                   onDrop={() => handleDrop(index)}
                 >
-                  <div className="flex items-center gap-2">
+                  <div className="grid items-center gap-2" style={{ gridTemplateColumns: "24px 24px 176px auto" }}>
                     {/* ドラッグボタン */}
-                    <span className="cursor-grab" style={{ minWidth: "24px" }}>≡</span>
-                    {/* 折り畳みボタン */}
-                    <button
-                      type="button"
-                      onClick={() => toggleExpand(index)}
-                      className="text-gray-950"
-                      style={{ minWidth: "24px" }}
-                    >
-                      {expanded[index] ? "▼" : "▽"}
-                    </button>
+                    <span className="cursor-grab text-center" style={{ minWidth: "24px" }}>≡</span>
+                    {/* index 表示（UIは+1） */}
+                    <span className="text-center" style={{ minWidth: "24px" }}>{s.index + 1}</span>
+                    {/* タイトル */}
                     <input
                       type="text"
                       value={s.title}
@@ -177,23 +160,6 @@ export default function StepsPostPage() {
                       )}
                     </div>
                   </div>
-
-                  {expanded[index] && (
-                    <div className="mt-2">
-                      <textarea
-                        value={s.theme}
-                        onChange={(e) => handleChange(index, "theme", e.target.value)}
-                        placeholder="説明"
-                        className="p-2 border"
-                        style={{
-                          borderRadius: "0px",
-                          width: "280px",
-                          whiteSpace: "pre-wrap",
-                          wordWrap: "break-word",
-                        }}
-                      />
-                    </div>
-                  )}
                 </div>
               ))}
             </div>
