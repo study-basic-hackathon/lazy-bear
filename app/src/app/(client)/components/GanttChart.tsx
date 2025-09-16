@@ -234,7 +234,7 @@ export default function GanttChart({
               } else {
                 const task = row as Task;
                 const tStart = toLocalDateOnly(task.startDate ?? new Date())!;
-                const tEnd = toLocalDateOnly(task.dueDate ?? new Date())!;
+                const tEnd = toLocalDateOnly(task.endDate ?? new Date())!;
                 const tStartKey = dayKey(tStart);
                 const tEndKey = dayKey(tEnd);
 

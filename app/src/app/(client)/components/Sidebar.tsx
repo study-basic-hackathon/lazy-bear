@@ -114,7 +114,7 @@ function LayoutD({ task }: { task: Task }) {
           {formatDate(task.startDate)}
         </div>
         <div className="flex items-center max-[375px]:hidden">
-          {formatDate(task.dueDate)}
+          {formatDate(task.endDate)}
         </div>
       </div>
 

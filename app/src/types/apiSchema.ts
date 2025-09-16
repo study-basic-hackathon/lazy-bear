@@ -685,7 +685,7 @@ export interface components {
             /** Format: date */
             startDate?: string;
             /** Format: date */
-            dueDate?: string;
+            endDate?: string;
             /** @enum {string} */
             taskStatus?: "undo" | "doing" | "done" | "blocked";
         };

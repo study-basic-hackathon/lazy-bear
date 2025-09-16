@@ -42,7 +42,7 @@ export default function TaskItem({ task }: TaskItemProps) {
         <div className="ml-4 text-sm text-gray-600 space-y-1">
           <div>{task.description}</div>
           <div>
-            期間: {task.startDate} ~ {task.dueDate}
+            期間: {task.startDate} ~ {task.endDate}
           </div>
           <div>
             ステータス:{" "}

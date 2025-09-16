@@ -49,7 +49,7 @@ export default function StepItem({ step }: StepItemProps) {
             title: "演習問題 1",
             description: "AI生成タスク",
             startDate: "2025-09-01",
-            dueDate: "2025-09-02",
+            endDate: "2025-09-02",
             taskStatus: "undo",
           },
           {
@@ -58,7 +58,7 @@ export default function StepItem({ step }: StepItemProps) {
             title: "演習問題 2",
             description: "AI生成タスク",
             startDate: "2025-09-03",
-            dueDate: "2025-09-04",
+            endDate: "2025-09-04",
             taskStatus: "doing",
           },
         ];
