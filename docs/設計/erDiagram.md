@@ -5,7 +5,23 @@ erDiagram
     PROJECT ||--|{ STEP : have
     STEP ||--|{ TASK : breaks_into
     PERSONA ||--o{ PROJECT : uses
+    USER ||--|| PERSONA : has
     PROJECT ||--|{ WEIGHT : targets
+
+    USER {
+        uuid userId PK
+        varchar name
+        varchar email
+        datetime verifiedAt
+    }
+
+    PERSONA {
+        uuid personaId PK
+        uuid userId FK
+        decimal weekdayHours
+        decimal weekendHours
+        enum learningPattern "インプット先行パターン|アウトプット先行パターン"
+    }
 
     PROJECT {
         uuid projectId PK
@@ -34,13 +50,6 @@ erDiagram
         date startDate
         date endDate
         enum taskStatus "undo|doing|done|blocked"
-    }
-
-    PERSONA {
-        uuid personaId PK
-        decimal weekdayHours
-        decimal weekendHours
-        enum learningPattern "インプット先行パターン|アウトプット先行パターン"
     }
 
     WEIGHT {
