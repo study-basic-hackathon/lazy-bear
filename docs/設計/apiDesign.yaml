@@ -467,7 +467,7 @@ components:
         startDate:
           type: string
           format: date
-        dueDate:
+        endDate:
           type: string
           format: date
         taskStatus:
