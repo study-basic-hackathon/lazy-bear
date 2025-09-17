@@ -1,0 +1,434 @@
+{
+    "root": {
+        "data": {
+            "id": "dcv39e44v800",
+            "created": 1758113609219,
+            "text": "発表スライド",
+            "expandState": "expand"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcv39qw9zsg0",
+                    "created": 1758113637042,
+                    "text": "4.全体を通しての学び"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcv39yy91k00",
+                            "created": 1758113654575,
+                            "text": "3人が見ているゴールが違う中でのすり合わせ",
+                            "expandState": "expand"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcv3lzxiku80",
+                                    "created": 1758114597078,
+                                    "text": "設計の段階で、クオリティのすり合わせを行った",
+                                    "layout_right_offset": {
+                                        "x": 108,
+                                        "y": 267
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcv3mehd8qg0",
+                                            "created": 1758114628753,
+                                            "text": "DB",
+                                            "layout_right_offset": {
+                                                "x": 66,
+                                                "y": 73
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcv3mna69c80",
+                                                    "created": 1758114647909,
+                                                    "text": "テーブルの数"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcv3mstusts0",
+                                                    "created": 1758114659983,
+                                                    "text": "カラムの数"
+                                                },
+                                                "children": []
+                                            },
+                                            {
+                                                "data": {
+                                                    "id": "dcv3s84ddo00",
+                                                    "created": 1758115085091,
+                                                    "text": "リレーション"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcv3mhz7km80",
+                                            "created": 1758114636362,
+                                            "text": "画面",
+                                            "layout_right_offset": {
+                                                "x": 41,
+                                                "y": 31
+                                            },
+                                            "expandState": "collapse"
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcv3mk81lw00",
+                                                    "created": 1758114641250,
+                                                    "text": "画面数"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcv3myzgvr40",
+                                            "created": 1758114673383,
+                                            "text": "API",
+                                            "layout_right_offset": {
+                                                "x": 47,
+                                                "y": 44
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcv3n2gxh4o0",
+                                                    "created": 1758114680969,
+                                                    "text": "一個のエンドポイントで賄う処理の粒度"
+                                                },
+                                                "children": []
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcv3o64ob4g0",
+                                            "created": 1758114767299,
+                                            "text": "はよちゃんが最初のアイデアを出して",
+                                            "layout_right_offset": {
+                                                "x": 27,
+                                                "y": 66
+                                            }
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcv3oiukd2w0",
+                                            "created": 1758114794986,
+                                            "text": "3人でスコープの絞り込みを議論した",
+                                            "layout_right_offset": {
+                                                "x": 7,
+                                                "y": 99
+                                            }
+                                        },
+                                        "children": []
+                                    },
+                                    {
+                                        "data": {
+                                            "id": "dcv3vqgz7fk0",
+                                            "created": 1758115360128,
+                                            "text": "何回もすり合わせを行った",
+                                            "layout_right_offset": {
+                                                "x": 101,
+                                                "y": -586
+                                            }
+                                        },
+                                        "children": [
+                                            {
+                                                "data": {
+                                                    "id": "dcv3vwyymeg0",
+                                                    "created": 1758115374276,
+                                                    "text": "なぜか？"
+                                                },
+                                                "children": [
+                                                    {
+                                                        "data": {
+                                                            "id": "dcv3wv6mzqw0",
+                                                            "created": 1758115448751,
+                                                            "text": "持ってる技術の情報が違う",
+                                                            "layout_right_offset": {
+                                                                "x": 24,
+                                                                "y": -47
+                                                            },
+                                                            "expandState": "expand",
+                                                            "progress": 9
+                                                        },
+                                                        "children": [
+                                                            {
+                                                                "data": {
+                                                                    "id": "dcv43ao9w4g0",
+                                                                    "created": 1758115952654,
+                                                                    "text": "最初から持っている技術",
+                                                                    "expandState": "expand"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "data": {
+                                                                            "id": "dcv40egk7vs0",
+                                                                            "created": 1758115725802,
+                                                                            "text": "フロントである程度データを保持できる",
+                                                                            "expandState": "expand"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "data": {
+                                                                                    "id": "dcv40ngbqow0",
+                                                                                    "created": 1758115745379,
+                                                                                    "text": "全部のデータをバックエンド＆DBで持っておかなくてもいい"
+                                                                                },
+                                                                                "children": []
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "data": {
+                                                                            "id": "dcv3xb7nfug0",
+                                                                            "created": 1758115483641,
+                                                                            "text": "フロント、バック、AI、DB、、、"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "data": {
+                                                                                    "id": "dcv3ymagmrc0",
+                                                                                    "created": 1758115586120,
+                                                                                    "text": "複数の技術の知見で「これは分かる」「これはわからない」がメンバー間で違う"
+                                                                                },
+                                                                                "children": []
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "data": {
+                                                                    "id": "dcv43q8ly6o0",
+                                                                    "created": 1758115986536,
+                                                                    "text": "後から知った技術",
+                                                                    "layout_right_offset": {
+                                                                        "x": 48,
+                                                                        "y": 9
+                                                                    },
+                                                                    "expandState": "expand"
+                                                                },
+                                                                "children": [
+                                                                    {
+                                                                        "data": {
+                                                                            "id": "dcv3zy4o1b40",
+                                                                            "created": 1758115690255,
+                                                                            "text": "プロンプトの書き方"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "data": {
+                                                                                    "id": "dcv416iqsrk0",
+                                                                                    "created": 1758115786884,
+                                                                                    "text": "適当に書いてもわかってくれるはず"
+                                                                                },
+                                                                                "children": []
+                                                                            },
+                                                                            {
+                                                                                "data": {
+                                                                                    "id": "dcv41d7lmiw0",
+                                                                                    "created": 1758115801448,
+                                                                                    "text": "的確なフレームワークを使うことで精度が上がる"
+                                                                                },
+                                                                                "children": [
+                                                                                    {
+                                                                                        "data": {
+                                                                                            "id": "dcv41vy5tsw0",
+                                                                                            "created": 1758115842236,
+                                                                                            "text": "後からの調査でそういう分野があることがわかった"
+                                                                                        },
+                                                                                        "children": []
+                                                                                    }
+                                                                                ]
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "data": {
+                                                                            "id": "dcv42e3txrk0",
+                                                                            "created": 1758115881761,
+                                                                            "text": "本のAPIの話"
+                                                                        },
+                                                                        "children": [
+                                                                            {
+                                                                                "data": {
+                                                                                    "id": "dcv42igtvrs0",
+                                                                                    "created": 1758115891254,
+                                                                                    "text": "著作権とか"
+                                                                                },
+                                                                                "children": []
+                                                                            }
+                                                                        ]
+                                                                    },
+                                                                    {
+                                                                        "data": {
+                                                                            "id": "dcv44iqfw0w0",
+                                                                            "created": 1758116048564,
+                                                                            "text": "あまり時間が取れなかったかも"
+                                                                        },
+                                                                        "children": []
+                                                                    },
+                                                                    {
+                                                                        "data": {
+                                                                            "id": "dcv44xwgl080",
+                                                                            "created": 1758116081579,
+                                                                            "text": "マジックリンク"
+                                                                        },
+                                                                        "children": []
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "data": {
+                                                            "id": "dcv3w97j6n40",
+                                                            "created": 1758115400916,
+                                                            "text": "QCDの見えてるところが3人でちょっとずつ違う",
+                                                            "layout_right_offset": {
+                                                                "x": 45,
+                                                                "y": 80
+                                                            }
+                                                        },
+                                                        "children": []
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcv3q0iccf40",
+                                    "created": 1758114911794,
+                                    "text": "最初の日：フローチャートでサービスの流れを把握できた",
+                                    "layout_right_offset": {
+                                        "x": 77,
+                                        "y": -202
+                                    }
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcv3kjd7fm80",
+                    "created": 1758114482657,
+                    "text": "（自己紹介で話す）",
+                    "expandState": "expand",
+                    "layout_right_offset": {
+                        "x": 32,
+                        "y": -766
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcv3axde9nc0",
+                            "created": 1758113729502,
+                            "text": "いぐっちゃん",
+                            "layout_right_offset": {
+                                "x": 30,
+                                "y": 230
+                            }
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcv3ap2dqzs0",
+                            "created": 1758113711421,
+                            "text": "はよちゃん",
+                            "layout_right_offset": {
+                                "x": 0,
+                                "y": -135
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcv3atfr4n40",
+                                    "created": 1758113720937,
+                                    "text": "フロントエンドだけやりたかった",
+                                    "layout_right_offset": {
+                                        "x": 8,
+                                        "y": 40
+                                    }
+                                },
+                                "children": [
+                                    {
+                                        "data": {
+                                            "id": "dcv3cqfp9i80",
+                                            "created": 1758113871132,
+                                            "text": "前回がバックエンドだったから"
+                                        },
+                                        "children": []
+                                    }
+                                ]
+                            },
+                            {
+                                "data": {
+                                    "id": "dcv3c0ol7jc0",
+                                    "created": 1758113815073,
+                                    "text": "途中でGoogle Cloudのハッカソン（Zennのハッカソン）があるとわかり、目標が切り替わった",
+                                    "layout_right_offset": {
+                                        "x": -7,
+                                        "y": 48
+                                    }
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcv3egls5vc0",
+                                    "created": 1758114006460,
+                                    "text": "前日に作りたいアイデアが浮かんだ",
+                                    "layout_right_offset": {
+                                        "x": -4,
+                                        "y": -128
+                                    }
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcv3ky1cz2o0",
+                            "created": 1758114514592,
+                            "text": "山口 さん",
+                            "layout_right_offset": {
+                                "x": 30,
+                                "y": -115
+                            }
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
