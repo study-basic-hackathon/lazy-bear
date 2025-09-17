@@ -41,7 +41,7 @@
 
 1.  **Next.jsアプリケーションのDockerイメージをビルドする。**
     ```bash
-    # app ディレクトリに移動
+    # app ディレクトリに移動して実行
     cd app
     docker build . -t asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest
     ```
@@ -51,6 +51,16 @@
     docker push asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest
     ```
 
-3.  **動作確認**
-    -   イメージがプッシュされると、Cloud Runのデプロイが自動的に完了します。
-    -   `terraform output cloud_run_service_url` コマンドで表示されるURLにアクセスし、アプリケーションが正常に動作することを確認します。
+3.  **新しいイメージでCloud Runサービスを更新（再デプロイ）する。**
+    `docker push`しただけでは自動で更新されないため、以下のコマンドで新しいリビジョンを作成するよう指示します。
+    ```bash
+    # terraform ディレクトリに移動して実行
+    cd ../terraform
+    gcloud run deploy lazy-bear-app \
+      --image asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest \
+      --region asia-northeast1 \
+      --platform managed
+    ```
+
+4.  **動作確認**
+    - デプロイが完了したら、`terraform output cloud_run_service_url` コマンドで表示されるURLにアクセスし、アプリケーションが正常に動作することを確認します。
