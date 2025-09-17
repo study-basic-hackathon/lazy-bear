@@ -10,19 +10,19 @@
 
 ## 1. GCP基本設定
 
-- [ ] **GCPプロジェクトID:** `your-gcp-project-id`
-- [ ] **リージョン:** (例: `asia-northeast1`)
-- [ ] **Terraformバックエンド用GCSバケット名:** (Terraformの状態ファイルを保存するGCSバケット。存在しない場合は作成されます) `your-terraform-state-bucket-name`
+- [ ] **GCPプロジェクトID:** `lazy-bear-471016`
+- [ ] **リージョン:** `asia-northeast1`
+- [ ] **Terraformバックエンド用GCSバケット名:** (Terraformの状態ファイルを保存するGCSバケット。存在しない場合は作成されます) `まだ用意してません`
 
 ---
 
 ## 2. Cloud SQL (PostgreSQL) 設定
 
-- [ ] **インスタンス名:** (例: `lazy-bear-db-instance`)
-- [ ] **データベースのバージョン:** (例: `POSTGRES_15`)
-- [ ] **マシンタイプ（Tier）:** (例: `db-g1-small`)
-- [ ] **データベース名 (初期データベース):** (例: `lazybear_db`)
-- [ ] **データベースユーザー名:** (例: `lazybear_user`)
+- [x] **インスタンス名:**　`lazy-bear-db-instance`
+- [x] **データベースのバージョン:** `POSTGRES_17`
+- [x] **マシンタイプ（Tier）:** `db-g1-small`
+- [x] **データベース名 (初期データベース):** `lazy_bear`
+- [x] **データベースユーザー名:** `lazybear_user`
 - [ ] **データベースユーザーのパスワード:** **(ここには書き込まないでください)**
 
 ---
@@ -31,25 +31,27 @@
 
 (Cloud Runで動かすDockerイメージを保存する場所です)
 
-- [ ] **リポジトリ名:** (例: `lazy-bear-repo`)
+- [x] **リポジトリ名:** `lazy-bear-repo`
 
 ---
 
 ## 4. Cloud Run 設定
 
-- [ ] **サービス名:** (例: `lazy-bear-app`)
-- [ ] **CPU & メモリ:** (例: `1`, `512Mi`)
-- [ ] **最小/最大インスタンス数:** (例: `0` / `3`)
-- [ ] **環境変数:**
+- [x] **サービス名:** `lazy-bear-app`
+- [x] **CPU & メモリ:** `1`, `512Mi`
+- [x] **最小/最大インスタンス数:** `0` / `3`
+- [x] **環境変数:**
     - `DATABASE_URL`: (Cloud SQLへの接続情報。Terraformで自動生成します)
-    - (その他、アプリケーションが必要とする環境変数があれば列挙してください)
+    - `GOOGLE_CLOUD_PROJECT=lazy-bear-471016`
+    - `GOOGLE_CLOUD_LOCATION=us-central1`
+    - `VERTEX_AI_MODEL_NAME=gemini-2.5-flash-lite`
 
 ---
 
 ## 5. ネットワーキング設定
 
-- [ ] **VPC名:** (既存のVPCを利用しますか？ 新規作成しますか？ 例: `lazy-bear-vpc`)
-- [ ] **サブネット名:** (例: `lazy-bear-subnet`)
-- [ ] **VPCコネクタ名:** (Cloud RunがCloud SQLと通信するために必要です。例: `lazy-bear-connector`)
+- [x] **VPC名:** `lazy-bear-vpc`（新規）
+- [x] **サブネット名:** `lazy-bear-subnet` (新規)
+- [x] **VPCコネクタ名:** `lazy-bear-connector`
 
 ---
