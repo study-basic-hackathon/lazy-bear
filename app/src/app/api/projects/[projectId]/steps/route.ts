@@ -327,16 +327,7 @@ export async function POST(
 
     const stepIds = newSteps.map((s) => s.stepId);
 
-    return NextResponse.json(
-      {
-        stepIds,
-        aiCompleted: aiGenerated,
-        message: aiGenerated
-          ? "Steps created with AI completion using steps/generate"
-          : "Steps created successfully",
-      },
-      { status: 201 }
-    );
+    return NextResponse.json({ stepIds }, { status: 201 });
   } catch (error) {
     console.error("Error creating steps:", error);
     return NextResponse.json(
