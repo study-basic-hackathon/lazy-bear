@@ -14,8 +14,8 @@ export const steps = pgTable("step", {
     .notNull()
     .references(() => projects.projectId),
   title: varchar("title").notNull(),
-  theme: text("theme").notNull(),
-  startDate: date("startDate").notNull(),
-  endDate: date("endDate").notNull(),
+  theme: text("theme"),
+  startDate: date("startDate"),
+  endDate: date("endDate"),
   index: integer("index").notNull().default(0),
 });

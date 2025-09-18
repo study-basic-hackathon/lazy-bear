@@ -22,6 +22,13 @@
       "when": 1757591921847,
       "tag": "0002_happy_magik",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1758203952064,
+      "tag": "0003_pretty_northstar",
+      "breakpoints": true
     }
   ]
 }
