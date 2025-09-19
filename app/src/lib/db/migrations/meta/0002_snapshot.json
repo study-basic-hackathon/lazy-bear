@@ -137,19 +137,19 @@
           "name": "theme",
           "type": "text",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "startDate": {
           "name": "startDate",
           "type": "date",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "endDate": {
           "name": "endDate",
           "type": "date",
           "primaryKey": false,
-          "notNull": true
+          "notNull": false
         },
         "index": {
           "name": "index",
