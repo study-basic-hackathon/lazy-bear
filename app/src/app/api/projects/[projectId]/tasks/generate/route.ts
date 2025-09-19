@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/db';
 import { projects, tasks } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
@@ -6,11 +6,11 @@ import { generateTasks } from '@/lib/ai/tasks/generate-tasks';
 import { TaskFromAI, TasksGenerateApiResponse } from '@/types/tasks';
 
 export async function POST(
-  request: Request,
-  { params }: { params: { projectId: string } }
-) {
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
   try {
-    const { projectId } = params;
+    const { projectId } = await context.params;
 
     // 1. DBからプロジェクトと関連情報を取得
     const projectData = await db.query.projects.findFirst({

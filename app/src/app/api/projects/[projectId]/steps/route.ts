@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
 import { steps, projects, weights } from "@/lib/db/schema";
 import { v4 as uuidv4 } from "uuid";
@@ -31,11 +31,11 @@ async function getSteps(projectId: string) {
 }
 
 export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ projectId: string }> }
-) {
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
   try {
-    const { projectId } = await params;
+    const { projectId } = await context.params;
 
     if (!isValidProjectId(projectId)) {
       return NextResponse.json(
@@ -64,12 +64,11 @@ export async function GET(
 }
 
 export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ projectId: string }> },
-  { body }: { body?: components["schemas"]["StepCreate"] }
-) {
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
   try {
-    const { projectId } = await params;
+    const { projectId } = await context.params;
 
     if (!isValidProjectId(projectId)) {
       return NextResponse.json(
@@ -78,7 +77,7 @@ export async function POST(
       );
     }
 
-    body = await request.json();
+    const body = await request.json();
     if (!Array.isArray(body) || body.length === 0) {
       return NextResponse.json(
         { message: "Request body must be a non-empty array of steps" },
@@ -90,8 +89,15 @@ export async function POST(
     const stepIds = await insertSteps(additionalSteps, projectId);
 
     return NextResponse.json({ stepIds }, { status: 201 });
-  } catch (e) {
-    return NextResponse.json({ message: "Invalid JSON body" }, { status: 400 });
+  } catch (error) {
+    console.error("ステップ登録エラー:", error);
+    if (error instanceof SyntaxError) {
+      return NextResponse.json({ message: "Invalid JSON body" }, { status: 400 });
+    }
+    return NextResponse.json(
+      { message: "ステップの登録に失敗しました" },
+      { status: 500 }
+    );
   }
 }
 

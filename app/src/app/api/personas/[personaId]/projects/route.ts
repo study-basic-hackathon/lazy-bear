@@ -5,10 +5,10 @@ import { eq, asc } from "drizzle-orm";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { personaId: string } }
-) {
+  context: { params: Promise<{ personaId: string }> }
+): Promise<NextResponse> {
   try {
-    const { personaId } = params;
+    const { personaId } = await context.params;
 
     const uuidRegex =
       /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -44,10 +44,10 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { personaId: string } }
-) {
+  context: { params: Promise<{ personaId: string }> }
+): Promise<NextResponse> {
   try {
-    const { personaId } = params;
+    const { personaId } = await context.params;
     const body = await request.json();
     const { certificationName, examDate, startDate, baseMaterial } = body;
 

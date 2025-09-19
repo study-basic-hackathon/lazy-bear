@@ -2,8 +2,11 @@ resource "google_cloud_run_v2_service" "service" {
   name     = "lazy-bear-app"
   location = "asia-northeast1"
   project  = var.project_id
+  deletion_protection = true
 
   template {
+    service_account = google_service_account.lazy_bear_sa.email
+
     scaling {
       min_instance_count = 0
       max_instance_count = 3
@@ -34,7 +37,7 @@ resource "google_cloud_run_v2_service" "service" {
       }
       env {
         name  = "VERTEX_AI_MODEL_NAME"
-        value = "gemini-1.5-flash-latest"
+        value = "gemini-2.5-flash-lite"
       }
       env {
         name = "DATABASE_URL"

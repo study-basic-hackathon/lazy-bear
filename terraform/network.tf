@@ -5,11 +5,12 @@ resource "google_compute_network" "vpc" {
 }
 
 resource "google_compute_subnetwork" "subnet" {
-  name          = "lazy-bear-subnet"
-  ip_cidr_range = "10.0.0.0/28"
-  region        = "asia-northeast1"
-  network       = google_compute_network.vpc.id
-  project       = var.project_id
+  name                     = "lazy-bear-subnet"
+  ip_cidr_range            = "10.0.0.0/28"
+  region                   = "asia-northeast1"
+  network                  = google_compute_network.vpc.id
+  private_ip_google_access = true
+  project                  = var.project_id
 }
 
 resource "google_vpc_access_connector" "connector" {
