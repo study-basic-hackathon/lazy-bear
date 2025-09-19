@@ -1,70 +1,20 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useParams } from "next/navigation";
 import Sidebar, { StepWithTasks } from "../../components/Sidebar";
 import GanttChart from "../../components/GanttChart";
 
 import { components } from "@/types/apiSchema";
 
 type Project = components["schemas"]["Project"];
-
-// モックデータ
-const mockProject: Project = {
-  projectId: "mock-project-1",
-  personaId: "mock-persona-1",
-  certificationName: "AWS SAA",
-  examDate: "2025-10-01",
-  baseMaterial: "TEXTBOOK",
-};
-
-const mockSteps: StepWithTasks[] = [
-  {
-    stepId: "step-1",
-    projectId: "mock-project-1",
-    title: "ステップ1",
-    theme: "テーマ1",
-    startDate: "2025-09-01",
-    endDate: "2025-09-05",
-    tasks: [
-      {
-        taskId: "task-1",
-        stepId: "step-1",
-        title: "タスク1-1",
-        description: "タスク1-1の概要です",
-        startDate: "2025-09-01",
-        endDate: "2025-09-03",
-      },
-      {
-        taskId: "task-2",
-        stepId: "step-1",
-        title: "タスク1-2",
-        description: "タスク1-2の概要です",
-        startDate: "2025-09-03",
-        endDate: "2025-09-05",
-      },
-    ],
-  },
-  {
-    stepId: "step-2",
-    projectId: "mock-project-1",
-    title: "ステップ2",
-    theme: "テーマ2",
-    startDate: "2025-09-06",
-    endDate: "2025-09-10",
-    tasks: [
-      {
-        taskId: "task-3",
-        stepId: "step-2",
-        title: "タスク2-1",
-        description: "タスク2-1の概要です",
-        startDate: "2025-09-06",
-        endDate: "2025-09-08",
-      },
-    ],
-  },
-];
+type Step = components["schemas"]["Step"];
+type Task = components["schemas"]["Task"];
 
 export default function ProjectPage() {
+  const params = useParams<{ id: string }>();
+  const projectId = params.id;
+
   const [project, setProject] = useState<Project | null>(null);
   const [steps, setSteps] = useState<StepWithTasks[]>([]);
   const [openSteps, setOpenSteps] = useState<Record<string, boolean>>({});
@@ -74,10 +24,35 @@ export default function ProjectPage() {
   const ganttRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // 将来的にAPIから取得予定
-    setProject(mockProject);
-    setSteps(mockSteps);
-  }, []);
+    if (!projectId) return;
+
+    // プロジェクト情報は別途必要なら fetch
+    fetch(`/api/projects/${projectId}`)
+      .then((res) => res.json())
+      .then((data: Project) => setProject(data))
+      .catch((err) => console.error("プロジェクト取得エラー:", err));
+
+    // ステップを取得
+    fetch(`/api/projects/${projectId}/steps`)
+      .then((res) => res.json())
+      .then(async (stepsData: Step[]) => {
+        // 各ステップごとにタスクを取得
+        const stepsWithTasks: StepWithTasks[] = await Promise.all(
+          stepsData.map(async (step) => {
+            try {
+              const res = await fetch(`/api/steps/${step.stepId}/tasks`);
+              const tasks: Task[] = await res.json();
+              return { ...step, tasks };
+            } catch (err) {
+              console.error(`タスク取得エラー (stepId=${step.stepId}):`, err);
+              return { ...step, tasks: [] };
+            }
+          })
+        );
+        setSteps(stepsWithTasks);
+      })
+      .catch((err) => console.error("ステップ取得エラー:", err));
+  }, [projectId]);
 
   const toggleStep = (id: string) => {
     setOpenSteps((prev) => ({ ...prev, [id]: !prev[id] }));
