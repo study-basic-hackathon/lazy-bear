@@ -12,8 +12,12 @@ resource "google_sql_database_instance" "instance" {
     disk_size         = 10
 
     ip_configuration {
-      ipv4_enabled    = false
+      ipv4_enabled    = true
       private_network = google_compute_network.vpc.id
+      authorized_networks {
+        value = "${var.authorized_ip_address}/32"
+        name  = "local-ipv4"
+      }
     }
 
     backup_configuration {

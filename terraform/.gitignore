@@ -14,3 +14,10 @@ override.tf
 override.tf.json
 *_override.tf
 *_override.tf.json
+
+# Ignore .tfvars files to avoid committing sensitive data
+*.tfvars
+*.tfvars.json
+
+# Ignore lock file
+.terraform.lock.hcl

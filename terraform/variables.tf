@@ -5,7 +5,12 @@ variable "project_id" {
 }
 
 variable "region" {
-  description = "The GCP region."
+  description = "The GCP region to deploy resources in."
   type        = string
   default     = "asia-northeast1"
+}
+
+variable "authorized_ip_address" {
+  description = "The IP address authorized to connect to the Cloud SQL instance."
+  type        = string
 }
