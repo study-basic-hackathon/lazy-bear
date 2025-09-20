@@ -1,7 +1,7 @@
-"use client"; 
+"use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { components } from "@/types/apiSchema";
 
@@ -15,15 +15,26 @@ export default function StepsPostPage() {
   const projectId = params.id;
   const router = useRouter();
 
-  // モックデータ
-  const [steps, setSteps] = useState<StepCreate[]>([
-    { index: 0, title: "準備ステップ", theme: "環境を整える" },
-    { index: 1, title: "学習ステップ", theme: "教科書を読む" },
-    { index: 2, title: "演習ステップ", theme: "問題を解く" },
-  ]);
-
+  const [steps, setSteps] = useState<StepCreate[]>([]);
   const [error, setError] = useState<string>("");
   const [draggingIndex, setDraggingIndex] = useState<number | null>(null);
+
+  // fetchでステップ取得
+  useEffect(() => {
+    if (!projectId) return;
+    const fetchSteps = async () => {
+      try {
+        const res = await fetch(`/api/projects/${projectId}/steps/generate`);
+        if (!res.ok) throw new Error("ステップの取得に失敗しました");
+        const data: StepCreate[] = await res.json();
+        setSteps(data);
+      } catch (err) {
+        console.error(err);
+        setError("ステップの取得に失敗しました");
+      }
+    };
+    fetchSteps();
+  }, [projectId]);
 
   // 削除
   const handleDelete = (index: number) => {
@@ -33,7 +44,7 @@ export default function StepsPostPage() {
 
   // 追加
   const handleAdd = () => {
-    setSteps([...steps, { index: steps.length, title: "", theme: "" }]); // 空文字を代入
+    setSteps([...steps, { index: steps.length, title: "", theme: "" }]);
   };
 
   // ドラッグ

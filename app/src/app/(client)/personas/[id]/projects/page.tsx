@@ -11,28 +11,6 @@ type Project = components["schemas"]["Project"];
 
 
 
-const mockProjects: Record<string, Project[]> = {
-  "11111111-1111-1111-1111-111111111111": [
-    {
-      projectId: "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa",
-      personaId: "11111111-1111-1111-1111-111111111111",
-      certificationName: "AWS SAA",
-      examDate: "2025-10-01",
-      startDate: "2025-08-01",
-      baseMaterial: "TEXTBOOK",
-    },
-    {
-      projectId: "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
-      personaId: "11111111-1111-1111-1111-111111111111",
-      certificationName: "LPIC-1",
-      examDate: "2025-11-15",
-      startDate: "2025-10-01",
-      baseMaterial: "VIDEO",
-    },
-  ],
-  "22222222-2222-2222-2222-222222222222": [],
-};
-
 export default function PersonaProjectsPage() {
   const params = useParams<{ id: string }>();
   const personaId = params.id;
@@ -40,26 +18,19 @@ export default function PersonaProjectsPage() {
 
   useEffect(() => {
     if (!personaId) return;
-    const data = mockProjects[personaId] || [];
-    setProjects(data);
+    const fetchProjects = async () => {
+      try {
+        const res = await fetch(`/api/personas/${personaId}/projects`);
+        if (!res.ok) throw new Error("Failed to fetch projects");
+        const json = await res.json();
+        setProjects(json.projects); // ✅ 配列部分だけをセット
+      } catch (err) {
+        console.error(err);
+        setProjects([]);
+      }
+    };
+    fetchProjects();
   }, [personaId]);
-
-  // 後でAPI fetchに差し替え
-  // // useEffect(() => {
-  // // if (!personaId) return;
-  // // const fetchProjects = async () => {
-  // // try {
-  // // const res = await fetch(`/api/personas/${personaId}/projects`);
-  // // if (!res.ok) throw new Error("Failed to fetch projects");
-  // // const json: Project[] = await res.json();
-  // // setProjects(json);
-  // // } catch (err) {
-  // // console.error(err);
-  // // setProjects([]);
-  // // }
-  // // };
-  // // fetchProjects();
-  // // },[personaId]);
 
   return (
     <div

@@ -61,14 +61,6 @@ export default function ProjectCreatePage() {
     console.log("プロジェクト作成 payload:", payload);
 
     try {
-      // weight モックデータ（テスト用、終了後削除予定）
-      const mockWeights = [
-        { area: "ネットワーク", weightPercent: 30 },
-        { area: "データベース", weightPercent: 25 },
-        { area: "セキュリティ", weightPercent: 20 },
-        { area: "アルゴリズム", weightPercent: 25 },
-      ];
-
       // 1. プロジェクト作成
       const res = await fetch(`/api/personas/${personaId}/projects`, {
         method: "POST",
@@ -76,24 +68,13 @@ export default function ProjectCreatePage() {
         body: JSON.stringify(payload),
       });
 
-      // if (!res.ok) throw new Error("プロジェクト作成に失敗しました");
+      if (!res.ok) throw new Error("プロジェクト作成に失敗しました");
 
-      // Location ヘッダから projectId を取得
-      const location = res.headers.get("Location") ?? "";
-      const parts = location.split("/");
-      const projectId = parts[parts.length - 1] || "mock-project-id";  //右はモック用データ
+      // body から projectId を取得
+      const json = await res.json();
+      const projectId = json.project.projectId;
 
-      // 2. 遷移前に AI に配点割合生成を依頼
-      // const genRes = await fetch(`/api/projects/${projectId}/weights/generate`, {
-      //   method: "GET",
-      // });
-
-      // if (!genRes.ok) {
-      //   console.warn("配点割合生成API失敗 → モックデータ使用");
-        console.log(mockWeights);
-      // }
-
-      // 3. 配点割合ページへ遷移
+      // 2. 直接遷移（weights生成は遷移後に行う）
       router.push(`/projects/${projectId}/weights/post`);
     } catch (err) {
       console.error(err);

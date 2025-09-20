@@ -13,6 +13,7 @@ type StepCreateArray = {
   startDate: string;
   endDate: string;
 };
+type StepCreate = components["schemas"]["StepCreate"];
 
 async function isValidProjectId(projectId: string) {
   const uuidRegex =
@@ -64,9 +65,9 @@ export async function GET(
 }
 
 export async function POST(
-  request: NextRequest,
-  context: { params: Promise<{ projectId: string }> }
-): Promise<NextResponse> {
+  request: Request,
+  { params }: { params: Promise<{ projectId: string }> },
+) {
   try {
     const { projectId } = await context.params;
 
@@ -77,31 +78,25 @@ export async function POST(
       );
     }
 
-    const body = await request.json();
-    if (!Array.isArray(body) || body.length === 0) {
+    const pendingSteps = (await request.json()) as components["schemas"]["StepCreate"];
+    if (!Array.isArray(pendingSteps) || pendingSteps.length === 0) {
       return NextResponse.json(
         { message: "Request body must be a non-empty array of steps" },
         { status: 400 }
       );
     }
 
-    const additionalSteps = await supplementSteps(projectId);
+    const additionalSteps = await supplementSteps(projectId, pendingSteps);
     const stepIds = await insertSteps(additionalSteps, projectId);
 
     return NextResponse.json({ stepIds }, { status: 201 });
-  } catch (error) {
-    console.error("ステップ登録エラー:", error);
-    if (error instanceof SyntaxError) {
-      return NextResponse.json({ message: "Invalid JSON body" }, { status: 400 });
-    }
-    return NextResponse.json(
-      { message: "ステップの登録に失敗しました" },
-      { status: 500 }
-    );
+  } catch (e) {
+    console.error(e);
+    return NextResponse.json({ message: "Invalid JSON body" }, { status: 400 });
   }
 }
 
-async function supplementSteps(projectId: string) {
+async function supplementSteps(projectId: string, pendingSteps: StepCreate[]) {
   try {
     const projectData = await getProjects(projectId);
     const weightData = await getWeights(projectId);
@@ -110,10 +105,10 @@ async function supplementSteps(projectId: string) {
       throw new Error("Project not found");
     }
 
-    // 既存のsteps/generateエンドポイントを活用
     const generatedStepsData = await generateSupplementSteps(
       projectData,
-      weightData
+      weightData,
+      pendingSteps
     );
 
     const stepsToInsert = generatedStepsData.steps.map(
