@@ -7,10 +7,10 @@ import { TaskFromAI, TasksGenerateApiResponse } from '@/types/tasks';
 
 export async function POST(
   request: Request,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
   try {
-    const { projectId } = params;
+    const { projectId } = await params;
 
     // 1. DBからプロジェクトと関連情報を取得
     const projectData = await db.query.projects.findFirst({
