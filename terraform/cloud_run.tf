@@ -51,15 +51,20 @@ resource "google_cloud_run_v2_service" "service" {
         value = google_sql_user.user.name
       }
       env {
-        name  = "DB_PASSWORD"
-        value = random_password.db_password.result
+        name = "DB_PASSWORD"
+        value_source {
+          secret_key_ref {
+            secret  = google_secret_manager_secret.db_password_secret.secret_id
+            version = "latest"
+          }
+        }
       }
       env {
         name  = "DB_NAME"
         value = google_sql_database.database.name
       }
       env {
-        name  = "DB_PORT"
+        name  = "PGPORT"
         value = "5432"
       }
     }
