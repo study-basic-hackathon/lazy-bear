@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { components } from "@/types/apiSchema";
 import { M_PLUS_1p } from "next/font/google";
@@ -17,15 +17,32 @@ export default function WeightsCreatePage() {
   const params = useParams<{ id: string }>();
   const projectId = params.id;
   const router = useRouter();
-  // モックデータ（APIから取得される想定、テスト終了後は削除）
-  const [weights, setWeights] = useState<WeightCreate[]>([
-    { area: "ネットワーク", weightPercent: 30 },
-    { area: "データベース", weightPercent: 25 },
-    { area: "セキュリティ", weightPercent: 20 },
-    { area: "アルゴリズム", weightPercent: 25 },
-  ]);
 
+  const [weights, setWeights] = useState<WeightCreate[]>([]);
   const [error, setError] = useState<string>("");
+
+  // 遷移後にweights/generateを叩いて初期値をセット
+  useEffect(() => {
+    if (!projectId) return;
+    const fetchGeneratedWeights = async () => {
+      try {
+        const res = await fetch(`/api/projects/${projectId}/weights/generate`);
+        if (!res.ok) throw new Error("配点割合生成に失敗しました");
+        const data = await res.json();
+
+        if (data && Array.isArray(data)) {
+          setWeights(data as WeightCreate[]);
+        } else {
+          console.error("weights が配列ではありません:", data);
+          setWeights([]);
+        }
+      } catch (err) {
+        console.error(err);
+        setError("配点割合生成に失敗しました");
+      }
+    };
+    fetchGeneratedWeights();
+  }, [projectId]);
 
   // フィールドの更新
   const handleChange = (index: number, field: keyof WeightCreate, value: string) => {
@@ -73,24 +90,15 @@ export default function WeightsCreatePage() {
 
     try {
       // weightの保存
-      await fetch(`/api/projects/${projectId}/weight`, {
+      await fetch(`/api/projects/${projectId}/weights`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(weights),
       });
 
-      // stepの生成結果を取得（モックデータで一時対応）
-      const steps = [
-        { index: 1, title: "準備ステップ", description: "環境を整える" },
-        { index: 2, title: "学習ステップ", description: "教科書を読む" },
-        { index: 3, title: "演習ステップ", description: "問題を解く" },
-      ];
-
-      console.log("取得したsteps（モック）:", steps);
-
       router.push(`/projects/${projectId}/steps/post`);
     } catch (err) {
-      console.error("保存または取得エラー:", err);
+      console.error("保存または生成エラー:", err);
       setError("保存または生成に失敗しました");
     }
   };
@@ -141,55 +149,56 @@ export default function WeightsCreatePage() {
                 height: "calc(344px - 24px)",
               }}
             >
-              {weights.map((w, index) => (
-                <div
-                  key={index}
-                  className="flex items-center gap-3 p-2"
-                >
-                  {/* 対象分野 */}
-                  <input
-                    type="text"
-                    value={w.area}
-                    onChange={(e) => handleChange(index, "area", e.target.value)}
-                    placeholder="分野名"
-                    className="p-2 border text-gray-950"
-                    style={{ borderRadius: "0px", width: "144px" }}
-                  />
-
-                  {/* 配点割合 + ゴミ箱 */}
-                  <div className="flex items-center">
+              {Array.isArray(weights) &&
+                weights.map((w, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-3 p-2"
+                  >
+                    {/* 対象分野 */}
                     <input
-                      type="number"
-                      value={w.weightPercent}
-                      onChange={(e) => handleChange(index, "weightPercent", e.target.value)}
-                      className="p-2 border text-right text-gray-950"
-                      style={{ borderRadius: "0px", width: "56px" }}
-                      min={0}
-                      max={100}
+                      type="text"
+                      value={w.area}
+                      onChange={(e) => handleChange(index, "area", e.target.value)}
+                      placeholder="分野名"
+                      className="p-2 border text-gray-950"
+                      style={{ borderRadius: "0px", width: "144px" }}
                     />
-                    <span className="ml-1">%</span>
-                    {/* ゴミ箱（非表示時もスペース確保） */}
-                    <div style={{ minWidth: "24px", marginLeft: "4px" }}>
-                      {weights.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => handleDelete(index)}
-                          className="text-red-500 font-bold"
-                          style={{ minWidth: "24px" }}
-                        >
-                          <Image
-                            src="/createWeights/trashBox.svg"
-                            alt="delete Weight"
-                            width={24}
-                            height={24}
-                            className="cursor-pointer hover:opacity-80"
-                          />
-                        </button>
-                      )}
+
+                    {/* 配点割合 + ゴミ箱 */}
+                    <div className="flex items-center">
+                      <input
+                        type="number"
+                        value={w.weightPercent}
+                        onChange={(e) => handleChange(index, "weightPercent", e.target.value)}
+                        className="p-2 border text-right text-gray-950"
+                        style={{ borderRadius: "0px", width: "56px" }}
+                        min={0}
+                        max={100}
+                      />
+                      <span className="ml-1">%</span>
+                      {/* ゴミ箱（非表示時もスペース確保） */}
+                      <div style={{ minWidth: "24px", marginLeft: "4px" }}>
+                        {weights.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => handleDelete(index)}
+                            className="text-red-500 font-bold"
+                            style={{ minWidth: "24px" }}
+                          >
+                            <Image
+                              src="/createWeights/trashBox.svg"
+                              alt="delete Weight"
+                              width={24}
+                              height={24}
+                              className="cursor-pointer hover:opacity-80"
+                            />
+                          </button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
 

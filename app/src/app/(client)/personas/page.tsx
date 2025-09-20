@@ -52,25 +52,16 @@ export default function PersonaCreatePage() {
     console.log("ペルソナ作成 payload:", payload);
 
     // TODO: API に接続
-    // const res = await fetch(`/api/personas`, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
-    // const data = await res.json();
-    // const personaId = data.personaId;
-    // router.push(`/personas/${personaId}`);
+    const res = await fetch(`/api/personas`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
 
-        // Location ヘッダを取得
-    // const location = res.headers.get("Location");
-
-    // const location = res.headers.get("Location") ?? "";
-    // // ["", "personas", "abcd-1234"]
-    // const parts = location.split("/");
-    // const personaId = parts[2]; // "abcd-1234"
+    const data = await res.json();
+    const personaId = data.personas.personaId ?? "";
 
     // 成功時にページ遷移
-    const personaId = "11111111-1111-1111-1111-111111111111"; // ← APIから返る想定
     router.push(`/personas/${personaId}/projects`);
   };
 
@@ -182,8 +173,8 @@ export default function PersonaCreatePage() {
                 <option value="" disabled>
                   学習パターン選択
                 </option>
-                <option value="INPUT_FIRST">インプット先行</option>
-                <option value="OUTPUT_FIRST">アウトプット先行</option>
+                <option value="インプット先行パターン">インプット先行</option>
+                <option value="アウトプット先行パターン">アウトプット先行</option>
               </select>
               {errors.learningPattern && (
                 <p className="text-red-500 text-sm mt-1">
