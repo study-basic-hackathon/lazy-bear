@@ -4,6 +4,12 @@ import { useState, useEffect, useRef } from "react";
 import { useParams } from "next/navigation";
 import Sidebar, { StepWithTasks } from "../../components/Sidebar";
 import GanttChart from "../../components/GanttChart";
+import { M_PLUS_1p } from "next/font/google";
+
+const mplus = M_PLUS_1p({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"]
+});
 
 import { components } from "@/types/apiSchema";
 
@@ -69,25 +75,29 @@ export default function ProjectPage() {
   };
 
   return (
-    <div className="flex">
+    <div className={`${mplus.className} text-stone-950 flex`}>
       {/* Sidebar */}
       <div ref={sidebarRef} className="overflow-y-auto">
-        <Sidebar
-          project={project}
-          steps={steps}
-          toggleStep={toggleStep}
-          openSteps={openSteps}
-          syncScroll={(scrollTop: number) => syncScroll("sidebar", scrollTop)}
-        />
+        <div className={`${mplus.className} text-stone-950`}>
+          <Sidebar
+            project={project}
+            steps={steps}
+            toggleStep={toggleStep}
+            openSteps={openSteps}
+            syncScroll={(scrollTop: number) => syncScroll("sidebar", scrollTop)}
+          />
+        </div>
       </div>
 
       {/* GanttChart */}
       <div ref={ganttRef} className="overflow-y-auto flex-1">
-        <GanttChart
-          steps={steps}
-          openSteps={openSteps}
-          syncScroll={(scrollTop: number) => syncScroll("gantt", scrollTop)}
-        />
+        <div className={`${mplus.className} text-stone-950`}>
+          <GanttChart
+            steps={steps}
+            openSteps={openSteps}
+            syncScroll={(scrollTop: number) => syncScroll("gantt", scrollTop)}
+          />
+        </div>
       </div>
     </div>
   );
