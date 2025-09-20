@@ -1,0 +1,85 @@
+{
+    "root": {
+        "data": {
+            "id": "dcx93uprpog0",
+            "created": 1758333221743,
+            "text": "バックエンド"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcx93z11ngg0",
+                    "created": 1758333231132,
+                    "text": "APIの実装",
+                    "layout_right_offset": {
+                        "x": 6,
+                        "y": 95
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcx95b0ca140",
+                            "created": 1758333335575,
+                            "text": "Vertex AI呼び出し共通化"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcx945iipso0",
+                    "created": 1758333245249,
+                    "text": "データベース管理",
+                    "layout_right_offset": {
+                        "x": 3,
+                        "y": -66
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcx957r9dyg0",
+                            "created": 1758333328496,
+                            "text": "drizzle"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcx94h98qzk0",
+                    "created": 1758333270810,
+                    "text": "インフラ",
+                    "layout_right_offset": {
+                        "x": 8,
+                        "y": 65
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcx94klmd5s0",
+                            "created": 1758333278089,
+                            "text": "ローカル環境：docker-compose"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcx94rl1fpk0",
+                            "created": 1758333293291,
+                            "text": "サーバー反映：terraform"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

@@ -5,6 +5,9 @@ resource "google_cloud_run_v2_service" "service" {
   deletion_protection = true
 
   template {
+    annotations = {
+      "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.instance.connection_name
+    }
     service_account = google_service_account.lazy_bear_sa.email
 
     scaling {
@@ -40,8 +43,24 @@ resource "google_cloud_run_v2_service" "service" {
         value = "gemini-2.5-flash-lite"
       }
       env {
-        name = "DATABASE_URL"
-        value = "postgresql://${google_sql_user.user.name}:${random_password.db_password.result}@/${google_sql_database.database.name}?host=/cloudsql/${google_sql_database_instance.instance.connection_name}"
+        name  = "INSTANCE_CONNECTION_NAME"
+        value = "/cloudsql/${google_sql_database_instance.instance.connection_name}"
+      }
+      env {
+        name  = "DB_USER"
+        value = google_sql_user.user.name
+      }
+      env {
+        name  = "DB_PASSWORD"
+        value = random_password.db_password.result
+      }
+      env {
+        name  = "DB_NAME"
+        value = google_sql_database.database.name
+      }
+      env {
+        name  = "DB_PORT"
+        value = "5432"
       }
     }
   }

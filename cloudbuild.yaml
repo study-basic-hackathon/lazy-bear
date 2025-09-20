@@ -1,0 +1,11 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args:
+  - 'build'
+  - '-t'
+  - 'asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest'
+  - '-f'
+  - 'app/Dockerfile.prod'
+  - './app'
+images:
+- 'asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest'
