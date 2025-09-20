@@ -5,9 +5,7 @@ resource "google_cloud_run_v2_service" "service" {
   deletion_protection = true
 
   template {
-    annotations = {
-      "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.instance.connection_name
-    }
+    # Cloud SQL Auth Proxy は使わないので annotations 削除
     service_account = google_service_account.lazy_bear_sa.email
 
     scaling {
@@ -17,7 +15,7 @@ resource "google_cloud_run_v2_service" "service" {
 
     vpc_access {
       connector = google_vpc_access_connector.connector.id
-      egress    = "ALL_TRAFFIC"
+      egress    = "PRIVATE_RANGES_ONLY"
     }
 
     containers {
@@ -42,9 +40,10 @@ resource "google_cloud_run_v2_service" "service" {
         name  = "VERTEX_AI_MODEL_NAME"
         value = "gemini-2.5-flash-lite"
       }
+      # Private IP を使うための DB ホスト設定
       env {
-        name  = "INSTANCE_CONNECTION_NAME"
-        value = "/cloudsql/${google_sql_database_instance.instance.connection_name}"
+        name  = "DB_HOST"
+        value = google_sql_database_instance.instance.private_ip_address
       }
       env {
         name  = "DB_USER"
