@@ -18,7 +18,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: docker/nextjs/Dockerfile
+      dockerfile: docker/nextjs/Dockerfile.dev
     container_name: lazy_bear_app
     ports:
       - "3000:3000"
