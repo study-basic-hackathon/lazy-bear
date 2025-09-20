@@ -2,7 +2,7 @@ import { generateContentFromPrompt } from "../client";
 import { FunctionDeclarationSchema, SchemaType } from "@google-cloud/vertexai";
 import { type projects, type personas } from "@/lib/db/schema";
 import { type weights } from "@/lib/db/schema/weights";
-import { paths } from "@/types/apiSchema";
+import { components } from "@/types/apiSchema"
 
 const systemInstruction = `
 # 思考のレンズ
@@ -92,10 +92,9 @@ const systemInstruction = `
 ### 出力形式
 - Json配列は "index" を 0 スタートかつ昇順でソートする。
 
-！テーマと日付を埋めてあげる！
+ステップの日付の定義
 `;
 
-// ！jsonの型を調整してあげる！
 const responseSchema: FunctionDeclarationSchema = {
   type: SchemaType.OBJECT,
   properties: {
@@ -111,22 +110,27 @@ const responseSchema: FunctionDeclarationSchema = {
           },
           theme: {
             type: SchemaType.STRING,
-            description: "そのステップで達成すべき学習目標",
+            description: "ステップで達成すべき学習目標",
+          },
+          startDate :{
+            type: SchemaType.STRING,
+            description: "ステップの開始日 (YYYY-MM-DD)",
+          },
+          endDate :{
+            type: SchemaType.STRING,
+            description: "ステップの終了日 (YYYY-MM-DD)",
           },
           index: {
             type: SchemaType.INTEGER,
             description: "ステップの順序 (0始まり)",
           },
         },
-        required: ["title", "theme", "index"],
+        required: ["title", "theme", 'startDate', 'endDate', "index"],
       },
     },
   },
   required: ["steps"],
 };
-
-type StepsGenerateResponse =
-  paths["/projects/{projectId}/steps/generate"]["get"]["responses"]["200"]["content"]["application/json"];
 
 type StepResponse = {
   steps: {
@@ -149,25 +153,33 @@ type Project = typeof projects.$inferSelect & {
   persona: typeof personas.$inferSelect | null;
 };
 type Weight = typeof weights.$inferSelect;
+type StepCreate = components["schemas"]["StepCreate"];
 
 export async function generateSupplementSteps(
   project: Project,
-  weights: Weight[]
+  weights: Weight[],
+  pendingSteps: StepCreate[]
 ): Promise<StepResponse> {
   const userPrompt = `
   ## 指示
   - 以下の情報に基づいて、学習ステップを生成してください。
 
+  ## 前提
+  - theme が空のときは、対応する name を参照し、全体のステップ構成に沿った theme を補完する。
+
   ## 各情報
-    - 資格名: ${project.certificationName}
-    - 学習開始日: ${project.startDate}
-    - 試験日: ${project.examDate}
-    - 主な学習教材: ${project.baseMaterial}
-    - 平日の学習可能時間: ${project.persona?.weekdayHours}時間
-    - 休日の学習可能時間: ${project.persona?.weekendHours}時間
-    - 学習スタイル: ${project.persona?.learningPattern}
-    - 出題分野と配点:
-    ${weights.map((w) => `  - ${w.area}: ${w.weightPercent}%`).join("\n")}
+  - 資格名: ${project.certificationName}
+  - 学習開始日: ${project.startDate}
+  - 試験日: ${project.examDate}
+  - 主な学習教材: ${project.baseMaterial}
+  - 平日の学習可能時間: ${project.persona?.weekdayHours}時間
+  - 休日の学習可能時間: ${project.persona?.weekendHours}時間
+  - 学習スタイル: ${project.persona?.learningPattern}
+  - 出題分野と配点:
+  ${weights.map((w) => `  - ${w.area}: ${w.weightPercent}%`).join("\n")}
+
+  ## themeに空の可能性があるステップ
+  - ${JSON.stringify(pendingSteps, null, 2)}
   `;
 
   // AIにリクエスト
