@@ -4,6 +4,11 @@ resource "google_cloud_run_v2_service" "service" {
   project  = var.project_id
   deletion_protection = true
 
+  traffic {
+    type    = "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST"
+    percent = 100
+  }
+
   template {
     annotations = {
       "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.instance.connection_name
@@ -44,15 +49,20 @@ resource "google_cloud_run_v2_service" "service" {
       }
       env {
         name  = "INSTANCE_CONNECTION_NAME"
-        value = "/cloudsql/${google_sql_database_instance.instance.connection_name}"
+        value = google_sql_database_instance.instance.connection_name
       }
       env {
         name  = "DB_USER"
         value = google_sql_user.user.name
       }
       env {
-        name  = "DB_PASSWORD"
-        value = random_password.db_password.result
+        name = "DB_PASSWORD"
+        value_source {
+          secret_key_ref {
+            secret  = google_secret_manager_secret.db_password_secret.id
+            version = "latest"
+          }
+        }
       }
       env {
         name  = "DB_NAME"
@@ -67,7 +77,8 @@ resource "google_cloud_run_v2_service" "service" {
 
   depends_on = [
     google_project_service.apis,
-    google_sql_user.user
+    google_sql_user.user,
+    google_project_iam_member.secret_manager_accessor_binding
   ]
 }
 

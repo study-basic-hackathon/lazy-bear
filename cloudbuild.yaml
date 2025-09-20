@@ -1,11 +1,31 @@
 steps:
+# 1. Dockerイメージをビルドする
 - name: 'gcr.io/cloud-builders/docker'
   args:
   - 'build'
   - '-t'
   - 'asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest'
   - '-f'
-  - 'app/Dockerfile.prod'
+  - 'docker/nextjs/Dockerfile.prod'
   - './app'
+
+# 2. ビルドしたイメージをArtifact Registryにプッシュする
+# このステップは、下の `images` でイメージを指定することで自動的に実行される
+
+# 3. 新しいイメージをCloud Runにデプロイする
+- name: 'gcr.io/google-cloud-sdk/gcloud'
+  args:
+  - 'run'
+  - 'deploy'
+  - 'lazy-bear-app' # Terraformで定義したCloud Runサービス名
+  - '--image'
+  - 'asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest' # プッシュしたイメージ
+  - '--region'
+  - 'asia-northeast1' # Cloud Runのリージョン
+  - '--project'
+  - 'lazy-bear-471016' # GCPプロジェクトID
+  - '--quiet' # 確認プロンプトを無効化
+
+# プッシュするイメージを指定
 images:
 - 'asia-northeast1-docker.pkg.dev/lazy-bear-471016/lazy-bear-repo/lazy-bear-app:latest'

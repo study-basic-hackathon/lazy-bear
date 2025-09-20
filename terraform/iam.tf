@@ -27,3 +27,10 @@ resource "google_project_iam_member" "artifact_registry_reader_binding" {
   role    = "roles/artifactregistry.reader"
   member  = "serviceAccount:${google_service_account.lazy_bear_sa.email}"
 }
+
+# サービスアカウントにSecret Manager Secret Accessorのロールを付与
+resource "google_project_iam_member" "secret_manager_accessor_binding" {
+  project = var.project_id
+  role    = "roles/secretmanager.secretAccessor"
+  member  = "serviceAccount:${google_service_account.lazy_bear_sa.email}"
+}
