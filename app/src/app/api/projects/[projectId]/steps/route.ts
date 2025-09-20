@@ -65,9 +65,9 @@ export async function GET(
 }
 
 export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ projectId: string }> },
-) {
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
   try {
     const { projectId } = await context.params;
 

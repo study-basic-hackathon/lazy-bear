@@ -57,7 +57,7 @@ export default function ProjectCreatedSuccessPage() {
 
   return (
     <div
-      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center ${mplus.className} text-gray-950`}
+      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center text-gray-950`}
     >
       <div
         className="p-6 bg-white relative text-center"
