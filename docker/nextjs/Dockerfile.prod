@@ -3,10 +3,11 @@ FROM node:22-alpine AS builder
 
 WORKDIR /app
 
-# Copy package.json and lock file from the 'app' directory
-# Use npm ci for cleaner installs
-COPY app/package.json app/package-lock.json* ./
-RUN npm ci
+# Copy only package.json to leverage Docker cache and avoid platform issues with lock files.
+COPY app/package.json ./
+
+# Install dependencies. This will generate a new package-lock.json for the correct platform (Linux).
+RUN npm install
 
 # Copy the rest of the application source code from the 'app' directory
 COPY app/. .
