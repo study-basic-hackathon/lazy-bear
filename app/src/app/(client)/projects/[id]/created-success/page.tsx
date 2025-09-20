@@ -11,37 +11,36 @@ const mplus = M_PLUS_1p({
 });
 
 export default function ProjectCreatedSuccessPage() {
-  // const params = useParams<{ id: string }>();
-  // const projectId = params.id;
+  const params = useParams<{ id: string }>();
+  const projectId = params.id; // ✅ URLからprojectIdを取得
   const router = useRouter();
 
-  // const [personaId, setPersonaId] = useState<string | null>(null);
-  const [personaId] = useState<string>("11111111-1111-1111-1111-111111111111");
-  const [projectId] = useState<string>("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+  const [personaId, setPersonaId] = useState<string | null>(null);
   const [error, setError] = useState<string>("");
 
-  // // projectIdからpersonaIdを取得
-  // useEffect(() => {
-  //   const fetchProject = async () => {
-  //     try {
-  //       const res = await fetch(`/api/projects/${projectId}`);
-  //       if (!res.ok) throw new Error("プロジェクト情報の取得に失敗しました");
-  //       const project = await res.json();
-  //       setPersonaId(project.personaId); // APIのレスポンスに personaId が含まれている想定
-  //     } catch (err) {
-  //       console.error(err);
-  //       setError("プロジェクト情報の取得に失敗しました");
-  //     }
-  //   };
+  // projectIdからpersonaIdを取得
+  useEffect(() => {
+    if (!projectId) return;
 
-  //   fetchProject();
-  // }, [projectId]);
+    const fetchProject = async () => {
+      try {
+        const res = await fetch(`/api/projects/${projectId}`);
+        if (!res.ok) throw new Error("プロジェクト情報の取得に失敗しました");
+        const project = await res.json();
+        setPersonaId(project.personaId); // ✅ useStateでセット
+      } catch (err) {
+        console.error(err);
+        setError("プロジェクト情報の取得に失敗しました");
+      }
+    };
+
+    fetchProject();
+  }, [projectId]);
 
   // TOPに戻る
   const handleGoTop = async () => {
     if (!personaId) return;
     try {
-      // await fetch(`/api/personas/${personaId}/projects`);
       router.push(`/personas/${personaId}/projects`);
     } catch (err) {
       console.error(err);
@@ -52,7 +51,6 @@ export default function ProjectCreatedSuccessPage() {
   // 計画を見る
   const handleGoPlan = async () => {
     try {
-      // await fetch(`/api/projects/${projectId}`);
       router.push(`/projects/${projectId}`);
     } catch (err) {
       console.error(err);
@@ -61,15 +59,21 @@ export default function ProjectCreatedSuccessPage() {
   };
 
   return (
-    <div className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center ${mplus.className} text-gray-950`}>
+    <div
+      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center ${mplus.className} text-gray-950`}
+    >
       <div
         className="p-6 bg-white relative text-center"
         style={{ width: "335px", height: "752px", marginTop: "30px" }}
       >
         {/* 完了メッセージ */}
-        <div style={{ marginTop: "200px" }} className="flex flex-col justify-center items-center">
+        <div
+          style={{ marginTop: "200px" }}
+          className="flex flex-col justify-center items-center"
+        >
           <p className="font-medium">
-            スケジュールが作成完了しました！<br />
+            スケジュールが作成完了しました！
+            <br />
             この調子で頑張りましょう！
           </p>
           <div className="mt-9">
@@ -83,7 +87,10 @@ export default function ProjectCreatedSuccessPage() {
         </div>
 
         {/* TOPに戻る */}
-        <div className="absolute left-1/2 transform -translate-x-1/2" style={{ top: "527px" }}>
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2"
+          style={{ top: "527px" }}
+        >
           <button
             type="button"
             onClick={handleGoTop}
@@ -96,7 +103,7 @@ export default function ProjectCreatedSuccessPage() {
               backgroundColor: "#A0AEC0",
               color: "#FFFFFF",
               opacity: personaId ? 1 : 0.6,
-              marginBottom: "24px",
+              marginBottom: "24px"
             }}
           >
             TOPに戻る
@@ -104,7 +111,10 @@ export default function ProjectCreatedSuccessPage() {
         </div>
 
         {/* 計画を見る */}
-        <div className="absolute left-1/2 transform -translate-x-1/2" style={{ top: "611px" }}>
+        <div
+          className="absolute left-1/2 transform -translate-x-1/2"
+          style={{ top: "611px" }}
+        >
           <button
             type="button"
             onClick={handleGoPlan}
@@ -114,7 +124,7 @@ export default function ProjectCreatedSuccessPage() {
               height: "60px",
               borderRadius: "0px",
               backgroundColor: "#3C436D",
-              color: "#FFFFFF",
+              color: "#FFFFFF"
             }}
           >
             計画を見る

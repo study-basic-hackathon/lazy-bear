@@ -66,7 +66,6 @@ export async function GET(
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ projectId: string }> },
-  { body }: { body?: components["schemas"]["StepCreate"] }
 ) {
   try {
     const { projectId } = await params;
@@ -78,7 +77,7 @@ export async function POST(
       );
     }
 
-    body = await request.json();
+    const body = (await request.json()) as components["schemas"]["StepCreate"];
     if (!Array.isArray(body) || body.length === 0) {
       return NextResponse.json(
         { message: "Request body must be a non-empty array of steps" },

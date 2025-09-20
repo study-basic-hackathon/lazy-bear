@@ -1,5 +1,5 @@
 import { generateContentFromPrompt } from '../client';
-import { FunctionDeclarationSchema, SchemaType } from '@google-cloud/vertexai';
+import { FunctionDeclaration, SchemaType } from '@google-cloud/vertexai';
 import { paths } from '@/types/apiSchema';
 
 const systemInstruction = `
@@ -59,29 +59,33 @@ const systemInstruction = `
    * 応答は **JSON のみ** とし、補足テキストを一切含めない。
 `;
 
-const responseSchema: FunctionDeclarationSchema = {
-  type: SchemaType.OBJECT,
-  properties: {
-    weights: {
-      type: SchemaType.ARRAY,
-      description: '試験分野と配点比率の配列',
-      items: {
-        type: SchemaType.OBJECT,
-        properties: {
-          area: {
-            type: SchemaType.STRING,
-            description: '試験分野名',
+const responseFunction: FunctionDeclaration = {
+  name: "json_output",
+  description: "試験分野と配点比率の配列を返す",
+  parameters: {
+    type: SchemaType.OBJECT,
+    properties: {
+      weights: {
+        type: SchemaType.ARRAY,
+        description: "試験分野と配点比率の配列",
+        items: {
+          type: SchemaType.OBJECT,
+          properties: {
+            area: {
+              type: SchemaType.STRING,
+              description: "試験分野名",
+            },
+            weightPercent: {
+              type: SchemaType.INTEGER,
+              description: "配点比率（%）",
+            },
           },
-          weightPercent: {
-            type: SchemaType.INTEGER,
-            description: '配点比率（%）',
-          },
+          required: ["area", "weightPercent"],
         },
-        required: ['area', 'weightPercent'],
       },
     },
+    required: ["weights"],
   },
-  required: ['weights'],
 };
 
 type WeightsGenerateResponse = paths["/projects/{projectId}/weights/generate"]["get"]["responses"]["200"]["content"]["application/json"];
@@ -105,6 +109,6 @@ export async function generateWeights(
   return await generateContentFromPrompt<WeightResponse>(
     systemInstruction,
     userPrompt,
-    responseSchema
+    responseFunction.parameters // ✅ 型注釈は不要、値をそのまま渡す
   );
 }
