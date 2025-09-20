@@ -4,14 +4,11 @@ import Image from "next/image";
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { components } from "@/types/apiSchema";
-import { M_PLUS_1p } from "next/font/google";
+
 
 type WeightCreate = components["schemas"]["WeightCreate"];
 
-const mplus = M_PLUS_1p({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"]
-});
+
 
 export default function WeightsCreatePage() {
   const params = useParams<{ id: string }>();
@@ -96,7 +93,7 @@ export default function WeightsCreatePage() {
   };
 
   return (
-    <div className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center ${mplus.className} text-gray-950`}>
+    <div className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center text-gray-950`}>
       <div
         className="p-6 bg-white relative"
         style={{ width: "335px", height: "752px", marginTop: "30px" }}

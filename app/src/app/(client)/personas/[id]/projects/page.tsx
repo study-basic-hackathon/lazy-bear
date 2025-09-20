@@ -5,14 +5,11 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { components } from "@/types/apiSchema";
-import { M_PLUS_1p } from "next/font/google";
+
 
 type Project = components["schemas"]["Project"];
 
-const mplus = M_PLUS_1p({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"]
-});
+
 
 const mockProjects: Record<string, Project[]> = {
   "11111111-1111-1111-1111-111111111111": [
@@ -66,7 +63,7 @@ export default function PersonaProjectsPage() {
 
   return (
     <div
-      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center ${mplus.className}`}
+      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center`}
     >
       <div
         className="p-6 bg-white"

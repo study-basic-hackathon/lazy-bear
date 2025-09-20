@@ -1,0 +1,12 @@
+
+# node_modules は絶対にコピーしない
+node_modules
+npm-debug.log
+
+# Git 管理ファイル
+.git
+.gitignore
+
+# OS / エディタ系
+.DS_Store
+*.swp
