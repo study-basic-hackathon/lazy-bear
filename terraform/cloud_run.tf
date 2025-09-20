@@ -2,7 +2,7 @@ resource "google_cloud_run_v2_service" "service" {
   name     = "lazy-bear-app"
   location = "asia-northeast1"
   project  = var.project_id
-  deletion_protection = true
+  deletion_protection = false
 
   template {
     service_account = google_service_account.lazy_bear_sa.email
@@ -13,8 +13,11 @@ resource "google_cloud_run_v2_service" "service" {
     }
 
     vpc_access {
-      connector = google_vpc_access_connector.connector.id
-      egress    = "ALL_TRAFFIC"
+      network_interfaces {
+        network    = google_compute_network.vpc.id
+        subnetwork = google_compute_subnetwork.subnet.id
+      }
+      egress = "ALL_TRAFFIC"
     }
 
     containers {
@@ -40,8 +43,25 @@ resource "google_cloud_run_v2_service" "service" {
         value = "gemini-2.5-flash-lite"
       }
       env {
-        name = "DATABASE_URL"
-        value = "postgresql://${google_sql_user.user.name}:${random_password.db_password.result}@/${google_sql_database.database.name}?host=/cloudsql/${google_sql_database_instance.instance.connection_name}"
+        name  = "DB_USER"
+        value = google_sql_user.user.name
+      }
+      env {
+        name = "DB_PASSWORD"
+        value_source {
+          secret_key_ref {
+            secret  = google_secret_manager_secret.db_password_secret.secret_id
+            version = "latest"
+          }
+        }
+      }
+      env {
+        name  = "DB_NAME"
+        value = google_sql_database.database.name
+      }
+      env {
+        name  = "INSTANCE_CONNECTION_NAME"
+        value = google_sql_database_instance.instance.connection_name
       }
     }
   }

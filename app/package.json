@@ -11,11 +11,12 @@
     "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@google-cloud/cloud-sql-connector": "^1.8.3",
     "@google-cloud/vertexai": "^1.10.0",
     "date-fns": "^4.1.0",
     "drizzle-orm": "^0.36.4",
     "next": "15.5.2",
-    "postgres": "^3.4.5",
+    "pg": "^8.16.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "uuid": "^13.0.0"
