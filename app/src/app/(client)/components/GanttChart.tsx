@@ -7,8 +7,8 @@ import { StepWithTasks } from "./Sidebar";
 type Step = components["schemas"]["Step"];
 type Task = components["schemas"]["Task"];
 
-const CELL = 42;
-const BG_HEIGHT = 812;
+const CELL = 50;
+const BG_HEIGHT = 1500;
 
 const toLocalDateOnly = (v?: string | Date) => {
   if (!v) return null;
@@ -188,7 +188,7 @@ export default function GanttChart({
                       borderBottom: "1px solid #000",
                     }}
                   >
-                    <span>{format(d, "MM/dd")}</span>
+                    <span>{format(d, "M/d")}</span>
                     <span>({format(d, "EEE", { locale: ja })})</span>
                   </div>
                 </th>
