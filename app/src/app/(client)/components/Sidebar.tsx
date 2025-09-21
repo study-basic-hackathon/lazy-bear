@@ -7,14 +7,14 @@ type Project = components["schemas"]["Project"];
 type Step = components["schemas"]["Step"];
 type Task = components["schemas"]["Task"];
 
-const CELL = 42;
+const CELL = 50;
 
 /* LayoutA: プロジェクト名 */
 function LayoutA({ project }: { project: Project | null }) {
   return (
     <div
       className="
-        grid pl-3 text-lg font-bold
+        grid pl-3 text-base font-semibold
       "
       style={{ height: `${CELL}px` }}
     >
@@ -28,7 +28,7 @@ function LayoutB() {
   return (
     <div
       className="
-        grid text-sm font-bold
+        grid text-xs font-semibold
       "
       style={{ height: `${CELL}px` }}
     >
@@ -53,7 +53,7 @@ function LayoutC({
     <div>
       <div
         className="
-          grid cursor-pointer font-medium
+          grid cursor-pointer font-normal
         "
         style={{ height: `${CELL}px` }}
         onClick={() => toggle(stepId)}
@@ -86,14 +86,14 @@ function LayoutD({ task }: { task: Task }) {
         "
         style={{ height: `${CELL}px` }}
       >
-        <div className="flex items-center text-left pl-6 text-sm">
+        <div className="flex items-center text-left pl-6 text-xs">
           {task.title}
         </div>
       </div>
 
       {/* description を hover 時に表示 */}
       {hover && task.description && (
-        <div className="pl-8 pr-2 text-xs font-light break-words whitespace-pre-wrap block min-h-[20px]">
+        <div className="pl-8 pr-2 text-[10px] font-extralight break-words whitespace-pre-wrap block min-h-[20px]">
           {task.description}
         </div>
       )}
@@ -161,11 +161,11 @@ export default function Sidebar({
       ref={sidebarRef}
       onScroll={handleScroll}
       className="
-        bg-gray-100 text-sm overflow-y-auto
+        bg-gray-100 text-xs overflow-y-auto
         w-[152px] min-w-[152px] max-w-[152px]
       "
       style={{
-        height: "812px",
+        height: "1500px",
         overflowX: "hidden",
       }}
     >
