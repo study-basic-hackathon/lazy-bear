@@ -1,0 +1,139 @@
+{
+    "root": {
+        "data": {
+            "id": "dczdddjhz5c0",
+            "created": 1758548372353,
+            "text": "タスク：プレゼン資料作成"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dczddnl66200",
+                    "created": 1758548394222,
+                    "text": "タスク概要"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dczdgu9nouw0",
+                            "created": 1758548643856,
+                            "text": "開発したサービスを、以下のハッカソンコンテストに提出することになった",
+                            "layout_right_offset": {
+                                "x": 12,
+                                "y": -3
+                            }
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dczdh3wp6eo0",
+                                    "created": 1758548664840,
+                                    "text": "https://zenn.dev/hackathons/google-cloud-japan-ai-hackathon-vol3?tab=rule"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dczdi6teeio0",
+                            "created": 1758548749535,
+                            "text": "提出物にはYoutube動画、デモ操作動画などもあるが、なんにせよこのプレゼン資料をベースに話すので重要である"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dczdhf1ew9c0",
+                    "created": 1758548689070,
+                    "text": "スライドの要件"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dczdhu2g0cw0",
+                            "created": 1758548721784,
+                            "text": "このリポジトリにmarpで作成する"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dczdjm89gsw0",
+                            "created": 1758548861450,
+                            "text": "必ず、上記のWebページの要件を読んで要件に沿ったスライド資料にすることを心がける"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dczdipwz37s0",
+                            "created": 1758548791110,
+                            "text": "特に、webページにある審査基準を満たす頃が重要なので、必ず章立てで抑えること"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dczdj827bw00",
+                                    "created": 1758548830609,
+                                    "text": "【課題の新規性】\n多くの人が抱えていて、いまだに解決策が与えられていない課題を発見したプロジェクトを評価します。\n【解決策の有効性】\n提案されたソリューションがその中心となる課題に効果的に対処し、解決しているかを評価します。\n【実装品質と拡張性】\n開発者がアイデアをどの程度実現し、必要なツールを活用し、拡張性があり、運用しやすく、費用対効果の高いソリューションを作成できたかを評価します。"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dczdjbhivdk0",
+                            "created": 1758548838065,
+                            "text": "過去に書いた計画書があるので、参考にしてください"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dczdknwqd8g0",
+                                    "created": 1758548943470,
+                                    "text": "docs/計画/プロジェクト計画書.md"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dczdmro8xw00",
+                            "created": 1758549108393,
+                            "text": "GEMINI,mdも参考にして",
+                            "layout_right_offset": {
+                                "x": 22,
+                                "y": 0
+                            }
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dczdkrzvnb40",
+                            "created": 1758548952368,
+                            "text": "各種設計資料（DBやシステム構成図）は、後でマーメイドかSVGを挿入します"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dczdm56d7cw0",
+                            "created": 1758549059422,
+                            "text": "デザインは後からでOK、今はなくて良い。"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

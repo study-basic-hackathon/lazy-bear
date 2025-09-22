@@ -1,0 +1,73 @@
+/* @theme hackathon */
+@import 'default';
+
+:root {
+  --hackathon-bg: #0b1d3a;   /* 紺 */
+  --hackathon-bg-2: #122a52; /* 紺のグラデーション用 */
+  --hackathon-fg: #ffffff;   /* 文字（白） */
+  --hackathon-muted: #c9d5e8;/* 補助文字 */
+  --hackathon-accent: #ff7a00; /* オレンジ */
+  --hackathon-bar-height: 30px; /* 上下バーの太さ */
+}
+
+/* スライド全体 */
+section {
+  background: var(--hackathon-bg);
+  color: var(--hackathon-fg);
+  /* 上下にアクセントバー（重なり防止のため inset shadow を使用） */
+  box-shadow:
+    inset 0 var(--hackathon-bar-height) 0 0 var(--hackathon-accent),
+    inset 0 calc(-1 * var(--hackathon-bar-height)) 0 0 var(--hackathon-accent);
+}
+
+/* 見出しにアクセントライン */
+section h1,
+section h2,
+section h3,
+section h4,
+section h5,
+section h6 {
+  color: var(--hackathon-fg);
+  border-left: 0.4rem solid var(--hackathon-accent);
+  padding-left: 0.6rem;
+}
+
+/* リードスライドはグラデ背景 + 大きめ見出し */
+section.lead {
+  background: linear-gradient(135deg, var(--hackathon-bg) 0%, var(--hackathon-bg-2) 60%);
+}
+section.lead h1 {
+  border: none;
+  padding-left: 0;
+  font-size: 2.2em;
+}
+
+/* テキストとリンク、強調 */
+section a { color: var(--hackathon-accent); }
+section strong { color: var(--hackathon-accent); }
+section footer { color: var(--hackathon-muted); }
+
+/* 表とコードの視認性向上 */
+section table {
+  border-collapse: collapse;
+}
+section table,
+section th,
+section td {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+section th {
+  background: var(--hackathon-accent);
+  color: #ffffff; /* ヘッダーは白文字 */
+}
+section td {
+  background: #ffffff; /* 本文セルは白背景 */
+  color: #000000;      /* 本文セルは黒文字 */
+}
+section td, section th {
+  padding: 0.45em 0.6em;
+}
+section pre, section code { background: rgba(255,255,255,0.06); }
+
+/* 箇条書きの間隔を少し広めに */
+section ul, section ol { line-height: 1.45; }
