@@ -112,7 +112,9 @@ function LayoutE({
   toggle: (id: string) => void;
 }) {
   const rows = steps.flatMap((step) =>
-    openSteps[step.stepId as string] ? [step, ...step.tasks] : [step]
+    openSteps[step.stepId as string]
+      ? [step, ...step.tasks]
+      : [step]
   );
 
   return (

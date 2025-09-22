@@ -135,10 +135,6 @@ const responseSchema: FunctionDeclarationSchema = {
 
 type StepResponse = {
   steps: {
-    /** Format: uuid */
-    stepId?: string;
-    /** Format: uuid */
-    projectId?: string;
     title: string;
     theme: string;
     /** Format: date */

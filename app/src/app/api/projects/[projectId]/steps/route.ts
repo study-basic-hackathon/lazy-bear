@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
 import { steps, projects, weights } from "@/lib/db/schema";
-import { v4 as uuidv4 } from "uuid";
 import { components } from "@/types/apiSchema";
 import { eq, asc } from "drizzle-orm";
 import { generateSupplementSteps } from "@/lib/ai/steps/generate-steps-root";
