@@ -2,7 +2,7 @@ import { generateContentFromPrompt } from "../client";
 import { FunctionDeclarationSchema, SchemaType } from "@google-cloud/vertexai";
 import { type projects, type personas } from "@/lib/db/schema";
 import { type weights } from "@/lib/db/schema/weights";
-import { paths } from "@/types/apiSchema";
+import { components } from "@/types/apiSchema"
 
 const systemInstruction = `
 # 思考のレンズ
@@ -82,8 +82,9 @@ const systemInstruction = `
 2. 各ステップは出題分野に基づき、スキルや能力による分類は禁止する。
 3. theme は必ず **80〜100文字以内** で記述する。
 4. 必ず最初に「資格勉強の準備期間」に相当するステップを設ける。
-5. 必ず最後に「総合演習期間」に相当するステップを設ける。
-6. theme の記述ルール:
+5. 必ず最後から2番目に「総合演習期間」に相当するステップを設ける。
+6. 必ず最後に「試験日」に相当するステップを設け、期間は1日でなければならない。
+7. theme の記述ルール:
     - 各ステップで行う内容を **50文字以上80文字以下** で説明する。
     - 絶対に**学ぶ対象であるtitleの名詞は分解され**、ステップの概要が説明される。</br>
       例えば、titleに"科目A"という名詞が入った場合、**絶対にthemeでは"科目A"という名詞を使用できない。**</br>
@@ -92,10 +93,9 @@ const systemInstruction = `
 ### 出力形式
 - Json配列は "index" を 0 スタートかつ昇順でソートする。
 
-！テーマと日付を埋めてあげる！
+ステップの日付の定義
 `;
 
-// ！jsonの型を調整してあげる！
 const responseSchema: FunctionDeclarationSchema = {
   type: SchemaType.OBJECT,
   properties: {
@@ -111,22 +111,27 @@ const responseSchema: FunctionDeclarationSchema = {
           },
           theme: {
             type: SchemaType.STRING,
-            description: "そのステップで達成すべき学習目標",
+            description: "ステップで達成すべき学習目標",
+          },
+          startDate :{
+            type: SchemaType.STRING,
+            description: "ステップの開始日 (YYYY-MM-DD)",
+          },
+          endDate :{
+            type: SchemaType.STRING,
+            description: "ステップの終了日 (YYYY-MM-DD)",
           },
           index: {
             type: SchemaType.INTEGER,
             description: "ステップの順序 (0始まり)",
           },
         },
-        required: ["title", "theme", "index"],
+        required: ["title", "theme", 'startDate', 'endDate', "index"],
       },
     },
   },
   required: ["steps"],
 };
-
-type StepsGenerateResponse =
-  paths["/projects/{projectId}/steps/generate"]["get"]["responses"]["200"]["content"]["application/json"];
 
 type StepResponse = {
   steps: {
@@ -149,25 +154,33 @@ type Project = typeof projects.$inferSelect & {
   persona: typeof personas.$inferSelect | null;
 };
 type Weight = typeof weights.$inferSelect;
+type StepCreate = components["schemas"]["StepCreate"];
 
 export async function generateSupplementSteps(
   project: Project,
-  weights: Weight[]
+  weights: Weight[],
+  pendingSteps: StepCreate[]
 ): Promise<StepResponse> {
   const userPrompt = `
   ## 指示
   - 以下の情報に基づいて、学習ステップを生成してください。
 
+  ## 前提
+  - theme が空のときは、対応する name を参照し、全体のステップ構成に沿った theme を補完する。
+
   ## 各情報
-    - 資格名: ${project.certificationName}
-    - 学習開始日: ${project.startDate}
-    - 試験日: ${project.examDate}
-    - 主な学習教材: ${project.baseMaterial}
-    - 平日の学習可能時間: ${project.persona?.weekdayHours}時間
-    - 休日の学習可能時間: ${project.persona?.weekendHours}時間
-    - 学習スタイル: ${project.persona?.learningPattern}
-    - 出題分野と配点:
-    ${weights.map((w) => `  - ${w.area}: ${w.weightPercent}%`).join("\n")}
+  - 資格名: ${project.certificationName}
+  - 学習開始日: ${project.startDate}
+  - 試験日: ${project.examDate}
+  - 主な学習教材: ${project.baseMaterial}
+  - 平日の学習可能時間: ${project.persona?.weekdayHours}時間
+  - 休日の学習可能時間: ${project.persona?.weekendHours}時間
+  - 学習スタイル: ${project.persona?.learningPattern}
+  - 出題分野と配点:
+  ${weights.map((w) => `  - ${w.area}: ${w.weightPercent}%`).join("\n")}
+
+  ## themeに空の可能性があるステップ
+  - ${JSON.stringify(pendingSteps, null, 2)}
   `;
 
   // AIにリクエスト

@@ -1,6 +1,5 @@
 import { components } from "@/types/apiSchema";
-import { useState, useRef } from "react";
-import { format } from "date-fns";
+import { useRef, useState } from "react";
 
 export type StepWithTasks = Step & { tasks: Task[] };
 
@@ -8,21 +7,14 @@ type Project = components["schemas"]["Project"];
 type Step = components["schemas"]["Step"];
 type Task = components["schemas"]["Task"];
 
-const CELL = 42;
-
-const formatDate = (dateStr?: string) => {
-  if (!dateStr) return "";
-  const d = new Date(dateStr);
-  return format(d, "MM/dd");
-};
+const CELL = 50;
 
 /* LayoutA: プロジェクト名 */
 function LayoutA({ project }: { project: Project | null }) {
   return (
     <div
       className="
-        grid grid-cols-[3fr_1fr_1fr] pl-3 text-lg font-bold
-        max-[375px]:grid-cols-[3fr]
+        grid pl-3 text-base font-semibold
       "
       style={{ height: `${CELL}px` }}
     >
@@ -36,14 +28,11 @@ function LayoutB() {
   return (
     <div
       className="
-        grid grid-cols-[3fr_1fr_1fr] text-sm font-bold
-        max-[375px]:grid-cols-[3fr]
+        grid text-xs font-semibold
       "
       style={{ height: `${CELL}px` }}
     >
       <div className="flex items-center"></div>
-      <div className="flex items-center max-[375px]:hidden">開始日</div>
-      <div className="flex items-center max-[375px]:hidden">終了日</div>
     </div>
   );
 }
@@ -64,8 +53,7 @@ function LayoutC({
     <div>
       <div
         className="
-          grid grid-cols-[3fr_1fr_1fr] cursor-pointer
-          max-[375px]:grid-cols-[3fr]
+          grid cursor-pointer font-normal
         "
         style={{ height: `${CELL}px` }}
         onClick={() => toggle(stepId)}
@@ -76,12 +64,6 @@ function LayoutC({
           </span>
           <span className="flex items-center text-left">{step.title}</span>
         </div>
-        <div className="flex items-center max-[375px]:hidden">
-          {formatDate(step.startDate)}
-        </div>
-        <div className="flex items-center max-[375px]:hidden">
-          {formatDate(step.endDate)}
-        </div>
       </div>
     </div>
   );
@@ -89,53 +71,30 @@ function LayoutC({
 
 /* LayoutD: タスク */
 function LayoutD({ task }: { task: Task }) {
-  const [open, setOpen] = useState(false);
+  const [hover, setHover] = useState(false);
 
   return (
-    <div>
+    <div
+      className="relative"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       {/* タスク行 */}
       <div
         className="
-          grid grid-cols-[3fr_1fr_1fr] cursor-pointer
-          max-[375px]:grid-cols-[3fr]
+          grid
         "
         style={{ height: `${CELL}px` }}
-        onClick={() => setOpen((prev) => !prev)}
       >
-        <div className="grid grid-cols-[1fr_1fr_8fr]">
-          {/* 最初の1frは空白 */}
-          <div />
-          <span className="flex items-center justify-center">
-            {open ? "▽" : "▷"}
-          </span>
-          <span className="flex items-center text-left">{task.title}</span>
-        </div>
-        <div className="flex items-center max-[375px]:hidden">
-          {formatDate(task.startDate)}
-        </div>
-        <div className="flex items-center max-[375px]:hidden">
-          {formatDate(task.endDate)}
+        <div className="flex items-center text-left pl-6 text-xs">
+          {task.title}
         </div>
       </div>
 
-      {/* 概要行 */}
-      {open && (
-        <div
-          className="
-            grid grid-cols-[3fr_1fr_1fr] w-full
-            max-[375px]:grid-cols-[3fr]
-          "
-        >
-          {/* 3fr 内をさらに 1fr_1fr_8fr に分割 */}
-          <div className="grid grid-cols-[1fr_1fr_8fr] text-xs whitespace-pre-wrap break-words">
-            <div /> {/* 空白 */}
-            <div /> {/* 空白 */}
-            <div className="text-left">{task.description}</div>{" "}
-            {/* 8fr に概要説明 */}
-          </div>
-          {/* 右側 (開始日/終了日) は空白 */}
-          <div className="max-[375px]:hidden" />
-          <div className="max-[375px]:hidden" />
+      {/* description を hover 時に表示 */}
+      {hover && task.description && (
+        <div className="pl-8 pr-2 text-[10px] font-extralight break-words whitespace-pre-wrap block min-h-[20px]">
+          {task.description}
         </div>
       )}
     </div>
@@ -202,12 +161,11 @@ export default function Sidebar({
       ref={sidebarRef}
       onScroll={handleScroll}
       className="
-        bg-gray-100 text-sm overflow-y-auto
-        w-[252px] min-w-[252px] max-w-[252px]
-        max-[375px]:w-[151px] max-[375px]:min-w-[151px] max-[375px]:max-w-[151px]
+        bg-gray-100 text-xs overflow-y-auto
+        w-[152px] min-w-[152px] max-w-[152px]
       "
       style={{
-        height: "812px",
+        height: "1500px",
         overflowX: "hidden",
       }}
     >
