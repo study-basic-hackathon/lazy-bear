@@ -4,7 +4,6 @@ import { db } from "@/lib/db/db";
 import { weights } from "@/lib/db/schema";
 import { v4 as uuidv4 } from "uuid";
 
-// apiDesign.yamlのWeightCreateスキーマに対応する型
 type WeightCreate = {
   area: string;
   weightPercent: number;
@@ -12,9 +11,9 @@ type WeightCreate = {
 
 export async function POST(
   request: Request,
-  { params }: { params: { projectId: string } }
+  { params }: { params: Promise<{ projectId: string }> }
 ) {
-  const { projectId } = params;
+  const { projectId } = await params;
 
   if (!projectId) {
     return NextResponse.json(

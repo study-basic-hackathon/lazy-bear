@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
 import { steps, projects, weights } from "@/lib/db/schema";
-import { v4 as uuidv4 } from "uuid";
 import { components } from "@/types/apiSchema";
 import { eq, asc } from "drizzle-orm";
 import { generateSupplementSteps } from "@/lib/ai/steps/generate-steps-root";
@@ -138,17 +137,22 @@ async function insertSteps(
       return [];
     }
 
+    //無効な値が入り込んでいるため、 stepId は事前に削除する
     const newSteps = stepsToInsert.map((s) => ({
-      stepId: uuidv4(),
-      projectId: projectId,
+      projectId,
       title: s.title,
       theme: s.theme,
       startDate: s.startDate,
       endDate: s.endDate,
       index: s.index,
     }));
-    await db.insert(steps).values(newSteps);
-    return newSteps.map((s) => s.stepId);
+
+    const stepIds = await db
+      .insert(steps)
+      .values(newSteps)
+      .returning({ stepId: steps.stepId });
+
+    return stepIds.map((row) => row.stepId);
   } catch (error: unknown) {
     console.error("DB呼び出しに失敗しました:", error);
     const message = error instanceof Error ? error.message : String(error);
