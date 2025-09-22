@@ -138,17 +138,22 @@ async function insertSteps(
       return [];
     }
 
+    //無効な値が入り込んでいるため、 stepId は事前に削除する
     const newSteps = stepsToInsert.map((s) => ({
-      stepId: uuidv4(),
-      projectId: projectId,
+      projectId,
       title: s.title,
       theme: s.theme,
       startDate: s.startDate,
       endDate: s.endDate,
       index: s.index,
     }));
-    await db.insert(steps).values(newSteps);
-    return newSteps.map((s) => s.stepId);
+
+    const stepIds = await db
+      .insert(steps)
+      .values(newSteps)
+      .returning({ stepId: steps.stepId });
+
+    return stepIds.map((row) => row.stepId);
   } catch (error: unknown) {
     console.error("DB呼び出しに失敗しました:", error);
     const message = error instanceof Error ? error.message : String(error);
