@@ -90,8 +90,8 @@ export default function ProjectPage() {
       </div>
 
       {/* GanttChart */}
-      <div ref={ganttRef} className="overflow-y-auto flex-1">
-        <div className={`${mplus.className} text-stone-950`}>
+      <div ref={ganttRef} className="overflow-y-auto flex-1 min-h-dvh">
+        <div className={`${mplus.className} text-stone-950 h-full`}>
           <GanttChart
             steps={steps}
             openSteps={openSteps}

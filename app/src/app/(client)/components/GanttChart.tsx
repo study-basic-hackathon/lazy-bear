@@ -117,28 +117,23 @@ export default function GanttChart({
       onTouchEnd={handleTouchEnd}
       className="cursor-grab select-none"
       style={{
-        height: `${BG_HEIGHT}px`,
-        overflow: "hidden", // ★ スクロールバーを非表示
+        height: "100%",
       }}
     >
       <div
         className="relative"
         style={{
-          width: gridWidth,
-          height: BG_HEIGHT,
+          height: "100%",
         }}
       >
         {/* 縦背景 */}
-        <div
-          className="absolute top-0 left-0 flex"
-          style={{ width: gridWidth, height: BG_HEIGHT }}
-        >
+        <div className="absolute top-0 left-0 flex" style={{ height: "100%" }}>
           {days.map((_, i) => (
             <div
               key={i}
               style={{
                 width: CELL,
-                height: BG_HEIGHT,
+                height: "100%",
                 backgroundColor: i % 2 === 0 ? "#E6E6EF" : "#FFFFFF",
               }}
             />
@@ -155,7 +150,7 @@ export default function GanttChart({
           }}
         >
           <thead>
-            <tr>
+            <tr className=" sticky left-0 top-0 z-10">
               {days.map((d) => (
                 <th
                   key={d.toISOString()}
@@ -174,7 +169,6 @@ export default function GanttChart({
                       width: "100%",
                       height: `${CELL}px`,
                       backgroundColor: "#FFFFFF",
-                      minWidth: "375px",
                       maxWidth: "1800px",
                       margin: "0 auto",
                     }}
@@ -206,7 +200,10 @@ export default function GanttChart({
                 const sEndKey = dayKey(sEnd);
 
                 return (
-                  <tr key={step.stepId as string} style={{ height: `${CELL}px` }}>
+                  <tr
+                    key={step.stepId as string}
+                    style={{ height: `${CELL}px` }}
+                  >
                     {days.map((d) => {
                       const dk = dayKey(d);
                       const inRange = dk >= sStartKey && dk <= sEndKey;
@@ -239,7 +236,10 @@ export default function GanttChart({
                 const tEndKey = dayKey(tEnd);
 
                 return (
-                  <tr key={task.taskId as string} style={{ height: `${CELL}px` }}>
+                  <tr
+                    key={task.taskId as string}
+                    style={{ height: `${CELL}px` }}
+                  >
                     {days.map((d) => {
                       const dk = dayKey(d);
                       const inRange = dk >= tStartKey && dk <= tEndKey;
