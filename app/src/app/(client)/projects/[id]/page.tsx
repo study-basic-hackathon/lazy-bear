@@ -8,7 +8,7 @@ import { M_PLUS_1p } from "next/font/google";
 
 const mplus = M_PLUS_1p({
   subsets: ["latin"],
-  weight: ["400", "500", "700"]
+  weight: ["400", "500", "700"],
 });
 
 import { components } from "@/types/apiSchema";
@@ -77,7 +77,7 @@ export default function ProjectPage() {
   return (
     <div className={`${mplus.className} text-stone-950 flex`}>
       {/* Sidebar */}
-      <div ref={sidebarRef} className="overflow-y-auto">
+      <div ref={sidebarRef} className="bg-gray-100">
         <div className={`${mplus.className} text-stone-950`}>
           <Sidebar
             project={project}
@@ -90,8 +90,8 @@ export default function ProjectPage() {
       </div>
 
       {/* GanttChart */}
-      <div ref={ganttRef} className="overflow-y-auto flex-1">
-        <div className={`${mplus.className} text-stone-950`}>
+      <div ref={ganttRef} className="overflow-y-auto flex-1 min-h-dvh">
+        <div className={`${mplus.className} text-stone-950 h-full`}>
           <GanttChart
             steps={steps}
             openSteps={openSteps}

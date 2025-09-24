@@ -48,9 +48,14 @@ function LayoutC({
   toggle: (id: string) => void;
 }) {
   const stepId = step.stepId as string;
+  const [hover, setHover] = useState(false);
 
   return (
-    <div>
+    <div
+      className="relative"
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
       <div
         className="
           grid cursor-pointer font-normal
@@ -58,13 +63,19 @@ function LayoutC({
         style={{ height: `${CELL}px` }}
         onClick={() => toggle(stepId)}
       >
-        <div className="grid grid-cols-[1fr_4fr]">
+        <div className="grid grid-cols-[1fr_4fr] font-bold">
           <span className="flex items-center justify-center">
             {isOpen ? "▼" : "▶"}
           </span>
           <span className="flex items-center text-left">{step.title}</span>
         </div>
       </div>
+
+      {hover && step.theme && (
+        <div className="absolute left-full ml-2 top-0 bg-white border border-gray-300 p-3 text-xs z-50 rounded shadow-lg max-w-xs break-words whitespace-pre-wrap w-2xl">
+          {step.theme}
+        </div>
+      )}
     </div>
   );
 }
@@ -82,7 +93,7 @@ function LayoutD({ task }: { task: Task }) {
       {/* タスク行 */}
       <div
         className="
-          grid
+          grid cursor-pointer
         "
         style={{ height: `${CELL}px` }}
       >
@@ -91,10 +102,9 @@ function LayoutD({ task }: { task: Task }) {
         </div>
       </div>
 
-      {/* description を hover 時に表示 */}
-      {hover && task.description && (
-        <div className="pl-8 pr-2 text-[10px] font-extralight break-words whitespace-pre-wrap block min-h-[20px]">
-          {task.description}
+      {hover && task.theme && (
+        <div className="absolute left-full ml-2 top-0 bg-white border border-gray-300 p-3 text-xs z-50 rounded shadow-lg max-w-xs break-words whitespace-pre-wrap w-2xl">
+          {task.theme}
         </div>
       )}
     </div>
@@ -112,9 +122,7 @@ function LayoutE({
   toggle: (id: string) => void;
 }) {
   const rows = steps.flatMap((step) =>
-    openSteps[step.stepId as string]
-      ? [step, ...step.tasks]
-      : [step]
+    openSteps[step.stepId as string] ? [step, ...step.tasks] : [step]
   );
 
   return (
@@ -163,13 +171,8 @@ export default function Sidebar({
       ref={sidebarRef}
       onScroll={handleScroll}
       className="
-        bg-gray-100 text-xs overflow-y-auto
-        w-[152px] min-w-[152px] max-w-[152px]
-      "
-      style={{
-        height: "1500px",
-        overflowX: "hidden",
-      }}
+        bg-gray-100 text-xs
+        w-[240px] pl-2 pr-2"
     >
       <LayoutA project={project} />
       <LayoutE steps={steps} openSteps={openSteps} toggle={toggleStep} />
