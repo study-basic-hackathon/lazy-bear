@@ -1,0 +1,133 @@
+{
+    "root": {
+        "data": {
+            "id": "dd117w1tixs0",
+            "created": 1758717209053,
+            "text": "改善"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dd11iej4cns0",
+                    "created": 1758718032922,
+                    "text": "改修ポイント",
+                    "expandState": "expand",
+                    "layout_right_offset": {
+                        "x": -16,
+                        "y": -96
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dd1183bd1sw0",
+                            "created": 1758717224867,
+                            "text": "「その計画、AIに任せてみませんか？」の後の部分"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dd118j8pw000",
+                                    "created": 1758717259536,
+                                    "text": "現状うまくいっていない要因を明確化し、それを解決する手段としてAIを使っていることを明確に書く"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dd11cznlj1c0",
+                            "created": 1758717608721,
+                            "text": "これからのlazy-bear"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dd11frs4m1c0",
+                                    "created": 1758717826673,
+                                    "text": "教材ソムリエを削除"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dd11fzv3yiw0",
+                                    "created": 1758717844267,
+                                    "text": "計画の再調整の方を重点的に"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dd11ianaa9k0",
+                    "created": 1758718024467,
+                    "text": "このファイルは、前のプレゼンで使用したパワポの抽出資料です。参考にしてください"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dd11mhtzwu00",
+                            "created": 1758718353567,
+                            "text": "docs/appendex/lazy-bear.txt"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dd11livf7p40",
+                    "created": 1758718277466,
+                    "text": "お願いごと",
+                    "layout_right_offset": {
+                        "x": -37,
+                        "y": -442
+                    }
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dd11lkyebyw0",
+                            "created": 1758718281999,
+                            "text": "docs/appendex/zenArticle.mdの改修をお願いします。"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dd11upt2y940",
+                    "created": 1758718997839,
+                    "text": "工夫点"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dd11v8xm0e80",
+                            "created": 1758719039472,
+                            "text": "プロンプト設計を改善したところ"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dd11uyvx6ko0",
+                            "created": 1758719017602,
+                            "text": "docs/設計/promptDesign.md"
+                        },
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}
