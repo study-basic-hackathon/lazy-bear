@@ -1,6 +1,6 @@
 import { generateContentFromPrompt } from '../client';
-import { FunctionDeclarationSchema } from '@google-cloud/vertexai';
-import { LearningPlan } from '@/lib/types';
+import { FunctionDeclarationSchema, SchemaType } from '@google-cloud/vertexai';
+import { LearningPlan } from '@/types/demo';
 
 // システムプロンプト
 const systemInstruction = 'あなたは優秀な学習プランナーです。ユーザーが指定した資格と期限に基づき、現実的で詳細な学習計画をステップとタスクの形式で生成してください。';
@@ -8,25 +8,25 @@ const systemInstruction = 'あなたは優秀な学習プランナーです。�
 
 // --- レスポンスのJSONスキーマ定義 ---
 const learningPlanSchema: FunctionDeclarationSchema = {
-  type: 'OBJECT',
+  type: SchemaType.OBJECT,
   properties: {
     steps: {
-      type: 'ARRAY',
+      type: SchemaType.ARRAY,
       items: {
-        type: 'OBJECT',
+        type: SchemaType.OBJECT,
         properties: {
-          id: { type: 'NUMBER', description: 'ステップの一意なID' },
-          title: { type: 'STRING', description: 'ステップのタイトル' },
+          id: { type: SchemaType.NUMBER, description: 'ステップの一意なID' },
+          title: { type: SchemaType.STRING, description: 'ステップのタイトル' },
           tasks: {
-            type: 'ARRAY',
+            type: SchemaType.ARRAY,
             items: {
-              type: 'OBJECT',
+              type: SchemaType.OBJECT,
               properties: {
-                id: { type: 'NUMBER', description: 'タスクの一意なID' },
-                title: { type: 'STRING', description: 'タスクのタイトル' },
-                description: { type: 'STRING', description: 'タスクの詳細な説明' },
-                startDate: { type: 'STRING', description: 'タスクの開始日 (YYYY-MM-DD)' },
-                endDate: { type: 'STRING', description: 'タスクの終了日 (YYYY-MM-DD)' },
+                id: { type: SchemaType.NUMBER, description: 'タスクの一意なID' },
+                title: { type: SchemaType.STRING, description: 'タスクのタイトル' },
+                description: { type: SchemaType.STRING, description: 'タスクの詳細な説明' },
+                startDate: { type: SchemaType.STRING, description: 'タスクの開始日 (YYYY-MM-DD)' },
+                endDate: { type: SchemaType.STRING, description: 'タスクの終了日 (YYYY-MM-DD)' },
               },
               required: ['id', 'title', 'description', 'startDate', 'endDate'],
             },

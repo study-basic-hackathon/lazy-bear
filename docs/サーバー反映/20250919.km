@@ -1,0 +1,116 @@
+{
+    "root": {
+        "data": {
+            "id": "dcwrs8eb0ps0",
+            "created": 1758284352287,
+            "text": "20250919_反映続き"
+        },
+        "children": [
+            {
+                "data": {
+                    "id": "dcwrt1osix40",
+                    "created": 1758284416047,
+                    "text": "現状",
+                    "expandState": "expand"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcwrsfl7fk00",
+                            "created": 1758284367941,
+                            "text": "テラフォームでGC上に各種サービスを展開済"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcwrt7lmqa00",
+                            "created": 1758284428917,
+                            "text": "CloudRunへのデプロイは未実施"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcwrtdf878g0",
+                    "created": 1758284441590,
+                    "text": "やりたいこと"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcwrtgzibsg0",
+                            "created": 1758284449347,
+                            "text": "CloudRunへのデプロイ"
+                        },
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "data": {
+                    "id": "dcwrtoya7ew0",
+                    "created": 1758284466687,
+                    "text": "懸念点"
+                },
+                "children": [
+                    {
+                        "data": {
+                            "id": "dcwrts174hk0",
+                            "created": 1758284473394,
+                            "text": "今のCloudRunのテラフォームでは、IAMユーザーアカウントを指定できていないのではないか"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcwrusqnirc0",
+                                    "created": 1758284553297,
+                                    "text": "そうなると、プログラム中で使っているVertexAIを使うことができなさそう"
+                                },
+                                "children": []
+                            },
+                            {
+                                "data": {
+                                    "id": "dcwrv6k1yjk0",
+                                    "created": 1758284583373,
+                                    "text": "そもそも、サービスアカウントを今のテラフォームで作成できているか"
+                                },
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "data": {
+                            "id": "dcwrvnkvqfk0",
+                            "created": 1758284620428,
+                            "text": "今のDcokerfileはDEV用に作ったので本番ビルド用のdockerfileが必要"
+                        },
+                        "children": []
+                    },
+                    {
+                        "data": {
+                            "id": "dcwrwv4qd2o0",
+                            "created": 1758284715230,
+                            "text": "マイグレーションを実行するため用のcloudrunジョブが欲しいところ"
+                        },
+                        "children": [
+                            {
+                                "data": {
+                                    "id": "dcwryfmzlpk0",
+                                    "created": 1758284838234,
+                                    "text": "優先度低"
+                                },
+                                "children": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    "template": "right",
+    "theme": "fresh-blue",
+    "version": "1.4.43"
+}

@@ -1,0 +1,44 @@
+# Stage 1: Builder - Install dependencies and build the application
+FROM node:22 AS builder
+
+WORKDIR /app
+
+# package.json のみコピー（lockfile はコピーしない）
+COPY package.json ./
+
+# Linux 環境で依存関係をインストールし、lockfile を生成
+RUN npm install
+
+# 残りのソースコードをコピー
+COPY . .
+
+# Next.js をビルド（standalone 出力推奨）
+RUN npm run build
+
+# Stage 2: Runner - Production image
+FROM node:22 AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=8080
+
+# セキュリティのため非 root ユーザーを作成
+RUN addgroup --system --gid 1001 nodejs \
+  && adduser --system --uid 1001 --ingroup nodejs nextjs
+
+# tini をインストール
+RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
+
+# builder から必要なものだけコピー
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 8080
+
+# node プロセスを正しく管理するため tini を利用
+ENTRYPOINT ["tini", "--"]
+
+CMD ["node", "server.js"]

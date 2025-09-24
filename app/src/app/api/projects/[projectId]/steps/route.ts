@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
 import { steps, projects, weights } from "@/lib/db/schema";
 import { components } from "@/types/apiSchema";
@@ -31,11 +31,11 @@ async function getSteps(projectId: string) {
 }
 
 export async function GET(
-  request: Request,
-  { params }: { params: Promise<{ projectId: string }> }
-) {
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
   try {
-    const { projectId } = await params;
+    const { projectId } = await context.params;
 
     if (!isValidProjectId(projectId)) {
       return NextResponse.json(
@@ -64,11 +64,11 @@ export async function GET(
 }
 
 export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ projectId: string }> },
-) {
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
   try {
-    const { projectId } = await params;
+    const { projectId } = await context.params;
 
     if (!isValidProjectId(projectId)) {
       return NextResponse.json(

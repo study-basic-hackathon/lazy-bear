@@ -1,5 +1,4 @@
-
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db/db";
 import { weights } from "@/lib/db/schema";
 import { v4 as uuidv4 } from "uuid";
@@ -10,10 +9,10 @@ type WeightCreate = {
 };
 
 export async function POST(
-  request: Request,
-  { params }: { params: Promise<{ projectId: string }> }
-) {
-  const { projectId } = await params;
+  request: NextRequest,
+  context: { params: Promise<{ projectId: string }> }
+): Promise<NextResponse> {
+  const { projectId } = await context.params;
 
   if (!projectId) {
     return NextResponse.json(

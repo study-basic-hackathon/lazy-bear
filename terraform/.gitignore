@@ -1,0 +1,23 @@
+# Local .terraform directories
+.terraform/
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore override files as they are usually used for local testing
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Ignore .tfvars files to avoid committing sensitive data
+*.tfvars
+*.tfvars.json
+
+# Ignore lock file
+.terraform.lock.hcl

@@ -2,11 +2,16 @@ import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
 import * as schema from "./schema";
 
-// PostgreSQL接続文字列を環境変数から取得
-const connectionString = process.env.DATABASE_URL!;
+const client =
+  process.env.NODE_ENV === "production"
+    ? postgres({
+        host: process.env.DB_HOST,  // Private IP を指定 (例: 10.23.45.67)
+        port: 5432,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+      })
+    : postgres(process.env.DATABASE_URL!);
 
-// PostgreSQL接続クライアント
-const client = postgres(connectionString);
 
-// Drizzle ORMインスタンスをエクスポート
 export const db = drizzle(client, { schema });

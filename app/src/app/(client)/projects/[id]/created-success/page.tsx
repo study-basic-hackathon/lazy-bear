@@ -3,12 +3,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { M_PLUS_1p } from "next/font/google";
 
-const mplus = M_PLUS_1p({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"]
-});
+
+
 
 export default function ProjectCreatedSuccessPage() {
   const params = useParams<{ id: string }>();
@@ -60,7 +57,7 @@ export default function ProjectCreatedSuccessPage() {
 
   return (
     <div
-      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center ${mplus.className} text-gray-950`}
+      className={`min-h-screen min-w-screen bg-[#EBEEF1] flex justify-center text-gray-950`}
     >
       <div
         className="p-6 bg-white relative text-center"
