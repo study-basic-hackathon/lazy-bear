@@ -102,9 +102,9 @@ function LayoutD({ task }: { task: Task }) {
         </div>
       </div>
 
-      {hover && task.theme && (
+      {hover && task.description && (
         <div className="absolute left-full ml-2 top-0 bg-white border border-gray-300 p-3 text-xs z-50 rounded shadow-lg max-w-xs break-words whitespace-pre-wrap w-2xl">
-          {task.theme}
+          {task.description}
         </div>
       )}
     </div>
