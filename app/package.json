@@ -18,8 +18,7 @@
     "postgres": "^3.4.5",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "uuid": "^13.0.0",
-    "@next/swc-linux-x64-gnu": "15.5.2"
+    "uuid": "^13.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
