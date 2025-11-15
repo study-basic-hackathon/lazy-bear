@@ -11,7 +11,7 @@ const mplus = M_PLUS_1p({
   weight: ["400", "500", "700"],
 });
 
-import { components } from "@/types/apiSchema";
+import { components } from "@/types/api/apiSchema";
 
 type Project = components["schemas"]["Project"];
 type Step = components["schemas"]["Step"];

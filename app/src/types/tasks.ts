@@ -1,4 +1,4 @@
-import { paths } from './apiSchema';
+import { paths } from './api/apiSchema';
 
 /**
  * AIから返される単一のタスクオブジェクトの型

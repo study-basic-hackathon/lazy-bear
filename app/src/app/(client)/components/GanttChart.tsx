@@ -1,4 +1,4 @@
-import { components } from "@/types/apiSchema";
+import { components } from "@/types/api/apiSchema";
 import React, { useMemo, useRef } from "react";
 import { format, eachDayOfInterval } from "date-fns";
 import { ja } from "date-fns/locale"; // ★ 日本語ロケールを追加

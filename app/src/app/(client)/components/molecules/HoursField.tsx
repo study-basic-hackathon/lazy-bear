@@ -1,29 +1,24 @@
+import { HoursFieldProps } from "@/types/view/molecules/hoursField";
 import Label from "../atoms/Label";
 import Input from "../atoms/Input";
-
-type HoursFieldProps = {
-  label: string;
-  value: number;
-  onChange: (value: number) => void;
-  error?: string;
-};
 
 export default function HoursField({
   label,
   value,
   onChange,
   error,
+  className = "",
+  style = {},
 }: HoursFieldProps) {
   return (
-    <div>
+    <div className={className} style={style}>
       <Label text={label} />
       <div className="flex items-center gap-2">
         <Input
           type="number"
           value={value}
           onChange={(e) => {
-            const num = Number(e.target.value);
-            onChange(isNaN(num) ? 0 : num);
+            onChange(isNaN(Number(e.target.value)) ? 0 : Number(e.target.value));
           }}
           placeholder="例: 2"
         />

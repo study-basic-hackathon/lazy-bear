@@ -1,4 +1,4 @@
-import { components } from "@/types/apiSchema";
+import { components } from "@/types/api/apiSchema";
 import { useRef, useState } from "react";
 
 export type StepWithTasks = Step & { tasks: Task[] };

@@ -1,23 +1,15 @@
-/**
- * Atomic Designのatom層においては、
- * ロジックや制御を持たず、propsをそのまま通す。
- */
-type ButtonProps = {
-  className?: string;
-  style?: React.CSSProperties;
-  label: string;
-  onClick?: () => void;
-};
+import { ButtonProps } from "@/types/view/atoms/button";
 
 export default function Button({
   className = "",
   style = {},
   label,
   onClick,
+  type = "button",
 }: ButtonProps) {
   return (
     <button
-      type="submit"
+      type={type}
       onClick={onClick}
       className={`font-semibold transition ${className}`}
       style={{

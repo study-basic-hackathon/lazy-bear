@@ -1,6 +1,6 @@
 import { generateContentFromPrompt } from '../client';
 import { FunctionDeclaration, SchemaType } from '@google-cloud/vertexai';
-import { paths } from '@/types/apiSchema';
+import { paths } from '@/types/api/apiSchema';
 
 const systemInstruction = `
 # 思考のレンズ

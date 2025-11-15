@@ -2,24 +2,26 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PersonaCreateTemplate from "../components/templates/PersonaCreateTemplate";
-import { components } from "@/types/apiSchema";
-
-type PersonaCreate = components["schemas"]["PersonaCreate"];
-
-type ApiError = {
-  code: string;
-  message: string;
-  details?: unknown;
-};
+import type { PersonaCreateViewModel } from "@/types/viewModel/persona";
+import { toApiModel, toViewModel } from "../convertType/persona";
+import type { ApiError } from "@/types/api/error.ts"
 
 export default function PersonaCreatePage() {
   const router = useRouter();
-  const [form, setForm] = useState<PersonaCreate>({
-    weekdayHours: 1,
-    weekendHours: 1,
-    learningPattern: "インプット先行パターン",
-  });
-  const [errors, setErrors] = useState<{ learningPattern?: string; hours?: string }>({});
+  const [form, setForm] = useState<PersonaCreateViewModel>(
+    toViewModel({
+      weekdayHours: 1,
+      weekendHours: 1,
+      learningPattern: "インプット先行パターン",
+    })
+  );
+    const handleChange = (partial: Partial<PersonaCreateViewModel>) => {
+    setForm((prev) => ({
+      ...prev,
+      ...partial,
+      errors: { ...prev.errors, ...(partial.errors ?? {}) },
+    }));
+  };
 
   const handleApiError = (e: unknown): ApiError => {
     if (e instanceof TypeError && e.message.includes("fetch")) {
@@ -36,13 +38,12 @@ export default function PersonaCreatePage() {
     };
   };
 
-  const postPersona = async (payload: PersonaCreate) => {
+    const postPersona = async (payload: ReturnType<typeof toApiModel>) => {
     const res = await fetch(`/api/personas`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
-
     if (!res.ok) {
       const errorBody = (await res.json().catch(() => null)) || {};
       throw {
@@ -53,35 +54,35 @@ export default function PersonaCreatePage() {
         details: errorBody.details,
       } satisfies ApiError;
     }
-
     return res.json();
   };
 
   const handleSubmit = async () => {
     try {
-      setErrors({});
       if (!form.learningPattern) {
-        setErrors({ learningPattern: "学習パターンを選択してください" });
+        handleChange({
+          errors: { learningPattern: "学習パターンを選択してください" },
+        });
         return;
       }
-      if (form.weekdayHours === 0 && form.weekendHours === 0) {
-        setErrors({ hours: "平日または休日の勉強時間を入力してください" });
+      if (Number(form.weekdayHours) === 0 && Number(form.weekendHours) === 0) {
+        handleChange({
+          errors: { hours: "平日または休日の勉強時間を入力してください" },
+        });
         return;
       }
-      const data = await postPersona(form);
+      const data = await postPersona(toApiModel(form));
       router.push(`/personas/${data.personas.personaId}/projects`);
     } catch (e: unknown) {
       const err = handleApiError(e);
-      console.error(`エラーが発生しました (${err.code}): ${err.message}`);
-      throw err;
+      console.error(`エラー (${err.code}): ${err.message}`);
     }
   };
 
   return (
     <PersonaCreateTemplate
       form={form}
-      errors={errors}
-      onChange={setForm}
+      onChange={handleChange}
       onSubmit={handleSubmit}
     />
   );

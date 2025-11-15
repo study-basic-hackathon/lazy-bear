@@ -1,21 +1,8 @@
-import { components } from "@/types/apiSchema";
+import { PersonaCreateTemplateProps } from "@/types/view/organisms/persona";
 import PersonaForm from "../organisms/PersonaForm";
-
-type PersonaCreate = components["schemas"]["PersonaCreate"];
-
-type PersonaCreateTemplateProps = {
-  form: PersonaCreate;
-  errors: {
-    learningPattern?: string;
-    hours?: string;
-  };
-  onChange: React.Dispatch<React.SetStateAction<PersonaCreate>>;
-  onSubmit: () => void;
-};
 
 export default function PersonaCreateTemplate({
   form,
-  errors,
   onChange,
   onSubmit,
 }: PersonaCreateTemplateProps) {
@@ -27,7 +14,6 @@ export default function PersonaCreateTemplate({
       >
         <PersonaForm
           form={form}
-          errors={errors}
           onChange={onChange}
           onSubmit={onSubmit}
         />

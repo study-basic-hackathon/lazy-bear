@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { components } from "@/types/apiSchema";
+import { components } from "@/types/api/apiSchema";
 
 
 type Project = components["schemas"]["Project"];

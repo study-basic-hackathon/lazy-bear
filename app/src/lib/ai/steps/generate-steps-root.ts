@@ -2,7 +2,7 @@ import { generateContentFromPrompt } from "../client";
 import { FunctionDeclarationSchema, SchemaType } from "@google-cloud/vertexai";
 import { type projects, type personas } from "@/lib/db/schema";
 import { type weights } from "@/lib/db/schema/weights";
-import { components } from "@/types/apiSchema"
+import { components } from "@/types/api/apiSchema"
 
 const systemInstruction = `
 # 思考のレンズ

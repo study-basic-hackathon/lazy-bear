@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { components } from "@/types/apiSchema";
+import { components } from "@/types/api/apiSchema";
 
 
 type StepCreate = components["schemas"]["StepCreate"];

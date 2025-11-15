@@ -4,7 +4,7 @@ import { db } from "@/lib/db/db";
 import { projects, weights } from "@/lib/db/schema";
 import { eq } from "drizzle-orm";
 import { generateSteps } from "@/lib/ai/steps/generate-steps";
-import { paths } from "@/types/apiSchema";
+import { paths } from "@/types/api/apiSchema";
 
 type StepsGenerateResponse =
   paths["/projects/{projectId}/steps/generate"]["get"]["responses"]["200"]["content"]["application/json"];
