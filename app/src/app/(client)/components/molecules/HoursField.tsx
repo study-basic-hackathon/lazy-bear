@@ -21,7 +21,10 @@ export default function HoursField({
         <Input
           type="number"
           value={value}
-          onChange={(e) => onChange(Number(e.target.value))}
+          onChange={(e) => {
+            const num = Number(e.target.value);
+            onChange(isNaN(num) ? 0 : num);
+          }}
           placeholder="例: 2"
         />
         <span className="text-stone-950">時間</span>

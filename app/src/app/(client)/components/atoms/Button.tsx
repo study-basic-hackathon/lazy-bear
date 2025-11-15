@@ -2,20 +2,31 @@
  * Atomic Designのatom層においては、
  * ロジックや制御を持たず、propsをそのまま通す。
  */
-type ButtonProps = { label: string; };
+type ButtonProps = {
+  className?: string;
+  style?: React.CSSProperties;
+  label: string;
+  onClick?: () => void;
+};
 
-export default function Button({ label }: ButtonProps) {
+export default function Button({
+  className = "",
+  style = {},
+  label,
+  onClick,
+}: ButtonProps) {
   return (
     <button
       type="submit"
-      className="font-semibold transition absolute left-1/2 transform -translate-x-1/2"
+      onClick={onClick}
+      className={`font-semibold transition ${className}`}
       style={{
         width: "226px",
         height: "60px",
         borderRadius: "0px",
         backgroundColor: "#3C436D",
         color: "#FFFFFF",
-        top: "611px",
+        ...style,
       }}
     >
       {label}

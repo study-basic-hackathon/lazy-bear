@@ -21,12 +21,11 @@ export default function LearningPatternSelect({
 
   return (
     <div>
-      <Label text="好きな学習パターンを選択してください" />
+      <Label text="学習方法を教えてください" />
       <Select
         value={value}
         onChange={onChange}
         options={options}
-        placeholder="選択してください"
       />
       {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
     </div>

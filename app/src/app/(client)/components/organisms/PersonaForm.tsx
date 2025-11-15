@@ -1,6 +1,6 @@
 import HoursField from "../molecules/HoursField";
-import LearningPatternSelect from "../molecules/LearningPatternSelect";
 import Button from "../atoms/Button";
+import LearningPatternSelect from "../molecules/LearningPatternSelect";
 import { components } from "@/types/apiSchema";
 
 type PersonaCreate = components["schemas"]["PersonaCreate"];
@@ -27,7 +27,7 @@ export default function PersonaForm({
         e.preventDefault();
         onSubmit();
       }}
-      className="grid"
+      className="relative grid mx-auto"
       style={{ width: "295px", height: "423px", marginTop: "70px" }}
     >
       <div className="flex flex-col" style={{ gap: "24px" }}>
@@ -49,7 +49,13 @@ export default function PersonaForm({
           error={errors.learningPattern}
         />
       </div>
-      <Button label="決定" />
+      <Button
+        className="absolute left-1/2 transform -translate-x-1/2"
+        style={{ top: "581px" }}
+        label="決定"
+        onClick={onSubmit}
+      />
     </form>
   );
 }
+
