@@ -1,6 +1,6 @@
 import type { components } from "@/types/api/apiSchema";
-type PersonaCreate = components["schemas"]["PersonaCreate"];
-type LearningPattern = PersonaCreate["learningPattern"];
+type PersonaCreateApiDto = components["schemas"]["PersonaCreate"];
+type LearningPattern = PersonaCreateApiDto["learningPattern"];
 
 export type LearningPatternSelectProps = {
   value: LearningPattern;

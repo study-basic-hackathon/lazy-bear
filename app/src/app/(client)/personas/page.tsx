@@ -2,14 +2,14 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PersonaCreateTemplate from "../components/templates/PersonaCreateTemplate";
+import { apitoViewModel, viewModeltoApi } from "../../../lib/convertType/persona";
 import type { PersonaCreateViewModel } from "@/types/viewModel/persona";
-import { toApiModel, toViewModel } from "../convertType/persona";
 import type { ApiError } from "@/types/api/error.ts"
 
 export default function PersonaCreatePage() {
   const router = useRouter();
   const [form, setForm] = useState<PersonaCreateViewModel>(
-    toViewModel({
+    apitoViewModel({
       weekdayHours: 1,
       weekendHours: 1,
       learningPattern: "インプット先行パターン",
@@ -38,7 +38,7 @@ export default function PersonaCreatePage() {
     };
   };
 
-    const postPersona = async (payload: ReturnType<typeof toApiModel>) => {
+    const postPersona = async (payload: ReturnType<typeof viewModeltoApi>) => {
     const res = await fetch(`/api/personas`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -71,7 +71,7 @@ export default function PersonaCreatePage() {
         });
         return;
       }
-      const data = await postPersona(toApiModel(form));
+      const data = await postPersona(viewModeltoApi(form));
       router.push(`/personas/${data.personas.personaId}/projects`);
     } catch (e: unknown) {
       const err = handleApiError(e);
