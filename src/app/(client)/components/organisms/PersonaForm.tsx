@@ -1,10 +1,11 @@
-import { PersonaFormProps } from "@/types/view/organisms/persona";
+import { PersonaFormProps } from "@/types/view/organisms/personaForm";
 import HoursField from "../molecules/HoursField";
 import LearningPatternSelect from "../molecules/LearningPatternSelect";
 import Button from "../atoms/Button";
 
 export default function PersonaForm({
   form,
+  errors,
   onChange,
   onSubmit,
 }: PersonaFormProps) {
@@ -20,20 +21,20 @@ export default function PersonaForm({
           label="平日の勉強時間"
           value={form.weekdayHours}
           onChange={(v) => onChange({ weekdayHours: v })}
-          error={form.errors.hours}
+          error={errors.hours}
         />
 
         <HoursField
           label="休日の勉強時間"
           value={form.weekendHours}
           onChange={(v) => onChange({ weekendHours: v })}
-          error={form.errors.hours}
+          error={errors.hours}
         />
 
         <LearningPatternSelect
           value={form.learningPattern}
           onChange={(v) => onChange({ learningPattern: v })}
-          error={form.errors.learningPattern}
+          error={errors.learningPattern}
         />
       </div>
 

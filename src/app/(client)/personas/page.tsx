@@ -3,11 +3,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PersonaCreateTemplate from "../components/templates/PersonaCreateTemplate";
 import { apiToViewModel, viewModelToApi } from "../../lib/convertType/persona";
-import type { PersonaCreateViewModel } from "@/types/viewModel/persona";
+import type { PersonaCreateViewModel, PersonaCreateErrors } from "@/types/viewModel/personaCreate";
 import type { ApiError } from "@/types/api/error";
 
 export default function PersonaCreatePage() {
   const router = useRouter();
+  const [errors, setErrors] = useState<PersonaCreateErrors>({});
   const [form, setForm] = useState<PersonaCreateViewModel>(
     apiToViewModel({
       weekdayHours: 1,
@@ -16,13 +17,8 @@ export default function PersonaCreatePage() {
     })
   );
     const handleChange = (partial: Partial<PersonaCreateViewModel>) => {
-    setForm((prev) => ({
-      ...prev,
-      ...partial,
-      errors: { ...prev.errors, ...(partial.errors ?? {}) },
-    }));
+    setForm((prev) => ({...prev, ...partial,}));
   };
-
   const handleApiError = (e: unknown): ApiError => {
     if (e instanceof TypeError && e.message.includes("fetch")) {
       return {
@@ -38,7 +34,7 @@ export default function PersonaCreatePage() {
     };
   };
 
-    const postPersona = async (payload: ReturnType<typeof viewModelToApi>) => {
+  const postPersona = async (payload: ReturnType<typeof viewModelToApi>) => {
     const res = await fetch(`/api/personas`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -59,22 +55,17 @@ export default function PersonaCreatePage() {
 
   const handleSubmit = async () => {
     try {
+      setErrors({});
       if (!form.learningPattern) {
-        handleChange({
-          errors: { learningPattern: "学習パターンを選択してください" },
-        });
+        setErrors({ learningPattern: "学習パターンを選択してください" });
         return;
       }
       if (!form.weekdayHours || !form.weekendHours) {
-        handleChange({
-          errors: { learningPattern: "平日または休日の勉強時間を入力してください" },
-        });
+        setErrors({ hours: "平日または休日の勉強時間を入力してください" });
         return;
       }
-      if (Number(form.weekdayHours) === 0 && Number(form.weekendHours) === 0) {
-        handleChange({
-          errors: { hours: "合計1時間以上になるよう入力してください" },
-        });
+      if (Number(form.weekdayHours) < 0 || Number(form.weekendHours) < 0) {
+        setErrors({ hours: "無効な入力値です" });
         return;
       }
       const data = await postPersona(viewModelToApi(form));
@@ -88,6 +79,7 @@ export default function PersonaCreatePage() {
   return (
     <PersonaCreateTemplate
       form={form}
+      errors={errors}
       onChange={handleChange}
       onSubmit={handleSubmit}
     />

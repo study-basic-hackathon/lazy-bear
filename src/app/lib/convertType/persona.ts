@@ -1,5 +1,5 @@
 import type { components } from "@/types/api/apiSchema";
-import type { PersonaCreateViewModel } from "@/types/viewModel/persona";
+import type { PersonaCreateViewModel } from "@/types/viewModel/personaCreate";
 
 type PersonaCreateApiDto = components["schemas"]["PersonaCreate"];
 

@@ -1,8 +1,9 @@
-import { PersonaCreateTemplateProps } from "@/types/view/organisms/persona";
+import { PersonaCreateTemplateProps } from "@/types/view/templates/personaCreate";
 import PersonaForm from "../organisms/PersonaForm";
 
 export default function PersonaCreateTemplate({
   form,
+  errors,
   onChange,
   onSubmit,
 }: PersonaCreateTemplateProps) {
@@ -12,6 +13,7 @@ export default function PersonaCreateTemplate({
         <div className="relative grid mx-auto w-[295px] h-[682px] mt-[70px]">
           <PersonaForm
             form={form}
+            errors={errors}
             onChange={onChange}
             onSubmit={onSubmit}
           />

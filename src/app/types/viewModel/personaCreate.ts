@@ -5,8 +5,9 @@ export type PersonaCreateViewModel = {
   weekdayHours: number | "";
   weekendHours: number | "";
   learningPattern: PersonaCreateApiDto["learningPattern"];
-  errors: {
-    learningPattern?: string;
-    hours?: string;
-  };
+};
+
+export type PersonaCreateErrors = {
+  learningPattern?: string;
+  hours?: string;
 };
