@@ -1,4 +1,4 @@
-import { SelectProps } from "../../../types/view/atoms/select";
+import { SelectProps } from "@/types/view/atoms/select";
 
 export default function Select<T extends string>({
   value,

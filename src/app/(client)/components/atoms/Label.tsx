@@ -1,4 +1,4 @@
-import { LabelProps } from "../../../types/view/atoms/label";
+import { LabelProps } from "@/types/view/atoms/label";
 
 export default function Label({
   text,

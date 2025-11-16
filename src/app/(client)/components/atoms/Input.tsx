@@ -1,4 +1,4 @@
-import { InputProps } from "../../../types/view/atoms/input";
+import { InputProps } from "@/types/view/atoms/input";
 
 export default function Input({
   className = "",

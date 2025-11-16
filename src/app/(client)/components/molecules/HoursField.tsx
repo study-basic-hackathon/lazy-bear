@@ -1,4 +1,4 @@
-import { HoursFieldProps } from "../../../types/view/molecules/hoursField";
+import { HoursFieldProps } from "@/types/view/molecules/hoursField";
 import Label from "../atoms/Label";
 import Input from "../atoms/Input";
 

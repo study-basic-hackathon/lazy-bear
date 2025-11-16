@@ -1,4 +1,4 @@
-import { PersonaFormProps } from "../../../types/view/organisms/persona";
+import { PersonaFormProps } from "@/types/view/organisms/persona";
 import HoursField from "../molecules/HoursField";
 import LearningPatternSelect from "../molecules/LearningPatternSelect";
 import Button from "../atoms/Button";

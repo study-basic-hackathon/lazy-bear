@@ -3,8 +3,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PersonaCreateTemplate from "../components/templates/PersonaCreateTemplate";
 import { apiToViewModel, viewModelToApi } from "../../lib/convertType/persona";
-import type { PersonaCreateViewModel } from "../../types/viewModel/persona";
-import type { ApiError } from "../../types/api/error";
+import type { PersonaCreateViewModel } from "@/types/viewModel/persona";
+import type { ApiError } from "@/types/api/error";
 
 export default function PersonaCreatePage() {
   const router = useRouter();

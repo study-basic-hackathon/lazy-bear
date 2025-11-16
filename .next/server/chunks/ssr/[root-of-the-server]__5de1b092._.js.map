@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 28, "column": 0}, "map": {"version":3,"sources":["file:///C:/dev/fork_lazy-bear/src/app/page.tsx"],"sourcesContent":["\"use client\";\r\nimport Link from \"next/link\";\r\n\r\nexport default function Home() {\r\n  return (\r\n    <Link href=\"../personas\">\r\n      Input your persona!!\r\n    </Link>\r\n  );\r\n}"],"names":[],"mappings":";;;;;AACA;AADA;;;AAGe,SAAS;IACtB,qBACE,8OAAC,uKAAI;QAAC,MAAK;kBAAc;;;;;;AAI7B","debugId":null}}]
+}

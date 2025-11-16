@@ -1,7 +1,7 @@
 import Label from "../atoms/Label";
 import Select from "../atoms/Select";
-import type { components } from "../../../types/api/apiSchema";
-import { LearningPatternSelectProps } from "../../../types/view/molecules/learningPattern";
+import type { components } from "@/types/api/apiSchema";
+import { LearningPatternSelectProps } from "@/types/view/molecules/learningPattern";
 
 type PersonaCreate = components["schemas"]["PersonaCreate"];
 type LearningPattern = PersonaCreate["learningPattern"];

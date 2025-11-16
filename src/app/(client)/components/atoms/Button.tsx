@@ -1,4 +1,4 @@
-import { ButtonProps } from "../../../types/view/atoms/button";
+import { ButtonProps } from "@/types/view/atoms/button";
 
 export default function Button({
   className = "",
