@@ -11,7 +11,6 @@ export function apiToViewModel(
     weekendHours: api.weekendHours ?? "",
     learningPattern:
       api.learningPattern ?? "インプット先行パターン",
-    errors: {},
   };
 }
 
