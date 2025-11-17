@@ -16,7 +16,7 @@ export default function PersonaCreatePage() {
       learningPattern: "インプット先行パターン",
     })
   );
-    const handleChange = (partial: Partial<PersonaCreateViewModel>) => {
+  const handleChange = (partial: Partial<PersonaCreateViewModel>) => {
     setForm((prev) => ({...prev, ...partial,}));
   };
   const handleApiError = (e: unknown): ApiError => {

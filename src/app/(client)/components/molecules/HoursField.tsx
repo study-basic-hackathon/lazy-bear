@@ -15,7 +15,7 @@ export default function HoursField({
       <Label text={label} />
       <div className="flex items-center gap-2">
         <Input
-          type="number"
+          type="text"
           value={value}
           onChange={(e) => {
             const v = e.target.value;
