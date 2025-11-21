@@ -2,13 +2,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PersonaCreateTemplate from "../components/templates/PersonaCreateTemplate";
-import { apiToViewModel, viewModelToApi } from "../../lib/convertType/persona";
+import { apiToViewModel, viewModelToApi } from "../converts/types/persona";
+import { convertHoursField, convertLearningPattern } from "../converts/personaCreate";
 import type { PersonaCreateViewModel, PersonaCreateErrors } from "@/types/viewModel/personaCreate";
 import type { ApiError } from "@/types/api/error";
 
 export default function PersonaCreatePage() {
   const router = useRouter();
-  const [errors, setErrors] = useState<PersonaCreateErrors>({});
+  const [errors, setErrors] = useState<PersonaCreateErrors>({
+    weekdayHours: null,
+    weekendHours: null,
+    learningPattern: null,
+  });
   const [form, setForm] = useState<PersonaCreateViewModel>(
     apiToViewModel({
       weekdayHours: 1,
@@ -55,17 +60,27 @@ export default function PersonaCreatePage() {
 
   const handleSubmit = async () => {
     try {
-      setErrors({});
-      if (!form.learningPattern) {
-        setErrors({ learningPattern: "学習パターンを選択してください" });
-        return;
+      setErrors({
+        weekdayHours: null,
+        weekendHours: null,
+        learningPattern: null,
+      });
+      const learningPattern = convertLearningPattern(form.learningPattern);
+      const weekdayHours = convertHoursField(form.weekdayHours);
+      const weekendHours = convertHoursField(form.weekendHours);
+
+      const nextErrors: PersonaCreateErrors = {
+        weekdayHours: weekdayHours.error,
+        weekendHours: weekendHours.error,
+        learningPattern: learningPattern.error,
+      };
+
+      function hasError(errors: PersonaCreateErrors): boolean {
+        return Object.values(errors).some(error => error !== null);
       }
-      if (!form.weekdayHours || !form.weekendHours) {
-        setErrors({ hours: "平日または休日の勉強時間を入力してください" });
-        return;
-      }
-      if (Number(form.weekdayHours) < 0 || Number(form.weekendHours) < 0) {
-        setErrors({ hours: "無効な入力値です" });
+
+      if (hasError(nextErrors)) {
+        setErrors(nextErrors);
         return;
       }
       const data = await postPersona(viewModelToApi(form));

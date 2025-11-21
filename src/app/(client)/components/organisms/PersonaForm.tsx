@@ -21,14 +21,14 @@ export default function PersonaForm({
           label="平日の勉強時間"
           value={form.weekdayHours}
           onChange={(v) => onChange({ weekdayHours: v })}
-          error={errors.hours}
+          error={errors.weekdayHours}
         />
 
         <HoursField
           label="休日の勉強時間"
           value={form.weekendHours}
           onChange={(v) => onChange({ weekendHours: v })}
-          error={errors.hours}
+          error={errors.weekendHours}
         />
 
         <LearningPatternSelect
