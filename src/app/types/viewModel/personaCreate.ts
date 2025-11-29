@@ -1,5 +1,5 @@
 import type { components } from "@/types/api/apiSchema";
-type PersonaCreateApiDto = components["schemas"]["PersonaCreate"];
+export type PersonaCreateApiDto = components["schemas"]["PersonaCreate"];
 
 export type PersonaCreateViewModel = {
   weekdayHours: string | "";

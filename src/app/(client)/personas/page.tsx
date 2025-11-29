@@ -58,39 +58,44 @@ export default function PersonaCreatePage() {
     return res.json();
   };
 
-  const handleSubmit = async () => {
-    try {
-      setErrors({
-        weekdayHours: null,
-        weekendHours: null,
-        learningPattern: null,
-      });
-      const learningPattern = convertLearningPattern(form.learningPattern);
-      const weekdayHours = convertHoursField(form.weekdayHours);
-      const weekendHours = convertHoursField(form.weekendHours);
+const handleSubmit = async () => {
+  try {
+    setErrors({
+      weekdayHours: null,
+      weekendHours: null,
+      learningPattern: null,
+    });
 
+    const weekdayHours = convertHoursField(form.weekdayHours);
+    const weekendHours = convertHoursField(form.weekendHours);
+    const learningPattern = convertLearningPattern(form.learningPattern);
+
+    const hasError =
+      !weekdayHours.ok || !weekendHours.ok || !learningPattern.ok;
+
+    if (hasError) {
       const nextErrors: PersonaCreateErrors = {
-        weekdayHours: weekdayHours.error,
-        weekendHours: weekendHours.error,
-        learningPattern: learningPattern.error,
+        weekdayHours: weekdayHours.ok ? null : weekdayHours.error,
+        weekendHours: weekendHours.ok ? null : weekendHours.error,
+        learningPattern: learningPattern.ok ? null : learningPattern.error,
       };
-
-      function hasError(errors: PersonaCreateErrors): boolean {
-        return Object.values(errors).some(error => error !== null);
-      }
-
-      if (hasError(nextErrors)) {
-        setErrors(nextErrors);
-        return;
-      }
-      const data = await postPersona(viewModelToApi(form));
-      router.push(`/personas/${data.personas.personaId}/projects`);
-    } catch (e: unknown) {
-      const err = handleApiError(e);
-      console.error(`エラー (${err.code}): ${err.message}`);
+      setErrors(nextErrors);
+      return;
     }
-  };
 
+    const acceptableForm: PersonaCreateViewModel = {
+      weekdayHours: weekdayHours.value,
+      weekendHours: weekendHours.value,
+      learningPattern: learningPattern.value,
+    };
+
+    const data = await postPersona(viewModelToApi(acceptableForm));
+    router.push(`/personas/${data.personas.personaId}/projects`);
+  } catch (e: unknown) {
+    const err = handleApiError(e);
+    console.error(`エラー (${err.code}): ${err.message}`);
+  }
+};
   return (
     <PersonaCreateTemplate
       form={form}

@@ -17,7 +17,9 @@ export default function HoursField({
         <Input
           type="text"
           value={value}
-          onChange={(e) => {onChange(e.target.value);}}
+          onChange={(e) => {
+            onChange(e.target.value);
+          }}
           placeholder="例: 2"
         />
         <span className="text-stone-950">時間</span>

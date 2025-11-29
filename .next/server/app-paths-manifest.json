@@ -1,5 +1,5 @@
 {
   "/(client)/personas/page": "app/(client)/personas/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/api/personas/route": "app/api/personas/route.js",
   "/page": "app/page.js"
 }
