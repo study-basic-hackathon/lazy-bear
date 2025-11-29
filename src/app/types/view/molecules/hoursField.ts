@@ -1,8 +1,10 @@
+import type { PersonaCreateErrors } from "@/types/viewModel/personaCreate";
+
 export type HoursFieldProps = {
   label: string;
-  value: number | "";
-  onChange: (value: number | "") => void;
-  error?: string;
+  value: string | "";
+  onChange: (value: string | "") => void;
+  error: PersonaCreateErrors["weekdayHours"] | PersonaCreateErrors["weekendHours"];
   className?: string;
   style?: React.CSSProperties;
 };

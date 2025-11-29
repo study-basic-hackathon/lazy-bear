@@ -15,15 +15,10 @@ export default function HoursField({
       <Label text={label} />
       <div className="flex items-center gap-2">
         <Input
-          type="number"
+          type="text"
           value={value}
           onChange={(e) => {
-            const v = e.target.value;
-            let result: number | "" = "";
-            if (v === "") result = "";
-            else if (isNaN(Number(v))) result = 0;
-            else result = Number(v);
-            onChange(result);
+            onChange(e.target.value);
           }}
           placeholder="例: 2"
         />

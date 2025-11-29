@@ -2,13 +2,18 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PersonaCreateTemplate from "../components/templates/PersonaCreateTemplate";
-import { apiToViewModel, viewModelToApi } from "../../lib/convertType/persona";
+import { apiToViewModel, viewModelToApi } from "../converts/types/persona";
+import { convertHoursField, convertLearningPattern } from "../converts/personaCreate";
 import type { PersonaCreateViewModel, PersonaCreateErrors } from "@/types/viewModel/personaCreate";
 import type { ApiError } from "@/types/api/error";
 
 export default function PersonaCreatePage() {
   const router = useRouter();
-  const [errors, setErrors] = useState<PersonaCreateErrors>({});
+  const [errors, setErrors] = useState<PersonaCreateErrors>({
+    weekdayHours: null,
+    weekendHours: null,
+    learningPattern: null,
+  });
   const [form, setForm] = useState<PersonaCreateViewModel>(
     apiToViewModel({
       weekdayHours: 1,
@@ -53,29 +58,44 @@ export default function PersonaCreatePage() {
     return res.json();
   };
 
-  const handleSubmit = async () => {
-    try {
-      setErrors({});
-      if (!form.learningPattern) {
-        setErrors({ learningPattern: "学習パターンを選択してください" });
-        return;
-      }
-      if (!form.weekdayHours || !form.weekendHours) {
-        setErrors({ hours: "平日または休日の勉強時間を入力してください" });
-        return;
-      }
-      if (Number(form.weekdayHours) < 0 || Number(form.weekendHours) < 0) {
-        setErrors({ hours: "無効な入力値です" });
-        return;
-      }
-      const data = await postPersona(viewModelToApi(form));
-      router.push(`/personas/${data.personas.personaId}/projects`);
-    } catch (e: unknown) {
-      const err = handleApiError(e);
-      console.error(`エラー (${err.code}): ${err.message}`);
-    }
-  };
+const handleSubmit = async () => {
+  try {
+    setErrors({
+      weekdayHours: null,
+      weekendHours: null,
+      learningPattern: null,
+    });
 
+    const weekdayHours = convertHoursField(form.weekdayHours);
+    const weekendHours = convertHoursField(form.weekendHours);
+    const learningPattern = convertLearningPattern(form.learningPattern);
+
+    const hasError =
+      !weekdayHours.ok || !weekendHours.ok || !learningPattern.ok;
+
+    if (hasError) {
+      const nextErrors: PersonaCreateErrors = {
+        weekdayHours: weekdayHours.ok ? null : weekdayHours.error,
+        weekendHours: weekendHours.ok ? null : weekendHours.error,
+        learningPattern: learningPattern.ok ? null : learningPattern.error,
+      };
+      setErrors(nextErrors);
+      return;
+    }
+
+    const acceptableForm: PersonaCreateViewModel = {
+      weekdayHours: weekdayHours.value,
+      weekendHours: weekendHours.value,
+      learningPattern: learningPattern.value,
+    };
+
+    const data = await postPersona(viewModelToApi(acceptableForm));
+    router.push(`/personas/${data.personas.personaId}/projects`);
+  } catch (e: unknown) {
+    const err = handleApiError(e);
+    console.error(`エラー (${err.code}): ${err.message}`);
+  }
+};
   return (
     <PersonaCreateTemplate
       form={form}

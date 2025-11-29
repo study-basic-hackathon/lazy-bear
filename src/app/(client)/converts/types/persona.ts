@@ -7,8 +7,8 @@ export function apiToViewModel(
   api: Partial<PersonaCreateApiDto>
 ): PersonaCreateViewModel {
   return {
-    weekdayHours: api.weekdayHours ?? "",
-    weekendHours: api.weekendHours ?? "",
+    weekdayHours: String(api.weekdayHours) ?? "",
+    weekendHours: String(api.weekendHours) ?? "",
     learningPattern:
       api.learningPattern ?? "インプット先行パターン",
   };
