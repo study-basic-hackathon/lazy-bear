@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { db } from "../../lib/db/db";
-import { personas } from "../../lib/db/schema";
+import { db } from "@/backend/infra/db/db";
+import { personas } from "@/backend/infra/db/schema";
 
 export async function POST(request: Request) {
   try {
@@ -35,12 +35,18 @@ export async function POST(request: Request) {
       })
       .returning();
 
+    const persona = newPersona[0];
+
     return NextResponse.json(
       {
-        message: "ペルソナが正常に作成されました",
-        personas: newPersona[0],
+        id: persona.personaId,
       },
-      { status: 201 }
+      {
+        status: 201,
+        headers: {
+          Location: `api/personas/${persona.personaId}`,
+        },
+      }
     );
   } catch (error) {
     console.error("ペルソナ作成エラー:", error);

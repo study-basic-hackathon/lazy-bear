@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { db } from "@/lib/db/db";
-import { projects, weights } from "@/lib/db/schema";
+import { db } from "@/backend/infra/db/db";
+import { projects, weights } from "@/backend/infra/db/schema";
 import { eq } from "drizzle-orm";
-import { generateSteps } from "@/lib/ai/steps/generate-steps";
-import { paths } from "@/types/api/apiSchema";
+import { generateSteps } from "@/backend/infra/ai/steps/generate-steps";
+import { paths } from "@/contracts/api";
 
 type StepsGenerateResponse =
   paths["/projects/{projectId}/steps/generate"]["get"]["responses"]["200"]["content"]["application/json"];

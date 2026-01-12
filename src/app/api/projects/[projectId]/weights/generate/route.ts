@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { db } from '@/lib/db/db';
-import { projects } from '@/lib/db/schema';
+import { db } from '@/backend/infra/db/db';
+import { projects } from '@/backend/infra/db/schema';
 import { eq } from 'drizzle-orm';
-import { generateWeights } from '@/lib/ai/weights/generate-weights';
+import { generateWeights } from '@/backend/infra/ai/weights/generate-weights';
 
 
 

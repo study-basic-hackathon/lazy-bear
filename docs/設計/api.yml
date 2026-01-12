@@ -1,0 +1,536 @@
+openapi: 3.0.3
+info:
+  title: 資格学習計画の生成アプリ
+  description: 資格取得までのガントチャートを生成してくれるAPIです。
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000
+    description: ローカル環境
+
+tags:
+  - name: persona
+    description: ペルソナの情報を取得するAPI
+  - name: project
+    description: プロジェクトの情報を取得するAPI
+  - name: step
+    description: ステップの情報を取得するAPI
+
+paths:
+  /api/personas:
+    post:
+      tags: [persona]
+      summary: ペルソナの作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonaCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                example: "/personas/1234"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                example: { id: "1234"}
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /api/personas/{personaId}/projects:
+    post:
+      tags: [persona]
+      summary: ペルソナのプロジェクトの作成
+      parameters:
+        - $ref: "#/components/parameters/PersonaId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectCreate"
+      responses:
+        "201":
+          description: 作成成功
+          headers:
+            Location:
+              required: true
+              schema:
+                type: string
+                example: "/projects/5678"
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                properties:
+                  id:
+                    type: string
+                example: { id: "1234"}
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example:
+                message: 入力内容が正しくありません
+        default:
+          description: An unexpected error occurred
+    get:
+      tags: [persona]
+      summary: ペルソナのプロジェクトの一覧
+      description: ペルソナのプロジェクトの一覧。プロジェクトは試験日の昇順。
+      parameters:
+        - $ref: "#/components/parameters/PersonaId"
+      responses:
+        "200":
+          description: プロジェクトの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example:
+                message: データが見つかりません
+        default:
+          description: An unexpected error occurred
+
+  /api/projects/{projectId}:
+    get:
+      tags: [project]
+      summary: プロジェクトの取得
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: プロジェクトの取得
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example:
+                message: データが見つかりません
+        default:
+          description: An unexpected error occurred
+  /api/projects/{projectId}/steps/generate:
+    get:
+      tags: [project]
+      summary: ステップ候補のリストの取得
+      description: ステップ候補のリストを取得する。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: ステップ候補のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  type: object
+                  required:
+                    - title
+                    - theme
+                    - index
+                  properties:
+                    title:
+                      type: string
+                    theme:
+                      type: string
+                    index:
+                      type: integer
+                      description: 並び順（昇順）
+        default:
+          description: An unexpected error occurred
+  /api/projects/{projectId}/weights/generate:
+    get:
+      tags: [project]
+      summary: 配点割合候補のリストの取得
+      description: 配点割合候補のリストを取得する。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: 配点割合候補のリスト
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  type: object
+                  required:
+                    - area
+                    - weightPercent
+                  properties:
+                    area:
+                      type: string
+                    weightPercent:
+                      type: number
+                      format: integer
+                      minimum: 30
+                      description: 配点割合（%）
+        default:
+          description: An unexpected error occurred
+  /api/projects/{projectId}/tasks/generate:
+    post:
+      tags: [project]
+      summary: タスク候補のリストの登録
+      description: タスク候補のリストの登録。
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "201":
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - taskIds
+                properties:
+                  taskIds:
+                    type: array
+                    minItems: 3
+                    items:
+                      type: string
+                      format: uuid
+                    description: 作成されたタスクIDのリスト
+        default:
+          description: An unexpected error occurred
+  /api/projects/{projectId}/steps:
+    get:
+      tags: [project]
+      summary: プロジェクトに紐づくステップの一覧
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      responses:
+        "200":
+          description: プロジェクトに紐づくステップの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Step"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example:
+                message: データが見つかりません
+        default:
+          description: An unexpected error occurred
+    post:
+      tags: [project]
+      summary: ステップの作成
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 3
+              items:
+                $ref: "#/components/schemas/StepCreate"
+      responses:
+        "201":
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - stepIds
+                properties:
+                  stepIds:
+                    type: array
+                    minItems: 3
+                    items:
+                      type: string
+                      format: uuid
+                    description: 作成されたステップIDのリスト
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+  /api/projects/{projectId}/weights:
+    post:
+      tags: [project]
+      summary: 配点割合の作成
+      parameters:
+        - $ref: "#/components/parameters/ProjectId"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              minItems: 3
+              items:
+                $ref: "#/components/schemas/WeightCreate"
+      responses:
+        "201":
+          description: 作成成功
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - weightIds
+                properties:
+                  weightIds:
+                    type: array
+                    minItems: 3
+                    items:
+                      type: string
+                      format: uuid
+                    description: 作成されたウェイトIDのリスト
+        "400":
+          description: 不正なリクエスト
+          content:
+            application/json:
+              example: { "message": "入力内容が正しくありません" }
+        default:
+          description: An unexpected error occurred
+
+  /api/steps/{stepId}/tasks:
+    get:
+      tags: [step]
+      summary: ステップに紐づくタスクの一覧
+      parameters:
+        - $ref: "#/components/parameters/StepId"
+      responses:
+        "200":
+          description: ステップに紐づくタスクの一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                minItems: 3
+                items:
+                  $ref: "#/components/schemas/Task"
+        "404":
+          description: データが見つからない
+          content:
+            application/json:
+              example: { "message": "データが見つかりません" }
+        default:
+          description: An unexpected error occurred
+
+components:
+  parameters:
+    PersonaId:
+      name: personaId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    StepId:
+      name: stepId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    TaskId:
+      name: taskId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    ScopeId:
+      name: scopeId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+    WeightId:
+      name: weightId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    PersonaCreate:
+      type: object
+      required: [weekdayHours, weekendHours, learningPattern, baseMaterial]
+      properties:
+        weekdayHours:
+          type: integer
+          example: 2
+        weekendHours:
+          type: integer
+          example: 5
+        learningPattern:
+          type: string
+          enum: ["インプット先行パターン", "アウトプット先行パターン"]
+          example: "インプット先行パターン"
+
+    Project:
+      type: object
+      required: [projectId, personaId, certificationName, startDate, examDate, baseMaterial]
+      properties:
+        projectId:
+          type: string
+          format: uuid
+        personaId:
+          type: string
+          format: uuid
+        certificationName:
+          type: string
+        startDate:
+          type: string
+          format: date
+        examDate:
+          type: string
+          format: date
+        baseMaterial:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+    ProjectCreate:
+      type: object
+      required: [certificationName, startDate, examDate, baseMaterial]
+      properties:
+        certificationName:
+          type: string
+          example: "AWS Solutions Architect Associate"
+        startDate:
+          type: string
+          format: date
+          example: "2025-10-01"
+        examDate:
+          type: string
+          format: date
+          example: "2025-12-15"
+        baseMaterial:
+          type: string
+          enum: [TEXTBOOK, VIDEO]
+          example: "TEXTBOOK"
+
+    Step:
+      type: object
+      properties:
+        stepId:
+          type: string
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        theme:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        index:
+          type: integer
+          description: "小さい値から昇順に並ぶシリアル番号"
+    StepCreate:
+      type: object
+      required: [title, theme, startDate, endDate, index]
+      properties:
+        title:
+          type: string
+        theme:
+          type: string
+        index:
+          type: integer
+          description: "小さい値から昇順に並ぶシリアル番号"
+
+    Task:
+      type: object
+      properties:
+        taskId:
+          type: string
+          format: uuid
+        stepId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        description:
+          type: string
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        taskStatus:
+          type: string
+          enum: [undo, doing, done, blocked]
+
+    Weight:
+      type: object
+      properties:
+        weightId:
+          type: string
+          format: uuid
+        projectId:
+          type: string
+          format: uuid
+        area:
+          type: string
+        weightPercent:
+          type: integer
+          minimum: 30
+    WeightCreate:
+      type: object
+      required: [area, weightPercent]
+      properties:
+        area:
+          type: string
+        weightPercent:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 30

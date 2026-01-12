@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db/db";
-import { weights } from "@/lib/db/schema";
+import { db } from "@/backend/infra/db/db";
+import { weights } from "@/backend/infra/db/schema";
 import { v4 as uuidv4 } from "uuid";
 
 type WeightCreate = {

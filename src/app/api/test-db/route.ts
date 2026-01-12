@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db/db";
-import { personas } from "@/lib/db/schema";
+import { db } from "@/backend/infra/db/db";
+import { personas } from "@/backend/infra/db/schema";
 
 export async function GET() {
   try {
