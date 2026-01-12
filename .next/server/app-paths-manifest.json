@@ -1,0 +1,5 @@
+{
+  "/(client)/personas/page": "app/(client)/personas/page.js",
+  "/api/personas/route": "app/api/personas/route.js",
+  "/page": "app/page.js"
+}
