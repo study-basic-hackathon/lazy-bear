@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db/db";
-import { steps, projects, weights } from "@/lib/db/schema";
-import { components } from "@/types/api/apiSchema";
+import { db } from "@/backend/infra/db/db";
+import { steps, projects, weights } from "@/backend/infra/db/schema";
+import { components } from "@/contracts/api";
 import { eq, asc } from "drizzle-orm";
-import { generateSupplementSteps } from "@/lib/ai/steps/generate-steps-root";
+import { generateSupplementSteps } from "@/backend/infra/ai/steps/generate-steps-root";
 
 type StepCreateArray = {
   title: string;

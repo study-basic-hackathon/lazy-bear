@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db/db';
-import { projects, tasks } from '@/lib/db/schema';
+import { db } from '@/backend/infra/db/db';
+import { projects, tasks } from '@/backend/infra/db/schema';
 import { eq } from 'drizzle-orm';
-import { generateTasks } from '@/lib/ai/tasks/generate-tasks';
-import { TaskFromAI, TasksGenerateApiResponse } from '@/types/tasks';
+import { generateTasks } from '@/backend/infra/ai/tasks/generate-tasks';
+import { TaskFromAI, TasksGenerateApiResponse } from '@/backend/types/tasks';
 
 export async function POST(
   request: NextRequest,
